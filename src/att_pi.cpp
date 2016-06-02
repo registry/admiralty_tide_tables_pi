@@ -33,7 +33,7 @@
 
 #include <wx/aui/aui.h>
 
-#include "demo_pi.h"
+#include "att_pi.h"
 
 
 // the class factories, used to create and destroy instances of the PlugIn

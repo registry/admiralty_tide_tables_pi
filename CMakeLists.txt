@@ -81,14 +81,14 @@ FIND_PACKAGE(Gettext REQUIRED)
 # header files and cpp/c files and CMake will sort them out
 
 
-SET(SRC_DEMO
-                att_pi.h
- 		att_pi.cpp
+SET(ATT_SRC
+                src/att_pi.h
+ 		src/att_pi.cpp
  	)
 
 INCLUDE_DIRECTORIES(nmea0183)
 
-ADD_LIBRARY(${PACKAGE_NAME} SHARED ${SRC_DEMO} ${SRC_NMEA0183} )
+ADD_LIBRARY(${PACKAGE_NAME} SHARED ${ATT_SRC}  )
 
 IF(WIN32)
   SET(OPENCPN_IMPORT_LIB "../../../${CMAKE_CFG_INTDIR}/${PARENT}")
