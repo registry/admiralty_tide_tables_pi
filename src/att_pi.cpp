@@ -40,7 +40,7 @@
 
 extern "C" DECL_EXP opencpn_plugin* create_pi(void *ppimgr)
 {
-    return new demo_pi(ppimgr);
+    return new att_pi(ppimgr);
 }
 
 extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p)
@@ -67,11 +67,11 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p)
 //---------------------------------------------------------------------------------------------------------
 
 
-int demo_pi::Init(void)
+int att_pi::Init(void)
 {
-//      printf("demo_pi Init()\n");
+     printf("att_pi Init()\n");
 
-      m_pdemo_window = NULL;
+      m_patt_window = NULL;
 
       // Get a pointer to the opencpn display canvas, to use as a parent for windows created
       m_parent_window = GetOCPNCanvasWindow();
@@ -91,20 +91,20 @@ int demo_pi::Init(void)
       m_hide_id = AddCanvasContextMenuItem(pmih, this );
       SetCanvasContextMenuItemViz(m_hide_id, false);
 
-        m_pdemo_window = new demoWindow(m_parent_window, wxID_ANY);
+        m_patt_window = new attWindow(m_parent_window, wxID_ANY);
 
         m_AUImgr = GetFrameAuiManager();
-        m_AUImgr->AddPane(m_pdemo_window);
-        m_AUImgr->GetPane(m_pdemo_window).Name(_T("Demo Window Name"));
+        m_AUImgr->AddPane(m_patt_window);
+        m_AUImgr->GetPane(m_patt_window).Name(_T("Demo Window Name"));
 
-        m_AUImgr->GetPane(m_pdemo_window).Float();
-        m_AUImgr->GetPane(m_pdemo_window).FloatingPosition(300,30);
+        m_AUImgr->GetPane(m_patt_window).Float();
+        m_AUImgr->GetPane(m_patt_window).FloatingPosition(300,30);
 
-        m_AUImgr->GetPane(m_pdemo_window).Caption(_T("AUI Managed Demo Window"));
-        m_AUImgr->GetPane(m_pdemo_window).CaptionVisible(true);
-        m_AUImgr->GetPane(m_pdemo_window).GripperTop(true);
-        m_AUImgr->GetPane(m_pdemo_window).CloseButton(true);
-        m_AUImgr->GetPane(m_pdemo_window).Show(false);
+        m_AUImgr->GetPane(m_patt_window).Caption(_T("AUI Managed Demo Window"));
+        m_AUImgr->GetPane(m_patt_window).CaptionVisible(true);
+        m_AUImgr->GetPane(m_patt_window).GripperTop(true);
+        m_AUImgr->GetPane(m_patt_window).CloseButton(true);
+        m_AUImgr->GetPane(m_patt_window).Show(false);
         m_AUImgr->Update();
 
       return (
@@ -114,73 +114,72 @@ int demo_pi::Init(void)
             );
 }
 
-bool demo_pi::DeInit(void)
+bool att_pi::DeInit(void)
 {
-      m_AUImgr->DetachPane(m_pdemo_window);
-      if(m_pdemo_window)
+      m_AUImgr->DetachPane(m_patt_window);
+      if(m_patt_window)
       {
-        m_pdemo_window->Close();
-//          m_pdemo_window->Destroy(); //Gives a Segmentation fault
+        m_patt_window->Close();
+//          m_patt_window->Destroy(); //Gives a Segmentation fault
       }
       return true;
 }
 
-int demo_pi::GetAPIVersionMajor()
+int att_pi::GetAPIVersionMajor()
 {
       return MY_API_VERSION_MAJOR;
 }
 
-int demo_pi::GetAPIVersionMinor()
+int att_pi::GetAPIVersionMinor()
 {
       return MY_API_VERSION_MINOR;
 }
 
-int demo_pi::GetPlugInVersionMajor()
+int att_pi::GetPlugInVersionMajor()
 {
       return PLUGIN_VERSION_MAJOR;
 }
 
-int demo_pi::GetPlugInVersionMinor()
+int att_pi::GetPlugInVersionMinor()
 {
       return PLUGIN_VERSION_MINOR;
 }
 
-wxString demo_pi::GetCommonName()
+wxString att_pi::GetCommonName()
 {
-      return _("Demo");
+      return _("Admiralty Tide Tables Calculation");
 }
 
-wxString demo_pi::GetShortDescription()
+wxString att_pi::GetShortDescription()
 {
-      return _("Demo PlugIn for OpenCPN");
+      return _("A.T.T. Calculation PlugIn for OpenCPN");
 }
 
-wxString demo_pi::GetLongDescription()
+wxString att_pi::GetLongDescription()
 {
-      return _("Demo PlugIn for OpenCPN\n\
-demonstrates PlugIn processing of NMEA messages.");
+      return _("A.T.T. Calculation  PlugIn for OpenCPN");
 
 }
 
-void demo_pi::SetNMEASentence(wxString &sentence)
-{
-//      printf("demo_pi::SetNMEASentence\n");
-      if(m_pdemo_window)
-      {
-            m_pdemo_window->SetSentence(sentence);
-      }
-}
+// void att_pi::SetNMEASentence(wxString &sentence)
+// {
+// //      printf("att_pi::SetNMEASentence\n");
+//       if(m_patt_window)
+//       {
+//             m_patt_window->SetSentence(sentence);
+//       }
+// }
 
 
-void demo_pi::OnContextMenuItemCallback(int id)
+void att_pi::OnContextMenuItemCallback(int id)
 {
-      wxLogMessage(_T("demo_pi OnContextMenuCallBack()"));
+      wxLogMessage(_T("att_pi OnContextMenuCallBack()"));
      ::wxBell();
 
       //  Note carefully that this is a "reference to a wxAuiPaneInfo classs instance"
-      //  Copy constructor (i.e. wxAuiPaneInfo pane = m_AUImgr->GetPane(m_pdemo_window);) will not work
+      //  Copy constructor (i.e. wxAuiPaneInfo pane = m_AUImgr->GetPane(m_patt_window);) will not work
 
-      wxAuiPaneInfo &pane = m_AUImgr->GetPane(m_pdemo_window);
+      wxAuiPaneInfo &pane = m_AUImgr->GetPane(m_patt_window);
       if(!pane.IsOk())
             return;
 
@@ -204,27 +203,27 @@ void demo_pi::OnContextMenuItemCallback(int id)
             m_AUImgr->Update();
       }
 
-/*
-      if(NULL == m_pdemo_window)
+
+      if(NULL == m_patt_window)
       {
-            m_pdemo_window = new demoWindow(m_parent_window, wxID_ANY);
+            m_patt_window = new attWindow(m_parent_window, wxID_ANY);
 
             SetCanvasContextMenuItemViz(m_hide_id, true);
             SetCanvasContextMenuItemViz(m_show_id, false);
       }
       else
       {
-            m_pdemo_window->Close();
-            m_pdemo_window->Destroy();
-            m_pdemo_window = NULL;
+            m_patt_window->Close();
+            m_patt_window->Destroy();
+            m_patt_window = NULL;
 
             SetCanvasContextMenuItemViz(m_hide_id, false);
             SetCanvasContextMenuItemViz(m_show_id, true);
       }
-*/
+
 }
 
-void demo_pi::UpdateAuiStatus(void)
+void att_pi::UpdateAuiStatus(void)
 {
       //    This method is called after the PlugIn is initialized
       //    and the frame has done its initial layout, possibly from a saved wxAuiManager "Perspective"
@@ -234,7 +233,7 @@ void demo_pi::UpdateAuiStatus(void)
       //    We use this callback here to keep the context menu selection in sync with the window state
 
 
-      wxAuiPaneInfo &pane = m_AUImgr->GetPane(m_pdemo_window);
+      wxAuiPaneInfo &pane = m_AUImgr->GetPane(m_patt_window);
       if(!pane.IsOk())
             return;
 
@@ -245,7 +244,7 @@ void demo_pi::UpdateAuiStatus(void)
 
 }
 
-bool demo_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
+bool att_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
 {
   /*    if(m_pGribDialog && m_pGRIBOverlayFactory)
       {
@@ -260,11 +259,11 @@ bool demo_pi::RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp)
       else*/
             return false;
 }
-void demo_pi::SetCursorLatLon(double lat, double lon)
+void att_pi::SetCursorLatLon(double lat, double lon)
 {
 
 }
-bool demo_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
+bool att_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
 {
    /*   if(m_pGribDialog && m_pGRIBOverlayFactory)
       {
@@ -280,23 +279,23 @@ bool demo_pi::RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp)
             return false;
 
 }
-int demo_pi::GetToolbarToolCount(void)
+int att_pi::GetToolbarToolCount(void)
 {
       return 1;
 }
-void demo_pi::ShowPreferencesDialog( wxWindow* parent )
+void att_pi::ShowPreferencesDialog( wxWindow* parent )
 {
 
 }
-void demo_pi::OnToolbarToolCallback(int id)
+void att_pi::OnToolbarToolCallback(int id)
 {
 
 }
-void demo_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
+void att_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
 {
 
 }
-void demo_pi::SetPositionFixEx(PlugIn_Position_Fix_Ex &pfix)
+void att_pi::SetPositionFixEx(PlugIn_Position_Fix_Ex &pfix)
 {
 
 }
@@ -307,90 +306,90 @@ void demo_pi::SetPositionFixEx(PlugIn_Position_Fix_Ex &pfix)
 //
 //----------------------------------------------------------------
 
-BEGIN_EVENT_TABLE(demoWindow, wxWindow)
-  EVT_PAINT ( demoWindow::OnPaint )
-  EVT_SIZE(demoWindow::OnSize)
+BEGIN_EVENT_TABLE(attWindow, wxWindow)
+  EVT_PAINT ( attWindow::OnPaint )
+  EVT_SIZE(attWindow::OnSize)
 
 
 END_EVENT_TABLE()
 
-demoWindow::demoWindow(wxWindow *pparent, wxWindowID id)
+attWindow::attWindow(wxWindow *pparent, wxWindowID id)
       :wxWindow(pparent, id, wxPoint(10,10), wxSize(200,200),
              wxSIMPLE_BORDER, _T("OpenCPN PlugIn"))
 {
-      mLat = 0.0;
-      mLon = 1.0;
-      mSog = 2.0;
-      mCog = 3.0;
-      mVar = 4.0;
+//       mLat = 0.0;
+//       mLon = 1.0;
+//       mSog = 2.0;
+//       mCog = 3.0;
+//       mVar = 4.0;
 }
 
-demoWindow::~demoWindow()
+attWindow::~attWindow()
 {
 }
 
-void demoWindow::OnSize(wxSizeEvent& event)
+void attWindow::OnSize(wxSizeEvent& event)
 {
-      printf("demoWindow OnSize()\n");
+      printf("attWindow OnSize()\n");
 }
 
 
-void demoWindow::SetSentence(wxString &sentence)
+void attWindow::SetSentence(wxString &sentence)
 {
-      m_NMEA0183 << sentence;
-
-      bool bGoodData = false;
-
-      if(m_NMEA0183.PreParse())
-      {
-            if(m_NMEA0183.LastSentenceIDReceived == _T("RMC"))
-            {
-                  if(m_NMEA0183.Parse())
-                  {
-                              if(m_NMEA0183.Rmc.IsDataValid == NTrue)
-                              {
-                                    float llt = m_NMEA0183.Rmc.Position.Latitude.Latitude;
-                                    int lat_deg_int = (int)(llt / 100);
-                                    float lat_deg = lat_deg_int;
-                                    float lat_min = llt - (lat_deg * 100);
-                                    mLat = lat_deg + (lat_min/60.);
-                                    if(m_NMEA0183.Rmc.Position.Latitude.Northing == South)
-                                          mLat = -mLat;
-
-                                    float lln = m_NMEA0183.Rmc.Position.Longitude.Longitude;
-                                    int lon_deg_int = (int)(lln / 100);
-                                    float lon_deg = lon_deg_int;
-                                    float lon_min = lln - (lon_deg * 100);
-                                    mLon = lon_deg + (lon_min/60.);
-                                    if(m_NMEA0183.Rmc.Position.Longitude.Easting == West)
-                                          mLon = -mLon;
-
-                                    mSog = m_NMEA0183.Rmc.SpeedOverGroundKnots;
-                                    mCog = m_NMEA0183.Rmc.TrackMadeGoodDegreesTrue;
-
-                                    if(m_NMEA0183.Rmc.MagneticVariationDirection == East)
-                                          mVar =  m_NMEA0183.Rmc.MagneticVariation;
-                                    else if(m_NMEA0183.Rmc.MagneticVariationDirection == West)
-                                          mVar = -m_NMEA0183.Rmc.MagneticVariation;
-
-                                    bGoodData = true;
-
-                              }
-                        }
-                  }
-        }
+//       m_NMEA0183 << sentence;
+// 
+//       bool bGoodData = false;
+// 
+//       if(m_NMEA0183.PreParse())
+//       {
+//             if(m_NMEA0183.LastSentenceIDReceived == _T("RMC"))
+//             {
+//                   if(m_NMEA0183.Parse())
+//                   {
+//                               if(m_NMEA0183.Rmc.IsDataValid == NTrue)
+//                               {
+//                                     float llt = m_NMEA0183.Rmc.Position.Latitude.Latitude;
+//                                     int lat_deg_int = (int)(llt / 100);
+//                                     float lat_deg = lat_deg_int;
+//                                     float lat_min = llt - (lat_deg * 100);
+//                                     mLat = lat_deg + (lat_min/60.);
+//                                     if(m_NMEA0183.Rmc.Position.Latitude.Northing == South)
+//                                           mLat = -mLat;
+// 
+//                                     float lln = m_NMEA0183.Rmc.Position.Longitude.Longitude;
+//                                     int lon_deg_int = (int)(lln / 100);
+//                                     float lon_deg = lon_deg_int;
+//                                     float lon_min = lln - (lon_deg * 100);
+//                                     mLon = lon_deg + (lon_min/60.);
+//                                     if(m_NMEA0183.Rmc.Position.Longitude.Easting == West)
+//                                           mLon = -mLon;
+// 
+//                                     mSog = m_NMEA0183.Rmc.SpeedOverGroundKnots;
+//                                     mCog = m_NMEA0183.Rmc.TrackMadeGoodDegreesTrue;
+// 
+//                                     if(m_NMEA0183.Rmc.MagneticVariationDirection == East)
+//                                           mVar =  m_NMEA0183.Rmc.MagneticVariation;
+//                                     else if(m_NMEA0183.Rmc.MagneticVariationDirection == West)
+//                                           mVar = -m_NMEA0183.Rmc.MagneticVariation;
+// 
+//                                     bGoodData = true;
+// 
+//                               }
+//                         }
+//                   }
+//         }
 
       //    Got the data, now do something with it
-
+/*
       if(bGoodData)
       {
             Refresh(false);
-      }
+      }*/
 }
 
-void demoWindow::OnPaint(wxPaintEvent& event)
+void attWindow::OnPaint(wxPaintEvent& event)
 {
-      wxLogMessage(_T("demo_pi onpaint"));
+      wxLogMessage(_T("att_pi onpaint"));
 
       wxPaintDC dc ( this );
 
@@ -400,9 +399,9 @@ void demoWindow::OnPaint(wxPaintEvent& event)
             dc.Clear();
 
             wxString data;
-            data.Printf(_T("Lat: %g "), mLat);
+            data.Printf(_T("Lat: %g "), 12);
             dc.DrawText(data, 10, 10);
-
+/*
             data.Printf(_T("Lon: %g"), mLon);
             dc.DrawText(data, 10, 40);
 
@@ -410,6 +409,6 @@ void demoWindow::OnPaint(wxPaintEvent& event)
             dc.DrawText(data, 10, 70);
 
             data.Printf(_T("Cog: %g"), mCog);
-            dc.DrawText(data, 10, 100);
+            dc.DrawText(data, 10, 100);*/
       }
 }

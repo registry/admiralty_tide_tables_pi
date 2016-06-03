@@ -36,24 +36,22 @@
 #define     PLUGIN_VERSION_MINOR    0
 
 #define     MY_API_VERSION_MAJOR    1
-#define     MY_API_VERSION_MINOR    8
+#define     MY_API_VERSION_MINOR    9
 
 #include "../../../include/ocpn_plugin.h"
 
-#include "nmea0183/nmea0183.h"
 
-
-class demoWindow;
+class attWindow;
 
 //----------------------------------------------------------------------------------------------------------
 //    The PlugIn Class Definition
 //----------------------------------------------------------------------------------------------------------
 
 
-class demo_pi : public opencpn_plugin_18
+class att_pi : public opencpn_plugin_19
 {
 public:
-      demo_pi(void *ppimgr):opencpn_plugin_18(ppimgr){}
+      att_pi(void *ppimgr):opencpn_plugin_19(ppimgr){}
 
 //    The required PlugIn Methods
       int Init(void);
@@ -70,7 +68,6 @@ public:
 
 //    The optional method overrides
 
-      void SetNMEASentence(wxString &sentence);
       void OnContextMenuItemCallback(int id);
       void UpdateAuiStatus(void);
 
@@ -88,7 +85,7 @@ public:
 private:
       wxWindow         *m_parent_window;
 
-      demoWindow       *m_pdemo_window;
+      attWindow        *m_patt_window;
       wxAuiManager     *m_AUImgr;
       int               m_show_id;
       int               m_hide_id;
@@ -97,20 +94,16 @@ private:
 
 
 
-class demoWindow : public wxWindow
+class attWindow : public wxWindow
 {
 public:
-      demoWindow(wxWindow *pparent, wxWindowID id);
-      ~demoWindow();
+      attWindow(wxWindow *pparent, wxWindowID id);
+      ~attWindow();
 
       void OnPaint(wxPaintEvent& event);
       void SetSentence(wxString &sentence);
       void OnSize(wxSizeEvent& event);
 
-      NMEA0183        m_NMEA0183;                 // Used to parse NMEA Sentences
-
-      wxString          m_NMEASentence;
-      double            mLat, mLon, mSog, mCog, mVar;
 
 
 DECLARE_EVENT_TABLE()

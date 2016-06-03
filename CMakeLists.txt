@@ -30,8 +30,25 @@ ENDIF (COMMAND cmake_policy)
 PROJECT(admiralty_tide_tables_pi)
 
 SET(PACKAGE_NAME admiralty_tide_tables_pi)
+
+SET(PACKAGE_NAME admiralty_tide_tables_pi)
+SET(VERBOSE_NAME "A.T.T. Calculation plugin")
+SET(TITLE_NAME ATT)
+SET(CPACK_PACKAGE_CONTACT "Pavel Saviankou ")
 SET(PLUGIN_SOURCE_DIR ..)
 MESSAGE (STATUS "*** Building ${PACKAGE_NAME} ***")
+SET(BUNDLE_DATA TRUE)
+
+INCLUDE( VERSION.cmake )
+SET(PLUGIN_VERSION "${PLUGIN_VERSION_MAJOR}.${PLUGIN_VERSION_MINOR}.${PLUGIN_VERSION_PATCH}" )
+
+SET(VERSION_MAJOR ${PLUGIN_VERSION_MAJOR})
+SET(VERSION_MINOR "${PLUGIN_VERSION_MINOR}")
+SET(VERSION_DATE ${PLUGIN_VERSION_DATE})
+
+INCLUDE("cmake/PluginConfigure.cmake")
+
+
 
 #SET(CMAKE_BUILD_TYPE Debug)
 
@@ -86,7 +103,6 @@ SET(ATT_SRC
  		src/att_pi.cpp
  	)
 
-INCLUDE_DIRECTORIES(nmea0183)
 
 ADD_LIBRARY(${PACKAGE_NAME} SHARED ${ATT_SRC}  )
 
@@ -106,3 +122,6 @@ IF(WIN32)
 INSTALL(TARGETS ${PACKAGE_NAME} RUNTIME DESTINATION "plugins")
 ENDIF(WIN32)
  	  	 
+INCLUDE("cmake/PluginInstall.cmake")
+INCLUDE("cmake/PluginLocalization.cmake")
+INCLUDE("cmake/PluginPackage.cmake")
