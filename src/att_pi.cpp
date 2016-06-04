@@ -35,9 +35,11 @@
 
 #include "att_pi.h"
 
+#include "tool_icon.h"
 
 // the class factories, used to create and destroy instances of the PlugIn
 
+static att_pi *s_att_pi;
 extern "C" DECL_EXP opencpn_plugin* create_pi(void *ppimgr)
 {
     return new att_pi(ppimgr);
@@ -59,6 +61,19 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p)
 //---------------------------------------------------------------------------------------------------------
 
 
+att_pi::att_pi(void *ppimgr)
+      :opencpn_plugin_19(ppimgr)
+{
+      // Create the PlugIn icons
+      initialize_images();
+      s_att_pi = this;
+}
+
+att_pi::~att_pi(void)
+{
+      delete _img_att;
+}
+
 
 //---------------------------------------------------------------------------------------------------------
 //
@@ -69,48 +84,50 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p)
 
 int att_pi::Init(void)
 {
-     printf("att_pi Init()\n");
+        m_patt_window = NULL;
 
-      m_patt_window = NULL;
+        // Get a pointer to the opencpn display canvas, to use as a parent for windows created
+        m_parent_window = GetOCPNCanvasWindow();
+      
+        //    This PlugIn needs a toolbar icon, so request its insertion if enabled locally
+      m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_att, _img_att, wxITEM_NORMAL,
+                                              _("A.T.T. Calculation"), _T(""), NULL,
+                                              ATT_TOOL_POSITION, 0, this);
+      
+        // Create the Context Menu Items
 
-      // Get a pointer to the opencpn display canvas, to use as a parent for windows created
-      m_parent_window = GetOCPNCanvasWindow();
-
-      // Create the Context Menu Items
-
-      //    In order to avoid an ASSERT on msw debug builds,
-      //    we need to create a dummy menu to act as a surrogate parent of the created MenuItems
-      //    The Items will be re-parented when added to the real context meenu
-      wxMenu dummy_menu;
-
-      wxMenuItem *pmi = new wxMenuItem(&dummy_menu, -1, _("Show PlugIn DemoWindow"));
-      m_show_id = AddCanvasContextMenuItem(pmi, this );
-      SetCanvasContextMenuItemViz(m_show_id, true);
-
-      wxMenuItem *pmih = new wxMenuItem(&dummy_menu, -1, _("Hide PlugIn DemoWindow"));
-      m_hide_id = AddCanvasContextMenuItem(pmih, this );
-      SetCanvasContextMenuItemViz(m_hide_id, false);
-
-        m_patt_window = new attWindow(m_parent_window, wxID_ANY);
-
-        m_AUImgr = GetFrameAuiManager();
-        m_AUImgr->AddPane(m_patt_window);
-        m_AUImgr->GetPane(m_patt_window).Name(_T("Demo Window Name"));
-
-        m_AUImgr->GetPane(m_patt_window).Float();
-        m_AUImgr->GetPane(m_patt_window).FloatingPosition(300,30);
-
-        m_AUImgr->GetPane(m_patt_window).Caption(_T("AUI Managed Demo Window"));
-        m_AUImgr->GetPane(m_patt_window).CaptionVisible(true);
-        m_AUImgr->GetPane(m_patt_window).GripperTop(true);
-        m_AUImgr->GetPane(m_patt_window).CloseButton(true);
-        m_AUImgr->GetPane(m_patt_window).Show(false);
-        m_AUImgr->Update();
+        //    In order to avoid an ASSERT on msw debug builds,
+        //    we need to create a dummy menu to act as a surrogate parent of the created MenuItems
+        //    The Items will be re-parented when added to the real context meenu
+//         wxMenu dummy_menu;
+// 
+//         wxMenuItem *pmi = new wxMenuItem(&dummy_menu, -1, _("Show A.T.T. Window"));
+//         m_show_id = AddCanvasContextMenuItem(pmi, this );
+//         SetCanvasContextMenuItemViz(m_show_id, true);
+// 
+//         wxMenuItem *pmih = new wxMenuItem(&dummy_menu, -1, _("Hide A.T.T. DemoWindow"));
+//         m_hide_id = AddCanvasContextMenuItem(pmih, this );
+//         SetCanvasContextMenuItemViz(m_hide_id, false);
+// 
+//         m_patt_window = new attWindow(m_parent_window, wxID_ANY);
+// 
+//         m_AUImgr = GetFrameAuiManager();
+//         m_AUImgr->AddPane(m_patt_window);
+//         m_AUImgr->GetPane(m_patt_window).Name(_T("A.T.T. Calculation"));
+// 
+//         m_AUImgr->GetPane(m_patt_window).Float();
+//         m_AUImgr->GetPane(m_patt_window).FloatingPosition(300,30);
+// 
+//         m_AUImgr->GetPane(m_patt_window).Caption(_T("A.T.T. Calculation Window"));
+//         m_AUImgr->GetPane(m_patt_window).CaptionVisible(true);
+//         m_AUImgr->GetPane(m_patt_window).GripperTop(true);
+//         m_AUImgr->GetPane(m_patt_window).CloseButton(true);
+//         m_AUImgr->GetPane(m_patt_window).Show(false);
+//         m_AUImgr->Update();
 
       return (
-           INSTALLS_CONTEXTMENU_ITEMS     |
-           WANTS_NMEA_SENTENCES           |
-           USES_AUI_MANAGER
+           WANTS_TOOLBAR_CALLBACK    |
+           INSTALLS_TOOLBAR_TOOL     
             );
 }
 
@@ -237,7 +254,7 @@ void att_pi::UpdateAuiStatus(void)
       if(!pane.IsOk())
             return;
 
-      printf("update %d\n",pane.IsShown());
+//       printf("update %d\n",pane.IsShown());
 
       SetCanvasContextMenuItemViz(m_hide_id, pane.IsShown());
       SetCanvasContextMenuItemViz(m_show_id, !pane.IsShown());
@@ -330,7 +347,7 @@ attWindow::~attWindow()
 
 void attWindow::OnSize(wxSizeEvent& event)
 {
-      printf("attWindow OnSize()\n");
+//       printf("attWindow OnSize()\n");
 }
 
 
@@ -399,7 +416,7 @@ void attWindow::OnPaint(wxPaintEvent& event)
             dc.Clear();
 
             wxString data;
-            data.Printf(_T("Lat: %g "), 12);
+            data.Printf(_T("Lat: %g "), 12.);
             dc.DrawText(data, 10, 10);
 /*
             data.Printf(_T("Lon: %g"), mLon);

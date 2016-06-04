@@ -101,6 +101,8 @@ FIND_PACKAGE(Gettext REQUIRED)
 SET(ATT_SRC
                 src/att_pi.h
  		src/att_pi.cpp
+ 		src/tool_icon.h
+ 		src/tool_icon.cpp
  	)
 
 

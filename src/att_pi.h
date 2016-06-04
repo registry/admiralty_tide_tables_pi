@@ -40,7 +40,7 @@
 
 #include "../../../include/ocpn_plugin.h"
 
-
+#define ATT_TOOL_POSITION    -1          // Request default positioning of toolbar tool
 class attWindow;
 
 //----------------------------------------------------------------------------------------------------------
@@ -51,8 +51,9 @@ class attWindow;
 class att_pi : public opencpn_plugin_19
 {
 public:
-      att_pi(void *ppimgr):opencpn_plugin_19(ppimgr){}
-
+      att_pi(void *ppimgr);
+      ~att_pi();
+ 
 //    The required PlugIn Methods
       int Init(void);
       bool DeInit(void);
@@ -71,6 +72,7 @@ public:
       void OnContextMenuItemCallback(int id);
       void UpdateAuiStatus(void);
 
+      
 //    The override PlugIn Methods
       bool RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp);
       void SetCursorLatLon(double lat, double lon);
@@ -84,6 +86,7 @@ public:
 
 private:
       wxWindow         *m_parent_window;
+      int              m_leftclick_tool_id;
 
       attWindow        *m_patt_window;
       wxAuiManager     *m_AUImgr;
