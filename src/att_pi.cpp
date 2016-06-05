@@ -93,7 +93,9 @@ int att_pi::Init(void)
       m_leftclick_tool_id  = InsertPlugInTool(_T(""), _img_att, _img_att, wxITEM_NORMAL,
                                               _("A.T.T. Calculation"), _T(""), NULL,
                                               ATT_TOOL_POSITION, 0, this);
-      
+        m_pATTDialog = new ATTDialog( m_parent_window );
+        m_pATTDialog->CreateButtons( m_alauncher_labels);
+    
         // Create the Context Menu Items
 
         //    In order to avoid an ASSERT on msw debug builds,
@@ -139,6 +141,13 @@ bool att_pi::DeInit(void)
         m_patt_window->Close();
 //          m_patt_window->Destroy(); //Gives a Segmentation fault
       }
+       if ( m_pATTDialog )
+    {
+        m_pATTDialog->Close();
+        delete m_pATTDialog;
+        m_pATTDialog = NULL;
+    }
+      
       return true;
 }
 
@@ -306,8 +315,11 @@ void att_pi::ShowPreferencesDialog( wxWindow* parent )
 }
 void att_pi::OnToolbarToolCallback(int id)
 {
-
+    SetToolbarItemState( id, false );
+    m_pATTDialog->Show();
 }
+
+
 void att_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
 {
 

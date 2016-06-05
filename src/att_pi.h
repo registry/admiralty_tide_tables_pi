@@ -39,9 +39,12 @@
 #define     MY_API_VERSION_MINOR    9
 
 #include "../../../include/ocpn_plugin.h"
+#include "ATTDialog.h"
 
 #define ATT_TOOL_POSITION    -1          // Request default positioning of toolbar tool
 class attWindow;
+
+
 
 //----------------------------------------------------------------------------------------------------------
 //    The PlugIn Class Definition
@@ -89,10 +92,13 @@ private:
       int              m_leftclick_tool_id;
 
       attWindow        *m_patt_window;
+       ATTDialog *m_pATTDialog;
       wxAuiManager     *m_AUImgr;
       int               m_show_id;
       int               m_hide_id;
-
+      
+    wxString m_launcher_labels;
+    wxArrayString m_alauncher_labels;
 };
 
 
