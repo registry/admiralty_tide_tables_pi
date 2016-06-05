@@ -65,7 +65,7 @@ void ATTDialog::CreateButtons( const wxArrayString& labels )
 
 void ATTDialog::AddButton( const wxString& label )
 {
-    LauncherButton *m_bAction = new wxButton( m_scrolledWindow, wxID_ANY, label, wxDefaultPosition, wxDefaultSize, 0 );
+    wxButton *m_bAction = new wxButton( m_scrolledWindow, wxID_ANY, label, wxDefaultPosition, wxDefaultSize, 0 );
     button_sizer->Add( m_bAction, 1, wxALL | wxEXPAND, 5 );
 
     m_bAction->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( ATTDialog::OnBtnClick ), NULL, this );

@@ -61,7 +61,7 @@ protected:
 
 public:
 
-    ATTDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _( "Launcher" ), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 400, 450 ), long style = wxCAPTION | wxDEFAULT_DIALOG_STYLE );
+    ATTDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _( "A.T.T. Calculation" ), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 400, 450 ), long style = wxCAPTION | wxDEFAULT_DIALOG_STYLE );
     ~ATTDialog();
     void CreateButtons( const wxArrayString& labels );
     void AddButton( const wxString& label);
