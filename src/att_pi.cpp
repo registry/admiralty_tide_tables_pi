@@ -94,7 +94,7 @@ int att_pi::Init(void)
                                               _("A.T.T. Calculation"), _T(""), NULL,
                                               ATT_TOOL_POSITION, 0, this);
         m_pATTDialog = new ATTDialog( m_parent_window );
-        m_pATTDialog->CreateButtons( m_alauncher_labels);
+//         m_pATTDialog->CreateLayout( );
     
         // Create the Context Menu Items
 

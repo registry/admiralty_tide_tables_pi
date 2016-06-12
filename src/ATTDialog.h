@@ -28,17 +28,22 @@
 #define __ATTDIALOG_H__
 
 #include <wx/artprov.h>
-#include <wx/xrc/xmlres.h>
-#include <wx/intl.h>
-#include <wx/string.h>
 #include <wx/button.h>
-#include <wx/gdicmn.h>
-#include <wx/font.h>
 #include <wx/colour.h>
+#include <wx/datectrl.h>
+#include <wx/dialog.h>
+#include <wx/font.h>
+#include <wx/gdicmn.h>
+#include <wx/intl.h>
+#include <wx/radiobut.h>
+#include <wx/scrolwin.h>
 #include <wx/settings.h>
 #include <wx/sizer.h>
-#include <wx/scrolwin.h>
-#include <wx/dialog.h>
+#include <wx/statbox.h>
+#include <wx/stattext.h>
+#include <wx/string.h>
+#include <wx/textctrl.h>
+#include <wx/xrc/xmlres.h>
 
 ///////////////////////////////////////////////////////////////////////////
 
@@ -57,15 +62,18 @@ protected:
 
     // Virtual event handlers, overide them in your derived class
     void OnBtnClick( wxCommandEvent& event );
-
+    void OnClose( wxCommandEvent& event );
 
 public:
 
-    ATTDialog( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _( "A.T.T. Calculation" ), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 400, 450 ), long style = wxCAPTION | wxDEFAULT_DIALOG_STYLE );
+    ATTDialog( wxWindow* parent, 
+               wxWindowID id = wxID_ANY, 
+               const wxString& title = _( "A.T.T. Calculation" ), 
+               const wxPoint& pos = wxDefaultPosition, 
+               const wxSize& size = wxDefaultSize, 
+               long style = wxCAPTION | wxDEFAULT_DIALOG_STYLE | wxRESIZE_BORDER );
     ~ATTDialog();
-    void CreateButtons( const wxArrayString& labels );
-    void AddButton( const wxString& label);
-
+    void CreateLayout(  );
 };
 
 // ///////////////////////////////////////////////////////////////////////////////

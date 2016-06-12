@@ -96,9 +96,6 @@ private:
       wxAuiManager     *m_AUImgr;
       int               m_show_id;
       int               m_hide_id;
-      
-    wxString m_launcher_labels;
-    wxArrayString m_alauncher_labels;
 };
 
 
