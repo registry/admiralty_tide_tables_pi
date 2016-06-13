@@ -60,6 +60,68 @@ protected:
     wxScrolledWindow* m_scrolledWindow;
     wxBoxSizer* button_sizer;
 
+    // all input elements:
+    wxDatePickerCtrl * m_Date;
+    wxRadioButton * m_TideSpring;
+    wxRadioButton * m_TideMid;
+    wxRadioButton * m_TideNipp;
+    
+    wxTextCtrl * m_StPName;
+    wxTextCtrl * m_StPLW1T;
+    wxTextCtrl * m_StPLW1H;
+    wxTextCtrl * m_StPHW1T;
+    wxTextCtrl * m_StPHW1H;
+    wxTextCtrl * m_StPLW2T;
+    wxTextCtrl * m_StPLW2H;
+    wxTextCtrl * m_StPHW2T;
+    wxTextCtrl * m_StPHW2H;
+    
+    wxTextCtrl * m_ScPName;
+    wxTextCtrl * m_ScPLW1T;
+    wxTextCtrl * m_ScPLW1H;
+    wxTextCtrl * m_ScPHW1T;
+    wxTextCtrl * m_ScPHW1H;
+    wxTextCtrl * m_ScPLW2T;
+    wxTextCtrl * m_ScPLW2H;
+    wxTextCtrl * m_ScPHW2T;
+    wxTextCtrl * m_ScPHW2H;
+    
+    wxStaticText* m_StPName2Label;
+    wxTextCtrl * m_ScPHWT1;
+    wxTextCtrl * m_ScPHWT2;
+    wxTextCtrl * m_ScPHWT3;
+    wxTextCtrl * m_ScPHWT4;
+    
+    wxTextCtrl * m_ScPLWT1;
+    wxTextCtrl * m_ScPLWT2;
+    wxTextCtrl * m_ScPLWT3;
+    wxTextCtrl * m_ScPLWT4;
+    
+    wxTextCtrl * m_StPMHWS;
+    wxTextCtrl * m_StPMHWN;
+    wxTextCtrl * m_StPMLWS;
+    wxTextCtrl * m_StPMLWN;
+    wxTextCtrl * m_StPSC;
+    
+    wxStaticText* m_ScPName2Label;
+    wxTextCtrl * m_ScPDHWT1;
+    wxTextCtrl * m_ScPDHWT2;
+    wxTextCtrl * m_ScPDLWT1;
+    wxTextCtrl * m_ScPDLWT2;
+    
+    wxTextCtrl * m_ScPMHWS;
+    wxTextCtrl * m_ScPMHWN;
+    wxTextCtrl * m_ScPMLWS;
+    wxTextCtrl * m_ScPMLWN;
+    wxTextCtrl * m_ScPSC;
+    
+    wxButton  * m_bCalculate;
+    wxButton  * m_bClose;
+    wxButton  * m_bPrint;
+    wxButton  * m_bSave;
+    
+    
+    
     // Virtual event handlers, overide them in your derived class
     void OnBtnClick( wxCommandEvent& event );
     void OnClose( wxCommandEvent& event );
@@ -76,30 +138,7 @@ public:
     void CreateLayout(  );
 };
 
-// ///////////////////////////////////////////////////////////////////////////////
-// /// Class LauncherButton
-// ///////////////////////////////////////////////////////////////////////////////
-// class LauncherButton : public wxButton
-// {
-// private:
-//     wxString m_command;
-// 
-// protected:
-// 
-// public:
-//     LauncherButton( wxWindow *parent, wxWindowID id, const wxString &label = wxEmptyString, const wxPoint &pos = wxDefaultPosition, const wxSize &size = wxDefaultSize, long style = 0, const wxValidator &validator = wxDefaultValidator, const wxString &name = wxButtonNameStr ) :
-//         wxButton( parent, id, label, pos, size, style, validator, name ) {}
-//     void SetCommand( const wxString& command )
-//     {
-//         m_command = command;
-//     }
-//     wxString GetCommand()
-//     {
-//         return m_command;
-//     }
-// 
-// };
 
 
-#endif //__LAUNCHERUIDIALOG_H__
+#endif //__ATTDIALOG_H__
 

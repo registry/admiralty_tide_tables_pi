@@ -29,7 +29,6 @@
 
 ATTDialog::ATTDialog( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
-//     this->SetSizeHints( wxDefaultSize, wxDefaultSize );
 
     CreateLayout();     
 
@@ -41,43 +40,58 @@ void ATTDialog::CreateLayout( )
     wxBoxSizer* main_sizer;
     main_sizer = new wxBoxSizer( wxVERTICAL );
 
-//     m_scrolledWindow = new wxScrolledWindow( this, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxHSCROLL | wxVSCROLL );
-//     m_scrolledWindow->SetScrollRate( 5, 5 );
-// 
-//     button_sizer = new wxBoxSizer( wxVERTICAL );
-// 
-//     m_scrolledWindow->SetSizer( button_sizer );
-//     m_scrolledWindow->Layout();
-//     button_sizer->Fit( m_scrolledWindow );
-//     main_sizer->Add( m_scrolledWindow, 1, wxALL | wxEXPAND, 5 );
     wxStaticBoxSizer* sbSizer0;
     sbSizer0 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("General info") ), wxHORIZONTAL );
     main_sizer->Add(sbSizer0);
     
     wxStaticText* m_DateLabel = new wxStaticText( this, wxID_ANY, _("Date"), wxDefaultPosition, wxDefaultSize, 0 );
-    sbSizer0->Add(m_DateLabel);
+    sbSizer0->Add(m_DateLabel,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
-    wxDatePickerCtrl * m_Date = new  wxDatePickerCtrl ( this, wxID_ANY);
-    sbSizer0->Add(m_Date); 
+    m_Date = new  wxDatePickerCtrl ( this, wxID_ANY);
+    sbSizer0->Add(m_Date,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 ); 
     
     
     wxStaticText* m_TideTypeLabel = new wxStaticText( this, wxID_ANY, _("Tide type"), wxDefaultPosition, wxDefaultSize, 0 );
-    sbSizer0->Add(m_TideTypeLabel);
-    wxRadioButton * m_TideSpring = new wxRadioButton 	( 	this ,
+    sbSizer0->Add(m_TideTypeLabel,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
+    m_TideSpring = new wxRadioButton 	( 	this ,
                                                                 wxID_ANY,
                                                          _("Spring"),
                                                                 wxDefaultPosition,
                                                          wxDefaultSize,
                                                          wxRB_GROUP);
-    sbSizer0->Add(m_TideSpring );
-    wxRadioButton * m_TideMid = new wxRadioButton 	( 	this ,
+    sbSizer0->Add(m_TideSpring ,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
+    m_TideMid = new wxRadioButton 	( 	this ,
                                                                 wxID_ANY,
                                                          _("Mid"));
-    sbSizer0->Add(m_TideMid );
-    wxRadioButton * m_TideNipp = new wxRadioButton 	( 	this ,
+    sbSizer0->Add(m_TideMid ,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
+    m_TideNipp = new wxRadioButton 	( 	this ,
                                                                 wxID_ANY,
                                                          _("Nipp"));
-    sbSizer0->Add(m_TideNipp );
+    sbSizer0->Add(m_TideNipp,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3  );
 
     
     wxStaticBoxSizer* sbSizer1;
@@ -86,7 +100,11 @@ void ATTDialog::CreateLayout( )
     
     wxStaticBoxSizer* sbStPSizer;
     sbStPSizer = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Standard Port") ), wxVERTICAL );
-    sbSizer1->Add(sbStPSizer);
+    sbSizer1->Add(sbStPSizer,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        5 );
     
     wxFlexGridSizer * _stp_name_sizer = new  wxFlexGridSizer 	( 	2   );
     sbStPSizer->Add( _stp_name_sizer);
@@ -94,52 +112,108 @@ void ATTDialog::CreateLayout( )
     
         
     wxStaticText* m_StPNameLabel = new wxStaticText( this, wxID_ANY, _("Name"), wxDefaultPosition, wxDefaultSize, 0 );
-    _stp_name_sizer->Add(m_StPNameLabel);
+    _stp_name_sizer->Add(m_StPNameLabel,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
-    wxTextCtrl * m_StPName= new wxTextCtrl (this, wxID_ANY );
-    _stp_name_sizer->Add(m_StPName);
+    m_StPName= new wxTextCtrl (this, wxID_ANY );
+    _stp_name_sizer->Add(m_StPName,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
     wxFlexGridSizer * _stp_tide_sizer = new  wxFlexGridSizer 	( 	3   );
     sbStPSizer->Add( _stp_tide_sizer);
     
           
     wxStaticText* m_StPLW1Label = new wxStaticText( this, wxID_ANY, _("LW1"), wxDefaultPosition, wxDefaultSize, 0 );
-    _stp_tide_sizer->Add(m_StPLW1Label);
+    _stp_tide_sizer->Add(m_StPLW1Label,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
-    wxTextCtrl * m_StPLW1T= new wxTextCtrl (this, wxID_ANY );
-    _stp_tide_sizer->Add(m_StPLW1T);  
+    m_StPLW1T= new wxTextCtrl (this, wxID_ANY );
+    _stp_tide_sizer->Add(m_StPLW1T,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
     
-    wxTextCtrl * m_StPLW1H= new wxTextCtrl (this, wxID_ANY );
-    _stp_tide_sizer->Add(m_StPLW1H);   
+    m_StPLW1H= new wxTextCtrl (this, wxID_ANY );
+    _stp_tide_sizer->Add(m_StPLW1H,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );   
     
     
     wxStaticText* m_StPHW1Label = new wxStaticText( this, wxID_ANY, _("HW1"), wxDefaultPosition, wxDefaultSize, 0 );
-    _stp_tide_sizer->Add(m_StPHW1Label);
+    _stp_tide_sizer->Add(m_StPHW1Label,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
-    wxTextCtrl * m_StPHW1T= new wxTextCtrl (this, wxID_ANY );
-    _stp_tide_sizer->Add(m_StPHW1T);  
+    m_StPHW1T= new wxTextCtrl (this, wxID_ANY );
+    _stp_tide_sizer->Add(m_StPHW1T,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
     
-    wxTextCtrl * m_StPHW1H= new wxTextCtrl (this, wxID_ANY );
-    _stp_tide_sizer->Add(m_StPHW1H);   
+    m_StPHW1H= new wxTextCtrl (this, wxID_ANY );
+    _stp_tide_sizer->Add(m_StPHW1H,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );   
     
-        wxStaticText* m_StPLW2Label = new wxStaticText( this, wxID_ANY, _("LW2"), wxDefaultPosition, wxDefaultSize, 0 );
-    _stp_tide_sizer->Add(m_StPLW2Label);
+    wxStaticText* m_StPLW2Label = new wxStaticText( this, wxID_ANY, _("LW2"), wxDefaultPosition, wxDefaultSize, 0 );
+    _stp_tide_sizer->Add(m_StPLW2Label,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
-    wxTextCtrl * m_StPLW2T= new wxTextCtrl (this, wxID_ANY );
-    _stp_tide_sizer->Add(m_StPLW2T);  
+    m_StPLW2T= new wxTextCtrl (this, wxID_ANY );
+    _stp_tide_sizer->Add(m_StPLW2T,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
     
-    wxTextCtrl * m_StPLW2H= new wxTextCtrl (this, wxID_ANY );
-    _stp_tide_sizer->Add(m_StPLW2H);   
+    m_StPLW2H= new wxTextCtrl (this, wxID_ANY );
+    _stp_tide_sizer->Add(m_StPLW2H,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );   
     
     
-        wxStaticText* m_StPHW2Label = new wxStaticText( this, wxID_ANY, _("HW2"), wxDefaultPosition, wxDefaultSize, 0 );
-    _stp_tide_sizer->Add(m_StPHW2Label);
+    wxStaticText* m_StPHW2Label = new wxStaticText( this, wxID_ANY, _("HW2"), wxDefaultPosition, wxDefaultSize, 0 );
+    _stp_tide_sizer->Add(m_StPHW2Label,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
-    wxTextCtrl * m_StPHW2T= new wxTextCtrl (this, wxID_ANY );
-    _stp_tide_sizer->Add(m_StPHW2T);  
+    m_StPHW2T= new wxTextCtrl (this, wxID_ANY );
+    _stp_tide_sizer->Add(m_StPHW2T,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
     
-    wxTextCtrl * m_StPHW2H= new wxTextCtrl (this, wxID_ANY );
-    _stp_tide_sizer->Add(m_StPHW2H);   
+    m_StPHW2H= new wxTextCtrl (this, wxID_ANY );
+    _stp_tide_sizer->Add(m_StPHW2H,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );   
     
     
     
@@ -149,17 +223,29 @@ void ATTDialog::CreateLayout( )
     
     wxStaticBoxSizer* sbScPSizer;
     sbScPSizer = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Secondary Port") ), wxVERTICAL );
-    sbSizer1->Add(sbScPSizer);   
+    sbSizer1->Add(sbScPSizer,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        5 );   
     
     wxFlexGridSizer * _scp_name_sizer = new  wxFlexGridSizer 	( 	2   );
     sbScPSizer->Add( _scp_name_sizer);
     
     
     wxStaticText* m_ScPNameLabel = new wxStaticText( this, wxID_ANY, _("Name"), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_name_sizer->Add(m_ScPNameLabel);
+    _scp_name_sizer->Add(m_ScPNameLabel,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
-    wxTextCtrl * m_ScPName= new wxTextCtrl (this, wxID_ANY );
-    _scp_name_sizer->Add(m_ScPName);
+    m_ScPName= new wxTextCtrl (this, wxID_ANY );
+    _scp_name_sizer->Add(m_ScPName,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
     wxFlexGridSizer * _scp_tide_sizer = new  wxFlexGridSizer 	( 	3   );
     sbScPSizer->Add( _scp_tide_sizer);
@@ -168,42 +254,90 @@ void ATTDialog::CreateLayout( )
         
           
     wxStaticText* m_ScPLW1Label = new wxStaticText( this, wxID_ANY, _("LW1"), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_tide_sizer->Add(m_ScPLW1Label);
+    _scp_tide_sizer->Add(m_ScPLW1Label,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
-    wxTextCtrl * m_ScPLW1T= new wxTextCtrl (this, wxID_ANY );
-    _scp_tide_sizer->Add(m_ScPLW1T);  
+    m_ScPLW1T= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_sizer->Add(m_ScPLW1T,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
     
-    wxTextCtrl * m_ScPLW1H= new wxTextCtrl (this, wxID_ANY );
-    _scp_tide_sizer->Add(m_ScPLW1H);   
+    m_ScPLW1H= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_sizer->Add(m_ScPLW1H,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );   
     
     
     wxStaticText* m_ScPHW1Label = new wxStaticText( this, wxID_ANY, _("HW1"), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_tide_sizer->Add(m_ScPHW1Label);
+    _scp_tide_sizer->Add(m_ScPHW1Label,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
-    wxTextCtrl * m_ScPHW1T= new wxTextCtrl (this, wxID_ANY );
-    _scp_tide_sizer->Add(m_ScPHW1T);  
+    m_ScPHW1T= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_sizer->Add(m_ScPHW1T,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
     
-    wxTextCtrl * m_ScPHW1H= new wxTextCtrl (this, wxID_ANY );
-    _scp_tide_sizer->Add(m_ScPHW1H);   
+    m_ScPHW1H= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_sizer->Add(m_ScPHW1H,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );   
     
         wxStaticText* m_ScPLW2Label = new wxStaticText( this, wxID_ANY, _("LW2"), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_tide_sizer->Add(m_ScPLW2Label);
+    _scp_tide_sizer->Add(m_ScPLW2Label,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
-    wxTextCtrl * m_ScPLW2T= new wxTextCtrl (this, wxID_ANY );
-    _scp_tide_sizer->Add(m_ScPLW2T);  
+    m_ScPLW2T= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_sizer->Add(m_ScPLW2T,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
     
-    wxTextCtrl * m_ScPLW2H= new wxTextCtrl (this, wxID_ANY );
-    _scp_tide_sizer->Add(m_ScPLW2H);   
+    m_ScPLW2H= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_sizer->Add(m_ScPLW2H,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );   
     
     
         wxStaticText* m_ScPHW2Label = new wxStaticText( this, wxID_ANY, _("HW2"), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_tide_sizer->Add(m_ScPHW2Label);
+    _scp_tide_sizer->Add(m_ScPHW2Label,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
-    wxTextCtrl * m_ScPHW2T= new wxTextCtrl (this, wxID_ANY );
-    _scp_tide_sizer->Add(m_ScPHW2T);  
+    m_ScPHW2T= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_sizer->Add(m_ScPHW2T,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
     
-    wxTextCtrl * m_ScPHW2H= new wxTextCtrl (this, wxID_ANY );
-    _scp_tide_sizer->Add(m_ScPHW2H);   
+    m_ScPHW2H= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_sizer->Add(m_ScPHW2H,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );   
     
     
     
@@ -214,80 +348,321 @@ void ATTDialog::CreateLayout( )
     sbSizer2 = new wxStaticBoxSizer( new wxStaticBox( this, wxID_ANY, _("Calculation") ), wxVERTICAL );
 
     
-    wxFlexGridSizer * _scp_tide_calc_sizer = new  wxFlexGridSizer 	( 	7   );
+    wxFlexGridSizer * _scp_tide_calc_sizer = new  wxFlexGridSizer 	( 	8   );
     sbSizer2->Add( _scp_tide_calc_sizer);
     
-    wxStaticText* m_ScPCalcHolderLabel = new wxStaticText( this, wxID_ANY, _(""), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_tide_calc_sizer->Add(m_ScPCalcHolderLabel);
+    wxStaticText* m_ScPCalcHolderLabel = new wxStaticText( this, wxID_ANY, _("Port"), wxDefaultPosition, wxDefaultSize, 0 );
+    _scp_tide_calc_sizer->Add(m_ScPCalcHolderLabel,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
      wxStaticText* m_ScPCalcHWLabel = new wxStaticText( this, wxID_ANY, _("HW"), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_tide_calc_sizer->Add(m_ScPCalcHWLabel);
+    _scp_tide_calc_sizer->Add(m_ScPCalcHWLabel,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
      
     wxStaticText* m_ScPCalcLWLabel = new wxStaticText( this, wxID_ANY, _("LW"), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_tide_calc_sizer->Add(m_ScPCalcLWLabel);   
+    _scp_tide_calc_sizer->Add(m_ScPCalcLWLabel,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );   
     
       wxStaticText* m_ScPCalcMHWSLabel = new wxStaticText( this, wxID_ANY, _("MHWS"), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_tide_calc_sizer->Add(m_ScPCalcMHWSLabel);
+    _scp_tide_calc_sizer->Add(m_ScPCalcMHWSLabel,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
   
       wxStaticText* m_ScPCalcMHWNLabel = new wxStaticText( this, wxID_ANY, _("MHWN"), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_tide_calc_sizer->Add(m_ScPCalcMHWNLabel);
+    _scp_tide_calc_sizer->Add(m_ScPCalcMHWNLabel,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
 
       wxStaticText* m_ScPCalcMLWSLabel = new wxStaticText( this, wxID_ANY, _("MLWS"), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_tide_calc_sizer->Add(m_ScPCalcMLWSLabel);
+    _scp_tide_calc_sizer->Add(m_ScPCalcMLWSLabel,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
   
       wxStaticText* m_ScPCalcMLWNLabel = new wxStaticText( this, wxID_ANY, _("MLWN"), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_tide_calc_sizer->Add(m_ScPCalcMLWNLabel);
+    _scp_tide_calc_sizer->Add(m_ScPCalcMLWNLabel,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
-    wxStaticText* m_ScPName2Label = new wxStaticText( this, wxID_ANY, _(""), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_tide_calc_sizer->Add(m_ScPName2Label);
+       wxStaticText* m_ScPCalcSCLabel = new wxStaticText( this, wxID_ANY, _("SC"), wxDefaultPosition, wxDefaultSize, 0 );
+    _scp_tide_calc_sizer->Add(m_ScPCalcSCLabel,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );   
+    
+    
+     m_StPName2Label = new wxStaticText( this, wxID_ANY, _(""), wxDefaultPosition, wxDefaultSize, 0 );
+    _scp_tide_calc_sizer->Add(m_StPName2Label,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
    
     // --- times for HW
     wxFlexGridSizer * _scp_hw_calc_sizer = new  wxFlexGridSizer 	( 	2   );
     _scp_tide_calc_sizer->Add( _scp_hw_calc_sizer);
     
-    wxTextCtrl * m_ScPHWT1= new wxTextCtrl (this, wxID_ANY );
-    _scp_hw_calc_sizer->Add(m_ScPHWT1);  
+    m_ScPHWT1= new wxTextCtrl (this, wxID_ANY );
+    _scp_hw_calc_sizer->Add(m_ScPHWT1,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
     
-    wxTextCtrl * m_ScPHWT2= new wxTextCtrl (this, wxID_ANY );
-    _scp_hw_calc_sizer->Add(m_ScPHWT2);   
+    m_ScPHWT2= new wxTextCtrl (this, wxID_ANY );
+    _scp_hw_calc_sizer->Add(m_ScPHWT2,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );   
         
     wxStaticText* m_ScPHWT1and1 = new wxStaticText( this, wxID_ANY, _("and"), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_hw_calc_sizer->Add(m_ScPHWT1and1);
+    _scp_hw_calc_sizer->Add(m_ScPHWT1and1,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
      wxStaticText* m_ScPHWT1and2 = new wxStaticText( this, wxID_ANY, _("and"), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_hw_calc_sizer->Add(m_ScPHWT1and2);
+    _scp_hw_calc_sizer->Add(m_ScPHWT1and2,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
       
-    wxTextCtrl * m_ScPHWT3= new wxTextCtrl (this, wxID_ANY );
-    _scp_hw_calc_sizer->Add(m_ScPHWT3);  
+    m_ScPHWT3= new wxTextCtrl (this, wxID_ANY );
+    _scp_hw_calc_sizer->Add(m_ScPHWT3,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
     
-    wxTextCtrl * m_ScPHWT4= new wxTextCtrl (this, wxID_ANY );
-    _scp_hw_calc_sizer->Add(m_ScPHWT4);    
+    m_ScPHWT4= new wxTextCtrl (this, wxID_ANY );
+    _scp_hw_calc_sizer->Add(m_ScPHWT4,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );    
 
       // --- times for LW
     wxFlexGridSizer * _scp_lw_calc_sizer = new  wxFlexGridSizer 	( 	2   );
     _scp_tide_calc_sizer->Add( _scp_lw_calc_sizer);
     
-    wxTextCtrl * m_ScPLWT1= new wxTextCtrl (this, wxID_ANY );
-    _scp_lw_calc_sizer->Add(m_ScPLWT1);  
+    m_ScPLWT1= new wxTextCtrl (this, wxID_ANY );
+    _scp_lw_calc_sizer->Add(m_ScPLWT1,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
     
-    wxTextCtrl * m_ScPLWT2= new wxTextCtrl (this, wxID_ANY );
-    _scp_lw_calc_sizer->Add(m_ScPLWT2);   
+    m_ScPLWT2= new wxTextCtrl (this, wxID_ANY );
+    _scp_lw_calc_sizer->Add(m_ScPLWT2,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );   
         
     wxStaticText* m_ScPLWT1and1 = new wxStaticText( this, wxID_ANY, _("and"), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_lw_calc_sizer->Add(m_ScPLWT1and1);
+    _scp_lw_calc_sizer->Add(m_ScPLWT1and1,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
      wxStaticText* m_ScPLWT1and2 = new wxStaticText( this, wxID_ANY, _("and"), wxDefaultPosition, wxDefaultSize, 0 );
-    _scp_lw_calc_sizer->Add(m_ScPLWT1and2);
+    _scp_lw_calc_sizer->Add(m_ScPLWT1and2,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
     
       
-    wxTextCtrl * m_ScPLWT3= new wxTextCtrl (this, wxID_ANY );
-    _scp_lw_calc_sizer->Add(m_ScPLWT3);  
+    m_ScPLWT3= new wxTextCtrl (this, wxID_ANY );
+    _scp_lw_calc_sizer->Add(m_ScPLWT3,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
     
-    wxTextCtrl * m_ScPLWT4= new wxTextCtrl (this, wxID_ANY );
-    _scp_lw_calc_sizer->Add(m_ScPLWT4);    
+    m_ScPLWT4= new wxTextCtrl (this, wxID_ANY );
+    _scp_lw_calc_sizer->Add(m_ScPLWT4,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );    
+    
+    // mean leavel on st p
+    
+    wxTextCtrl * m_StPMHWS= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_calc_sizer->Add(m_StPMHWS,
+        0,            // make vertically stretchable
+            // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
+    
+    wxTextCtrl * m_StPMHWN= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_calc_sizer->Add(m_StPMHWN,
+        0,            // make vertically stretchable
+            // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
+      
+    wxTextCtrl * m_StPMLWS= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_calc_sizer->Add(m_StPMLWS,
+        0,            // make vertically stretchable
+            // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
+    
+    wxTextCtrl * m_StPMLWN= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_calc_sizer->Add(m_StPMLWN,
+        0,            // make vertically stretchable
+            // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
+        
+    wxTextCtrl * m_StPSC= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_calc_sizer->Add(m_StPSC,
+        0,            // make vertically stretchable
+            // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
+    
+    // differences for secondary port 
+    
+    m_ScPName2Label = new wxStaticText( this, wxID_ANY, _(""), wxDefaultPosition, wxDefaultSize, 0 );
+    _scp_tide_calc_sizer->Add(m_ScPName2Label,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );
+  
+          // --- differences for HW
+    wxFlexGridSizer * _scp_diff_hw_calc_sizer = new  wxFlexGridSizer 	( 	2   );
+    _scp_tide_calc_sizer->Add( _scp_diff_hw_calc_sizer);
+    
+    m_ScPDHWT1= new wxTextCtrl (this, wxID_ANY );
+    _scp_diff_hw_calc_sizer->Add(m_ScPDHWT1,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
+    
+    m_ScPDHWT2= new wxTextCtrl (this, wxID_ANY );
+    _scp_diff_hw_calc_sizer->Add(m_ScPDHWT2,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );   
+        
+    
+      // --- differences for LW
+    wxFlexGridSizer * _scp_diff_lw_calc_sizer = new  wxFlexGridSizer 	( 	2   );
+    _scp_tide_calc_sizer->Add( _scp_diff_lw_calc_sizer);
+    
+    m_ScPDLWT1= new wxTextCtrl (this, wxID_ANY );
+    _scp_diff_lw_calc_sizer->Add(m_ScPDLWT1,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
+    
+    m_ScPDLWT2= new wxTextCtrl (this, wxID_ANY );
+    _scp_diff_lw_calc_sizer->Add(m_ScPDLWT2,
+        1,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );   
+        
     
     
+    
+        
+    m_ScPMHWS= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_calc_sizer->Add(m_ScPMHWS,
+        0,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
+    
+    m_ScPMHWN= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_calc_sizer->Add(m_ScPMHWN,
+        0,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
+      
+    m_ScPMLWS= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_calc_sizer->Add(m_ScPMLWS,
+        0,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
+    
+    m_ScPMLWN= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_calc_sizer->Add(m_ScPMLWN,
+        0,            // make vertically stretchable
+        wxEXPAND |    // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
+    
+    m_ScPSC= new wxTextCtrl (this, wxID_ANY );
+    _scp_tide_calc_sizer->Add(m_ScPSC,
+        0,            // make vertically stretchable
+            // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3 );  
     
     main_sizer->Add(sbSizer2);
+    
+     
+    wxFlexGridSizer* sbButtonSizer = new wxFlexGridSizer(  4 );
+    
+    
+    m_bPrint = new wxButton( this, wxID_ANY, _("Print")); 
+    sbButtonSizer->Add(m_bPrint,
+        0,            // make vertically stretchable
+            // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3);
+    m_bSave = new wxButton( this, wxID_ANY, _("Save")); 
+     sbButtonSizer->Add(m_bSave,
+        0,            // make vertically stretchable
+            // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3);
+    m_bCalculate = new wxButton( this, wxID_ANY, _("CALCULATE!")); 
+     sbButtonSizer->Add(m_bCalculate,
+        0,            // make vertically stretchable
+            // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3);
+    m_bClose = new wxButton( this, wxID_ANY, _("Close")); 
+     sbButtonSizer->Add(m_bClose,
+        0,            // make vertically stretchable
+            // make horizontally stretchable
+        wxALL,        //   and make border all around
+        3);
+    
+    main_sizer->Add(sbButtonSizer);
+    
+    
     
 
     this->SetSizer( main_sizer );
