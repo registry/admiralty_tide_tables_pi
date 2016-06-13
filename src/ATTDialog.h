@@ -46,6 +46,8 @@
 #include <wx/xrc/xmlres.h>
 
 ///////////////////////////////////////////////////////////////////////////
+class ATTCalculation;
+
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -57,8 +59,11 @@ private:
 
       
 protected:
-    wxScrolledWindow* m_scrolledWindow;
-    wxBoxSizer* button_sizer;
+    ATTCalculation * att_calculation;
+    
+    
+     wxBoxSizer* main_sizer;
+    
 
     // all input elements:
     wxDatePickerCtrl * m_Date;
@@ -125,6 +130,8 @@ protected:
     // Virtual event handlers, overide them in your derived class
     void OnBtnClick( wxCommandEvent& event );
     void OnClose( wxCommandEvent& event );
+    void OnStPEnter( wxCommandEvent& event );
+    void OnScPEnter( wxCommandEvent& event );
 
 public:
 

@@ -105,6 +105,8 @@ SET(ATT_SRC
  		src/tool_icon.cpp
  		src/ATTDialog.h
  		src/ATTDialog.cpp
+ 		src/ATTCalculation.h
+ 		src/ATTCalculation.cpp
  	)
 
 
