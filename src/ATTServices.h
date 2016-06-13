@@ -29,6 +29,8 @@
 
 
 #include "ATTTime.h"
+#include <wx/string.h>
+
 ///////////////////////////////////////////////////////////////////////////
 #include <string>
 
@@ -44,18 +46,18 @@ class ATTServices
 public:
 
     static
-    double convertATTTimeAsString2Double(const std::string &); // 0345 -> 3.75
+    double convertATTTimeAsString2Double(const wxString &); // 0345 -> 3.75
     
     static
-    std::string convertATTTimeAsDouble2String(const double ); // 3.75 -> 0345
+    wxString convertATTTimeAsDouble2String(const double ); // 3.75 -> 0345
+    
+/*    static
+    double convertTimeAsString2Double( const wxString &); // 03h45m -> 3.75
     
     static
-    double convertTimeAsString2Double( const std::string &); // 03h45m -> 3.75
+    wxString convertTimeAsDouble2String( const double ); // 3.75  -> 3h45m
     
-    static
-    std::string convertTimeAsDouble2String( const double ); // 3.75  -> 3h45m
-    
-     
+    */ 
     
     
     

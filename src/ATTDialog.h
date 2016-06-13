@@ -128,10 +128,14 @@ protected:
     
     
     // Virtual event handlers, overide them in your derived class
-    void OnBtnClick( wxCommandEvent& event );
+    void OnCalculate( wxCommandEvent& event );
     void OnClose( wxCommandEvent& event );
     void OnStPEnter( wxCommandEvent& event );
     void OnScPEnter( wxCommandEvent& event );
+    void OnStPLW1T( wxCommandEvent& event );
+    void OnStPLW2T( wxCommandEvent& event );
+    void OnStPHW1T( wxCommandEvent& event );
+    void OnStPHW2T( wxCommandEvent& event );
 
 public:
 

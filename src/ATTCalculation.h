@@ -45,6 +45,7 @@ private:
       
 protected:
 
+    std::string error_message;
     
 
     // all input elements:
@@ -105,6 +106,29 @@ public:
 
     ATTCalculation( );
     ~ATTCalculation();
+    
+    bool calculate(); // false if failed to calculate
+    std::string& error(); // delivers an error message . "" if ok
+    
+    inline
+    void
+    setStPLW1T( const double d) {  m_StPLW1T = d; };
+    
+    inline
+    void
+    setStPLW2T( const double d) {  m_StPLW2T = d; };
+    
+    inline
+    void
+    setStPHW1T( const double d) {  m_StPHW1T = d; };
+    
+    inline
+    void
+    setStPHW2T( const double d) {  m_StPHW2T = d; };;
+    
+    
+    
+    
     
 };
 

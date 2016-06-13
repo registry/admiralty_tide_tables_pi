@@ -25,13 +25,30 @@
  */
 
 #include "ATTTime.h"
+#include <wx/regex.h>
 ///////////////////////////////////////////////////////////////////////////
 #include <iostream>
 #include <cmath>
 
 
-ATTTime::ATTTime(const std::string & _s)
+ATTTime::ATTTime(const wxString & _s)
 {
+    wxRegEx atttime("([[:digit:]]{2})([[:digit:]]{2})");
+    if (atttime.Matches(_s) )
+    {
+        wxString _h = atttime.GetMatch(_s, 1);
+        wxString _m = atttime.GetMatch(_s, 2);
+        long _hh ;
+        if (_h.ToLong(&_hh))
+        {
+            att_time_h = (double)_hh;
+        }
+        long _mm;
+        if (_m.ToLong(&_mm))
+        {
+            att_time_m = (double)_mm;
+        }    
+    }
 }
 
 
@@ -53,12 +70,24 @@ ATTTime::ATTTime(const double t)
     
     att_time_h = (double)((int)_t);
     att_time_m =  (double)((int)((_t - att_time_h)*60.));
-    
-    std::cout << " Convert " << t << "to " << att_time_h << "h" << att_time_m << "m " << days << " days" << std::endl;
-    
 }
 
 ATTTime::~ATTTime()
 {
 }
 
+  
+double 
+ATTTime::normalized_atttime()
+{
+    return att_time_h  + att_time_m/60.;
+}
+
+
+wxString 
+ATTTime::atttime()
+{
+    wxString _t;
+    _t << ((att_time_h<10)?"0":"") << att_time_h << ((att_time_m<10)?"0":"") << (int)(att_time_m);
+    return _t;
+}

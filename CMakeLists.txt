@@ -107,6 +107,10 @@ SET(ATT_SRC
  		src/ATTDialog.cpp
  		src/ATTCalculation.h
  		src/ATTCalculation.cpp
+ 		src/ATTServices.h
+ 		src/ATTServices.cpp
+ 		src/ATTTime.h
+ 		src/ATTTime.cpp
  	)
 
 

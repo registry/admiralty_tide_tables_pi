@@ -39,31 +39,33 @@ ATTServices::~ATTServices()
 
 
 double 
-ATTServices::convertATTTimeAsString2Double( const std::string & _s)
+ATTServices::convertATTTimeAsString2Double( const wxString & _s)
 {
-    return 10.;
+    ATTTime _t(_s);
+    return _t.normalized_atttime();
 }
 
 
-std::string 
+wxString 
 ATTServices::convertATTTimeAsDouble2String(const  double _t)
 {
-    return "3233";
+    ATTTime _s(_t);
+    return _s.atttime();
 }
 
 
-double 
-ATTServices::convertTimeAsString2Double( const std::string & _s)
-{
-    return 0.;
-}
-
-
-std::string 
-ATTServices::convertTimeAsDouble2String( const double _t)
-{
-    return "23h45m";
-}
+// double 
+// ATTServices::convertTimeAsString2Double( const wxString & _s)
+// {
+//     return 0.;
+// }
+// 
+// 
+// wxString 
+// ATTServices::convertTimeAsDouble2String( const double _t)
+// {
+//     return "23h45m";
+// }
 
      
     

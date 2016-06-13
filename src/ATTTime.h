@@ -29,15 +29,14 @@
 
 
 ///////////////////////////////////////////////////////////////////////////
-#include <string>
-
+#include <wx/string.h>
 ///////////////////////////////////////////////////////////////////////////////
 /// Class ATTServices 
 ///////////////////////////////////////////////////////////////////////////////
 
 
 
-class ATTTime // in form of hhmm ; 0123 -> 1h23m -> 1.3834h
+class ATTTime // in form of hhmm ; 0123 -> 1.3834
 {
     double att_time_h;
     double att_time_m;
@@ -46,9 +45,12 @@ public:
 
     
     
-    ATTTime( const std::string &);
+    ATTTime( const wxString &);
     ATTTime( const double);
     ~ATTTime();
+    
+    double normalized_atttime();
+    wxString atttime();
     
 };
 

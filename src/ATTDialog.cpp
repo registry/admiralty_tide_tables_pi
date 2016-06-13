@@ -26,6 +26,8 @@
 
 #include "ATTDialog.h"
 #include "ATTCalculation.h"
+#include "ATTServices.h"
+#include "ATTTime.h"
 ///////////////////////////////////////////////////////////////////////////
 #include <iostream>
 
@@ -147,15 +149,18 @@ void ATTDialog::CreateLayout( )
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
-        3 );  
-    
+        3 ); 
+    m_StPLW1T->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPLW1T ), NULL, this); 
+    *m_StPLW1T << "0000";   
+   
     m_StPLW1H= new wxTextCtrl (this, wxID_ANY );
     _stp_tide_sizer->Add(m_StPLW1H,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );   
-    
+//     m_StPLW1H->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPLWT1 ), NULL, this); 
+     *m_StPLW1H << "0";     
     
     wxStaticText* m_StPHW1Label = new wxStaticText( this, wxID_ANY, _("HW1"), wxDefaultPosition, wxDefaultSize, 0 );
     _stp_tide_sizer->Add(m_StPHW1Label,
@@ -170,13 +175,16 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    m_StPHW1T->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPHW1T ), NULL, this); 
+    *m_StPHW1T << "0000";
     
     m_StPHW1H= new wxTextCtrl (this, wxID_ANY );
     _stp_tide_sizer->Add(m_StPHW1H,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
-        3 );   
+        3 );     
+     *m_StPHW1H << "0";  
     
     wxStaticText* m_StPLW2Label = new wxStaticText( this, wxID_ANY, _("LW2"), wxDefaultPosition, wxDefaultSize, 0 );
     _stp_tide_sizer->Add(m_StPLW2Label,
@@ -191,13 +199,16 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    m_StPLW2T->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPLW2T ), NULL, this); 
+    *m_StPLW2T << "0000";
     
     m_StPLW2H= new wxTextCtrl (this, wxID_ANY );
     _stp_tide_sizer->Add(m_StPLW2H,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
-        3 );   
+        3 );  
+     *m_StPLW2H << "0";  
     
     
     wxStaticText* m_StPHW2Label = new wxStaticText( this, wxID_ANY, _("HW2"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -213,13 +224,16 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    m_StPHW2T->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPHW2T ), NULL, this); 
+    *m_StPHW2T << "0000";
     
     m_StPHW2H= new wxTextCtrl (this, wxID_ANY );
     _stp_tide_sizer->Add(m_StPHW2H,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
-        3 );   
+        3 );  
+     *m_StPHW2H << "0";   
     
     
     
@@ -445,6 +459,7 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    *m_ScPHWT1 << "0000";
     
     m_ScPHWT2= new wxTextCtrl (this, wxID_ANY );
     _scp_hw_calc_sizer->Add(m_ScPHWT2,
@@ -452,6 +467,7 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );   
+    *m_ScPHWT2 << "0600";
         
     wxStaticText* m_ScPHWT1and1 = new wxStaticText( this, wxID_ANY, _("and"), wxDefaultPosition, wxDefaultSize, 0 );
     _scp_hw_calc_sizer->Add(m_ScPHWT1and1,
@@ -473,6 +489,7 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    *m_ScPHWT3 << "1200";
     
     m_ScPHWT4= new wxTextCtrl (this, wxID_ANY );
     _scp_hw_calc_sizer->Add(m_ScPHWT4,
@@ -480,6 +497,7 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );    
+    *m_ScPHWT4 << "1800";
 
       // --- times for LW
     wxFlexGridSizer * _scp_lw_calc_sizer = new  wxFlexGridSizer 	( 	2   );
@@ -490,7 +508,8 @@ void ATTDialog::CreateLayout( )
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
-        3 );  
+        3 );   
+    *m_ScPLWT1 << "0100";
     
     m_ScPLWT2= new wxTextCtrl (this, wxID_ANY );
     _scp_lw_calc_sizer->Add(m_ScPLWT2,
@@ -498,6 +517,7 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );   
+    *m_ScPLWT2 << "0800";
         
     wxStaticText* m_ScPLWT1and1 = new wxStaticText( this, wxID_ANY, _("and"), wxDefaultPosition, wxDefaultSize, 0 );
     _scp_lw_calc_sizer->Add(m_ScPLWT1and1,
@@ -519,13 +539,15 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    *m_ScPLWT3 << "1400";
     
     m_ScPLWT4= new wxTextCtrl (this, wxID_ANY );
     _scp_lw_calc_sizer->Add(m_ScPLWT4,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
-        3 );    
+        3 ); 
+    *m_ScPLWT4 << "2000";   
     
     // mean leavel on st p
     
@@ -535,6 +557,7 @@ void ATTDialog::CreateLayout( )
             // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    *m_StPMHWS << 0;   
     
     m_StPMHWN= new wxTextCtrl (this, wxID_ANY );
     _scp_tide_calc_sizer->Add(m_StPMHWN,
@@ -542,6 +565,7 @@ void ATTDialog::CreateLayout( )
             // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    *m_StPMHWN << 0;   
       
     m_StPMLWS= new wxTextCtrl (this, wxID_ANY );
     _scp_tide_calc_sizer->Add(m_StPMLWS,
@@ -549,6 +573,7 @@ void ATTDialog::CreateLayout( )
             // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    *m_StPMLWS << 0;   
     
     m_StPMLWN= new wxTextCtrl (this, wxID_ANY );
     _scp_tide_calc_sizer->Add(m_StPMLWN,
@@ -556,6 +581,7 @@ void ATTDialog::CreateLayout( )
             // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    *m_StPMLWN << 0;   
         
     m_StPSC= new wxTextCtrl (this, wxID_ANY );
     _scp_tide_calc_sizer->Add(m_StPSC,
@@ -584,6 +610,7 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    *m_ScPDHWT1 << 0;
     
     m_ScPDHWT2= new wxTextCtrl (this, wxID_ANY );
     _scp_diff_hw_calc_sizer->Add(m_ScPDHWT2,
@@ -591,7 +618,7 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );   
-        
+    *m_ScPDHWT2 << 0;
     
       // --- differences for LW
     wxFlexGridSizer * _scp_diff_lw_calc_sizer = new  wxFlexGridSizer 	( 	2   );
@@ -603,13 +630,15 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    *m_ScPDLWT1 << 0;
     
     m_ScPDLWT2= new wxTextCtrl (this, wxID_ANY );
     _scp_diff_lw_calc_sizer->Add(m_ScPDLWT2,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
-        3 );   
+        3 );  
+    *m_ScPDLWT2 << 0; 
         
     
     
@@ -621,6 +650,7 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    *m_ScPMHWS << 0; 
     
     m_ScPMHWN= new wxTextCtrl (this, wxID_ANY );
     _scp_tide_calc_sizer->Add(m_ScPMHWN,
@@ -628,20 +658,23 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    *m_ScPMHWN << 0; 
       
     m_ScPMLWS= new wxTextCtrl (this, wxID_ANY );
     _scp_tide_calc_sizer->Add(m_ScPMLWS,
         0,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
-        3 );  
+        3 );    
+    *m_ScPMLWS << 0; 
     
     m_ScPMLWN= new wxTextCtrl (this, wxID_ANY );
     _scp_tide_calc_sizer->Add(m_ScPMLWN,
         0,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
-        3 );  
+        3 );    
+    *m_ScPMLWN << 0; 
     
     m_ScPSC= new wxTextCtrl (this, wxID_ANY );
     _scp_tide_calc_sizer->Add(m_ScPSC,
@@ -682,7 +715,7 @@ void ATTDialog::CreateLayout( )
         wxALL,        //   and make border all around
         3);
     m_bClose->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( ATTDialog::OnClose ) , NULL, this);
-    m_bCalculate->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( ATTDialog::OnBtnClick ), NULL, this );
+    m_bCalculate->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( ATTDialog::OnCalculate ), NULL, this );
         
      
      
@@ -704,19 +737,14 @@ ATTDialog::~ATTDialog()
     delete att_calculation;
 }
 
-void ATTDialog::OnBtnClick( wxCommandEvent& event )
+void ATTDialog::OnCalculate( wxCommandEvent& event )
 {
-//     LauncherButton *button = ( LauncherButton* )event.GetEventObject();
-//     this->Hide();
-//     wxString cmd = button->GetCommand();
-//     cmd.Replace( _T( "%BOAT_LAT%" ), wxString::Format( _T( "%f" ), m_Lat ) );
-//     cmd.Replace( _T( "%BOAT_LON%" ), wxString::Format( _T( "%f" ), m_Lon ) );
-//     cmd.Replace( _T( "%BOAT_SOG%" ), wxString::Format( _T( "%f" ), m_Sog ) );
-//     cmd.Replace( _T( "%BOAT_COG%" ), wxString::Format( _T( "%f" ), m_Cog ) );
-//     cmd.Replace( _T( "%BOAT_VAR%" ), wxString::Format( _T( "%f" ), m_Var ) );
-//     cmd.Replace( _T( "%BOAT_FIXTIME%" ), wxString::Format( _T( "%d" ), m_FixTime ) );
-//     cmd.Replace( _T( "%BOAT_NSATS%" ), wxString::Format( _T( "%d" ), m_nSats ) );
-//     wxExecute( cmd, wxEXEC_ASYNC );
+    ATTTime t( 125.13);
+    if (!att_calculation->calculate())
+    {
+    
+    std::cout << att_calculation->error() << std::endl;
+    }
     event.Skip();
 }
 
@@ -724,20 +752,46 @@ void ATTDialog::OnBtnClick( wxCommandEvent& event )
 void ATTDialog::OnClose( wxCommandEvent& event )
 {
     Close();
+    event.Skip();
 }
 
 void ATTDialog::OnStPEnter( wxCommandEvent& event )
 {
-   m_StPName2Label->SetLabel( m_StPName->GetLineText(0));
-   SetMinClientSize( main_sizer->GetMinSize()); 
+    m_StPName2Label->SetLabel( m_StPName->GetLineText(0));
+    SetMinClientSize( main_sizer->GetMinSize()); 
+    event.Skip();
    
 }
 
 void ATTDialog::OnScPEnter( wxCommandEvent& event )
 {
-   m_ScPName2Label->SetLabel( m_ScPName->GetLineText(0));
-   SetMinClientSize( main_sizer->GetMinSize()); 
+    m_ScPName2Label->SetLabel( m_ScPName->GetLineText(0));
+    SetMinClientSize( main_sizer->GetMinSize()); 
+    event.Skip();
 }
 
 
+void ATTDialog::OnStPLW1T( wxCommandEvent& event )
+{
+    att_calculation->setStPLW1T( ATTServices::convertATTTimeAsString2Double( m_StPLW1T->GetLineText(0)) );
+    event.Skip();
+};
+
+void ATTDialog::OnStPLW2T( wxCommandEvent& event )
+{
+    att_calculation->setStPLW2T( ATTServices::convertATTTimeAsString2Double( m_StPLW2T->GetLineText(0)) );
+    event.Skip();
+};
+
+void ATTDialog::OnStPHW1T( wxCommandEvent& event )
+{
+    att_calculation->setStPHW1T( ATTServices::convertATTTimeAsString2Double( m_StPHW1T->GetLineText(0)) );
+     event.Skip();
+};
+
+void ATTDialog::OnStPHW2T( wxCommandEvent& event )
+{
+    att_calculation->setStPHW2T( ATTServices::convertATTTimeAsString2Double( m_StPHW2T->GetLineText(0)) );
+    event.Skip();
+};
 
