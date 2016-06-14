@@ -171,7 +171,7 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );   
-//     m_StPLW1H->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPLWT1 ), NULL, this); 
+    m_StPLW1H->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPLW1H ), NULL, this); 
      *m_StPLW1H << "0";     
     
     wxStaticText* m_StPHW1Label = new wxStaticText( this, wxID_ANY, _("HW1"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -195,7 +195,8 @@ void ATTDialog::CreateLayout( )
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
-        3 );     
+        3 );  
+    m_StPHW1H->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPHW1H ), NULL, this); 
      *m_StPHW1H << "0";  
     
     wxStaticText* m_StPLW2Label = new wxStaticText( this, wxID_ANY, _("LW2"), wxDefaultPosition, wxDefaultSize, 0 );
@@ -220,6 +221,7 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    m_StPLW2H->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPLW2H ), NULL, this); 
      *m_StPLW2H << "0";  
     
     
@@ -245,6 +247,7 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 );  
+    m_StPHW2H->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPHW2H ), NULL, this); 
      *m_StPHW2H << "0";   
     
     
@@ -773,12 +776,8 @@ ATTDialog::~ATTDialog()
 
 void ATTDialog::OnCalculate( wxCommandEvent& event )
 {
-    ATTTime t( 125.13);
-    if (!att_calculation->calculate())
-    {
-    
-    std::cout << att_calculation->error() << std::endl;
-    }
+    att_calculation->calculate();
+    std::cout << *att_calculation << std::endl;
     event.Skip();
 }
 

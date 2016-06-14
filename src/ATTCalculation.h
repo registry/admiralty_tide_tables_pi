@@ -31,6 +31,8 @@
 ///////////////////////////////////////////////////////////////////////////
 #include <wx/string.h>
 #include <iostream>
+#include <ostream>
+
 ///////////////////////////////////////////////////////////////////////////////
 /// Class ATTCalculation
 ///////////////////////////////////////////////////////////////////////////////
@@ -41,7 +43,8 @@ enum TideType { SPRING_TIDE=0, MID_TIDE = 1, NIPP_TIDE = 2};
 class ATTCalculation
 {
 private:
-
+    double  calculate_hw( double hwh );
+    double  calculate_lw( double lwh );
       
 protected:
 
@@ -107,7 +110,7 @@ public:
     ATTCalculation( );
     ~ATTCalculation();
     
-    bool calculate(); // false if failed to calculate
+    void calculate(); // false if failed to calculate
     wxString& error(); // delivers an error message . "" if ok
     
     inline 
@@ -251,6 +254,11 @@ public:
     inline
     void
     setScPSC( const double d) {  m_ScPSC = d; };
+    
+    friend
+    std::ostream& operator<<(std::ostream&, const ATTCalculation&);
+    
+    
     
 };
 
