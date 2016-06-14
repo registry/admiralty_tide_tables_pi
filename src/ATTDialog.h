@@ -136,7 +136,44 @@ protected:
     void OnStPLW2T( wxCommandEvent& event );
     void OnStPHW1T( wxCommandEvent& event );
     void OnStPHW2T( wxCommandEvent& event );
-
+    void OnStPLW1H( wxCommandEvent& event );
+    void OnStPLW2H( wxCommandEvent& event );
+    void OnStPHW1H( wxCommandEvent& event );
+    void OnStPHW2H( wxCommandEvent& event );
+    
+    void OnScPHWT1( wxCommandEvent& event );
+    void OnScPHWT2( wxCommandEvent& event );
+    void OnScPHWT3( wxCommandEvent& event );
+    void OnScPHWT4( wxCommandEvent& event );
+    
+    void OnScPLWT1( wxCommandEvent& event );
+    void OnScPLWT2( wxCommandEvent& event );
+    void OnScPLWT3( wxCommandEvent& event );
+    void OnScPLWT4( wxCommandEvent& event );
+        
+   
+    void OnStPMHWS( wxCommandEvent& event );
+    void OnStPMHWN( wxCommandEvent& event );
+    void OnStPMLWS( wxCommandEvent& event );
+    void OnStPMLWN( wxCommandEvent& event );
+    void OnStPSC( wxCommandEvent& event );
+    
+    void OnScPDHWT1( wxCommandEvent& event );
+    void OnScPDHWT2( wxCommandEvent& event );
+    void OnScPDLWT1( wxCommandEvent& event );
+    void OnScPDLWT2( wxCommandEvent& event );  
+    
+    void OnScPMHWS( wxCommandEvent& event );
+    void OnScPMHWN( wxCommandEvent& event );
+    void OnScPMLWS( wxCommandEvent& event );
+    void OnScPMLWN( wxCommandEvent& event );
+    void OnScPSC( wxCommandEvent& event );
+   
+    
+    
+    void OnTideSpring( wxCommandEvent& event );
+    void OnTideMid( wxCommandEvent& event );
+    void OnTideNipp( wxCommandEvent& event );
 public:
 
     ATTDialog( wxWindow* parent, 

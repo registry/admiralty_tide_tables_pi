@@ -45,7 +45,7 @@ ATTCalculation::calculate()
     return false;
 }
 
-std::string& ATTCalculation::error()
+wxString& ATTCalculation::error()
 {
     error_message = "huj";
     return error_message;
