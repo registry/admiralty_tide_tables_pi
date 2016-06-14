@@ -46,6 +46,43 @@ private:
     double  calculate_hw( double hwh );
     double  calculate_lw( double lwh );
       
+    
+
+
+double  
+calculate_hwdt( double hwt );
+
+double  
+calculate_lwdt( double lwt );
+
+
+
+void  
+get_pair_lw(const double t,  
+            double& t1, 
+            double&dt1, 
+            double &t2, 
+            double&dt2 );
+
+void  
+get_pair_hw(const double t,  
+            double& t1, 
+            double&dt1, 
+            double &t2, 
+            double&dt2 );
+
+int  
+get_pair ( const double t, 
+           const double& t1, 
+           const double& t2, 
+           const double& t3, 
+           const double& t4);
+
+
+    
+    
+    
+    
 protected:
 
     wxString error_message;

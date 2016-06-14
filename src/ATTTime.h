@@ -38,9 +38,9 @@
 
 class ATTTime // in form of hhmm ; 0123 -> 1.3834
 {
+    int sign;
     double att_time_h;
     double att_time_m;
-    int days;
 public:
 
     

@@ -43,14 +43,27 @@ ATTCalculation::~ATTCalculation()
 void 
 ATTCalculation::calculate()
 {
-  double HUG =  (double)(wxRound((calculate_hw (  m_StPHW1H ))*10))/10.;  
-  m_ScPHW1H = m_StPHW1H -m_StPSC + HUG + m_ScPSC;
-  HUG = (double)(wxRound((calculate_lw (  m_StPLW1H ))*10))/10.;  
-  m_ScPLW1H = m_StPLW1H -m_StPSC + HUG + m_ScPSC;
-  HUG = (double)(wxRound((calculate_hw (  m_StPHW2H ))*10))/10.;
-  m_ScPHW2H =   m_StPHW2H -m_StPSC + HUG + m_ScPSC; 
-  HUG = (double)(wxRound((calculate_lw (  m_StPLW2H ))*10))/10.;  
-  m_ScPLW2H = m_StPLW2H -m_StPSC + HUG + m_ScPSC;  
+    double HUG =  (double)(wxRound((calculate_hw (  m_StPHW1H ))*10))/10.;  
+    m_ScPHW1H = m_StPHW1H -m_StPSC + HUG + m_ScPSC;
+    HUG = (double)(wxRound((calculate_lw (  m_StPLW1H ))*10))/10.;  
+    m_ScPLW1H = m_StPLW1H -m_StPSC + HUG + m_ScPSC;
+    HUG = (double)(wxRound((calculate_hw (  m_StPHW2H ))*10))/10.;
+    m_ScPHW2H =   m_StPHW2H -m_StPSC + HUG + m_ScPSC; 
+    HUG = (double)(wxRound((calculate_lw (  m_StPLW2H ))*10))/10.;  
+    m_ScPLW2H = m_StPLW2H -m_StPSC + HUG + m_ScPSC;  
+
+    double ZUG = calculate_hwdt( m_StPHW1T);
+    m_ScPHW1T = m_StPHW1T + ZUG;
+
+    ZUG = calculate_hwdt( m_StPHW2T);
+    m_ScPHW2T = m_StPHW2T + ZUG;
+
+    ZUG = calculate_lwdt( m_StPLW1T);
+    m_ScPLW1T = m_StPLW1T + ZUG;
+
+    ZUG = calculate_lwdt( m_StPLW2T);
+    m_ScPLW2T = m_StPLW2T + ZUG;
+
 }
 
 
@@ -87,8 +100,152 @@ ATTCalculation::calculate_lw( double lwh )
 
 
 
+double  
+ATTCalculation::calculate_hwdt( double hwt )
+{
+    double t1, dt1, t2, dt2;
+    get_pair_hw(hwt, t1, dt1, t2, dt2);
+    
+    std::cout << " HW " << hwt << " " << t1 << " " << dt1 << " " << t2 << " " << dt2 << std::endl;
+    
+    
+    if (t2 != t1) 
+        return ( dt1 + (dt2-dt1)*(hwt - t1)/( t2 - t1));
+    else
+    {
+        error_message = "t2 == t1 !!!";
+        return 0.;
+    }
+    
+}
+
+double  
+ATTCalculation::calculate_lwdt( double lwt )
+{
+    double t1, dt1, t2, dt2;
+    get_pair_lw(lwt, t1, dt1, t2, dt2);
+    
+    std::cout << " LW " << lwt << " " << t1 << " " << dt1 << " " << t2 << " " << dt2 << std::endl;
+    
+    if (t2 != t1) 
+        return ( dt1 + (dt2-dt1)*(lwt - t1)/( t2 - t1));
+    else
+    {
+        error_message = "t2 == t1 !!!";
+        return 0.;
+    }
+    
+}
 
 
+
+
+
+void  
+ATTCalculation::get_pair_lw(const double t,  double& t1, double&dt1, double &t2, double&dt2 )
+{
+    switch (get_pair(t, m_ScPLWT1,  m_ScPLWT2, m_ScPLWT3,  m_ScPLWT4 ))
+        {
+            case 0:
+                t1 = m_ScPLWT4-24;
+                dt1 = m_ScPDLWT2;
+                t2 = m_ScPLWT1;
+                dt2 = m_ScPDLWT1;
+                break;
+            case 1:
+                t1 = m_ScPLWT1;
+                dt1 = m_ScPDLWT1;
+                t2 = m_ScPLWT2;
+                dt2 = m_ScPDLWT2;
+                break;    
+            case 2:
+                t1 = m_ScPLWT2;
+                dt1 = m_ScPDLWT2;
+                t2 = m_ScPLWT3;
+                dt2 = m_ScPDLWT1;
+                break;     
+            case 3:
+                t1 = m_ScPLWT3;
+                dt1 = m_ScPDLWT1;
+                t2 = m_ScPLWT4;
+                dt2 = m_ScPDLWT2;
+                break;      
+            case 4:
+                t1 = m_ScPLWT4;
+                dt1 = m_ScPDLWT2;
+                t2 = m_ScPLWT1+24;
+                dt2 = m_ScPDLWT1;
+                break;   
+            default:
+                error_message = " something is really wrong in LW dt calculation ";
+                break;
+        }
+    
+}
+
+void  
+ATTCalculation::get_pair_hw(const double t,  double& t1, double&dt1, double &t2, double&dt2 )
+{
+    switch (get_pair(t, m_ScPHWT1,  m_ScPHWT2, m_ScPHWT3,  m_ScPHWT4 ))
+    {
+        case 0:
+            t1 = m_ScPHWT4-24;
+            dt1 = m_ScPDHWT2;
+            t2 = m_ScPHWT1;
+            dt2 = m_ScPDHWT1;
+            break;
+        case 1:
+            t1 = m_ScPHWT1;
+            dt1 = m_ScPDHWT1;
+            t2 = m_ScPHWT2;
+            dt2 = m_ScPDHWT2;
+            break;    
+        case 2:
+            t1 = m_ScPHWT2;
+            dt1 = m_ScPDHWT2;
+            t2 = m_ScPHWT3;
+            dt2 = m_ScPDHWT1;
+            break;     
+        case 3:
+            t1 = m_ScPHWT3;
+            dt1 = m_ScPDHWT1;
+            t2 = m_ScPHWT4;
+            dt2 = m_ScPDHWT2;
+            break;      
+        case 4:
+            t1 = m_ScPHWT4;
+            dt1 = m_ScPDHWT2;
+            t2 = m_ScPHWT1+24;
+            dt2 = m_ScPDHWT1;
+            break;   
+        default:
+            error_message = " something is really wrong in HW dt calculation. ";
+            break;
+    }
+}
+
+
+int  
+ATTCalculation::get_pair ( const double t, const double& t1, const double& t2, const double& t3, const double& t4)
+{
+    if (t < t1 )
+    {
+        return 0;
+    }
+    if (t < t2 )
+    {
+        return 1 ;
+    }
+    if (t < t3 )
+    {
+        return 2 ;
+    }    
+    if (t < t4 )
+    {
+        return 3;
+    }
+    return 4 ;
+}
 
 
 
