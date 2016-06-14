@@ -197,6 +197,45 @@ public:
     setStPHW2H( const double d) {  m_StPHW2H = d; };
     
         
+        
+    inline
+    double
+    getScPLW1T( ) {  return m_ScPLW1T; };
+   
+    inline
+    double
+    getScPLW2T( ) {  return m_ScPLW2T; };
+   
+    inline
+    double
+    getScPHW1T( ) {  return m_ScPHW1T; };
+   
+    inline
+    double
+    getScPHW2T( ) {  return m_ScPHW2T; };
+   
+       
+    inline
+    double
+    getScPLW1H( ) {  return m_ScPLW1H; };
+   
+    inline
+    double
+    getScPLW2H( ) {  return m_ScPLW2H; };
+   
+    inline
+    double
+    getScPHW1H( ) {  return m_ScPHW1H; };
+   
+    inline
+    double
+    getScPHW2H( ) {  return m_ScPHW2H; };
+   
+  
+    
+    
+    
+    
     inline
     void
     setScPHWT1( const double d) {  m_ScPHWT1 = d; };

@@ -777,7 +777,29 @@ ATTDialog::~ATTDialog()
 void ATTDialog::OnCalculate( wxCommandEvent& event )
 {
     att_calculation->calculate();
-    std::cout << *att_calculation << std::endl;
+    m_ScPLW1T->SetValue( ATTServices::convertATTTimeAsDouble2String( att_calculation->getScPLW1T()) );
+    wxString _s;
+    _s <<  att_calculation->getScPLW1H() ;
+    m_ScPLW1H->SetValue( _s );
+
+    m_ScPLW2T->SetValue( ATTServices::convertATTTimeAsDouble2String( att_calculation->getScPLW2T()) );
+    _s = "";
+     _s <<  att_calculation->getScPLW2H() ;
+    m_ScPLW2H->SetValue(_s);
+        
+    m_ScPHW1T->SetValue( ATTServices::convertATTTimeAsDouble2String( att_calculation->getScPHW1T()) );
+    _s = "";
+     _s <<  att_calculation->getScPHW1H() ;
+    m_ScPHW1H->SetValue( _s );
+
+    m_ScPHW2T->SetValue( ATTServices::convertATTTimeAsDouble2String( att_calculation->getScPHW2T()) );
+    _s = "";
+     _s <<  att_calculation->getScPHW2H() ;
+    m_ScPHW2H->SetValue( _s );
+        
+           
+    
+    
     event.Skip();
 }
 
