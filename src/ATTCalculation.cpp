@@ -106,9 +106,6 @@ ATTCalculation::calculate_hwdt( double hwt )
     double t1, dt1, t2, dt2;
     get_pair_hw(hwt, t1, dt1, t2, dt2);
     
-    std::cout << " HW " << hwt << " " << t1 << " " << dt1 << " " << t2 << " " << dt2 << std::endl;
-    
-    
     if (t2 != t1) 
         return ( dt1 + (dt2-dt1)*(hwt - t1)/( t2 - t1));
     else
@@ -124,8 +121,6 @@ ATTCalculation::calculate_lwdt( double lwt )
 {
     double t1, dt1, t2, dt2;
     get_pair_lw(lwt, t1, dt1, t2, dt2);
-    
-    std::cout << " LW " << lwt << " " << t1 << " " << dt1 << " " << t2 << " " << dt2 << std::endl;
     
     if (t2 != t1) 
         return ( dt1 + (dt2-dt1)*(lwt - t1)/( t2 - t1));
