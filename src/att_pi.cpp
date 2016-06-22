@@ -135,7 +135,6 @@ int att_pi::Init(void)
 
 bool att_pi::DeInit(void)
 {
-      m_AUImgr->DetachPane(m_patt_window);
       if(m_patt_window)
       {
         m_patt_window->Close();
