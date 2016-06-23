@@ -111,6 +111,10 @@ SET(ATT_SRC
  		src/ATTServices.cpp
  		src/ATTTime.h
  		src/ATTTime.cpp
+ 		src/ATTStandardPort.h
+ 		src/ATTStandardPort.cpp
+ 		src/ATTSecondaryPort.h
+ 		src/ATTSecondaryPort.cpp
  	)
 
 

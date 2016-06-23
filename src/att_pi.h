@@ -42,8 +42,6 @@
 #include "ATTDialog.h"
 
 #define ATT_TOOL_POSITION    -1          // Request default positioning of toolbar tool
-class attWindow;
-
 
 
 //----------------------------------------------------------------------------------------------------------
@@ -72,14 +70,8 @@ public:
 
 //    The optional method overrides
 
-      void OnContextMenuItemCallback(int id);
-      void UpdateAuiStatus(void);
-
       
 //    The override PlugIn Methods
-      bool RenderOverlay(wxDC &dc, PlugIn_ViewPort *vp);
-      void SetCursorLatLon(double lat, double lon);
-      bool RenderGLOverlay(wxGLContext *pcontext, PlugIn_ViewPort *vp);
       int GetToolbarToolCount(void);
       void ShowPreferencesDialog( wxWindow* parent );
       void OnToolbarToolCallback(int id);
@@ -91,29 +83,14 @@ private:
       wxWindow         *m_parent_window;
       int              m_leftclick_tool_id;
 
-      attWindow        *m_patt_window;
-       ATTDialog *m_pATTDialog;
-      wxAuiManager     *m_AUImgr;
+//       attWindow        *m_patt_window;
+       ATTDialog         *m_pATTDialog;
       int               m_show_id;
       int               m_hide_id;
 };
 
 
-
-class attWindow : public wxWindow
-{
-public:
-      attWindow(wxWindow *pparent, wxWindowID id);
-      ~attWindow();
-
-      void OnPaint(wxPaintEvent& event);
-      void SetSentence(wxString &sentence);
-      void OnSize(wxSizeEvent& event);
-
-
-
-DECLARE_EVENT_TABLE()
-};
+// 
 
 
 #endif
