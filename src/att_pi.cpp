@@ -164,12 +164,3 @@ void att_pi::OnToolbarToolCallback(int id)
     m_pATTDialog->Show();
 }
 
-
-void att_pi::SetPluginMessage(wxString &message_id, wxString &message_body)
-{
-
-}
-void att_pi::SetPositionFixEx(PlugIn_Position_Fix_Ex &pfix)
-{
-
-}

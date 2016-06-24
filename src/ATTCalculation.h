@@ -30,6 +30,7 @@
 
 ///////////////////////////////////////////////////////////////////////////
 #include <wx/string.h>
+#include <wx/datetime.h>
 #include <iostream>
 #include <ostream>
 
@@ -37,7 +38,6 @@
 /// Class ATTCalculation
 ///////////////////////////////////////////////////////////////////////////////
 
-enum TideType { SPRING_TIDE=0, MID_TIDE = 1, NIPP_TIDE = 2};
 
 
 class ATTCalculation
@@ -89,8 +89,7 @@ protected:
     
 
     // all input elements:
-//     wxDatePickerCtrl * m_Date;
-    TideType m_TideType;
+    wxDateTime m_Date;
     
     wxString  m_StPName;
     double  m_StPLW1T;
@@ -150,11 +149,7 @@ public:
     void calculate(); // false if failed to calculate
     wxString& error(); // delivers an error message . "" if ok
     
-    inline 
-    void
-    setTideType( const TideType _t) {  m_TideType = _t;  };
-    
-    
+
     inline
     void
     setStPName( const wxString& d) {  m_StPName = d; };   

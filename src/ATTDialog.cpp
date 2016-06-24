@@ -31,6 +31,7 @@
 ///////////////////////////////////////////////////////////////////////////
 #include <iostream>
 
+#include "ocpn_plugin.h"
 
 
 ATTDialog::ATTDialog( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
@@ -62,52 +63,7 @@ void ATTDialog::CreateLayout( )
         wxALL,        //   and make border all around
         3 ); 
     
-    
-    wxStaticText* m_TideTypeLabel = new wxStaticText( this, wxID_ANY, _("Tide type"), wxDefaultPosition, wxDefaultSize, 0 );
-    sbSizer0->Add(m_TideTypeLabel,
-        1,            // make vertically stretchable
-        wxEXPAND |    // make horizontally stretchable
-        wxALL,        //   and make border all around
-        3 );
-    m_TideSpring = new wxRadioButton 	( 	this ,
-                                                                wxID_ANY,
-                                                         _("Spring"),
-                                                                wxDefaultPosition,
-                                                         wxDefaultSize,
-                                                         wxRB_GROUP);
-    sbSizer0->Add(m_TideSpring ,
-        1,            // make vertically stretchable
-        wxEXPAND |    // make horizontally stretchable
-        wxALL,        //   and make border all around
-        3 );
-    m_TideSpring->Connect( wxEVT_RADIOBUTTON , wxCommandEventHandler( ATTDialog::OnTideSpring ), NULL, this);
-    m_TideSpring->SetValue(true);
-    wxCommandEvent event(wxEVT_RADIOBUTTON); 
-    OnTideSpring(event);// engade settinh initial tide type
-    
-    m_TideMid = new wxRadioButton 	( 	this ,
-                                                                wxID_ANY,
-                                                         _("Mid"));
-    sbSizer0->Add(m_TideMid ,
-        1,            // make vertically stretchable
-        wxEXPAND |    // make horizontally stretchable
-        wxALL,        //   and make border all around
-        3 );
-    m_TideMid->Connect( wxEVT_RADIOBUTTON , wxCommandEventHandler( ATTDialog::OnTideMid ), NULL, this);
-    m_TideMid->SetValue(false);
-    
-    
-    
-    m_TideNipp = new wxRadioButton 	( 	this ,
-                                                                wxID_ANY,
-                                                         _("Nipp"));
-    sbSizer0->Add(m_TideNipp,
-        1,            // make vertically stretchable
-        wxEXPAND |    // make horizontally stretchable
-        wxALL,        //   and make border all around
-        3  );
-    m_TideNipp->Connect( wxEVT_RADIOBUTTON , wxCommandEventHandler( ATTDialog::OnTideNipp ), NULL, this);
-    m_TideNipp->SetValue(false);
+
   
     
     wxStaticBoxSizer* sbSizer1;
@@ -797,8 +753,9 @@ void ATTDialog::OnCalculate( wxCommandEvent& event )
      _s <<  att_calculation->getScPHW2H() ;
     m_ScPHW2H->SetValue( _s );
         
-           
-    
+//     wxString s =wxFileName::GetPathSeparator();
+//     std::cout <<  (*GetpSharedDataLocation() + _T("plugins")
+//         + s + _T("att_pi") + s + _T("data") + s) << std::endl;
     
     event.Skip();
 }
@@ -810,34 +767,6 @@ void ATTDialog::OnClose( wxCommandEvent& event )
     event.Skip();
 }
 
-
-// --------------- setting calculations values
-
-void ATTDialog::OnTideSpring( wxCommandEvent& event )
-{
-    if ( m_TideSpring->GetValue())
-        att_calculation->setTideType( SPRING_TIDE );
-    event.Skip();
-   
-}
-
-
-void ATTDialog::OnTideMid( wxCommandEvent& event )
-{
-    if ( m_TideMid->GetValue())
-        att_calculation->setTideType( MID_TIDE );
-    event.Skip();
-   
-}
-
-
-void ATTDialog::OnTideNipp( wxCommandEvent& event )
-{
-    if ( m_TideNipp->GetValue())
-        att_calculation->setTideType( NIPP_TIDE );
-    event.Skip();
-   
-}
 
 
 

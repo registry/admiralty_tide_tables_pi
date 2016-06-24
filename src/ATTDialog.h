@@ -27,6 +27,12 @@
 #ifndef __ATTDIALOG_H__
 #define __ATTDIALOG_H__
 
+#include "wx/wxprec.h"
+
+#ifndef  WX_PRECOMP
+  #include "wx/wx.h"
+#endif //precompiled headers
+
 #include <wx/artprov.h>
 #include <wx/button.h>
 #include <wx/colour.h>
@@ -67,9 +73,6 @@ protected:
 
     // all input elements:
     wxDatePickerCtrl * m_Date;
-    wxRadioButton * m_TideSpring;
-    wxRadioButton * m_TideMid;
-    wxRadioButton * m_TideNipp;
     
     wxTextCtrl * m_StPName;
     wxTextCtrl * m_StPLW1T;
@@ -169,11 +172,7 @@ protected:
     void OnScPMLWN( wxCommandEvent& event );
     void OnScPSC( wxCommandEvent& event );
    
-    
-    
-    void OnTideSpring( wxCommandEvent& event );
-    void OnTideMid( wxCommandEvent& event );
-    void OnTideNipp( wxCommandEvent& event );
+
 public:
 
     ATTDialog( wxWindow* parent, 

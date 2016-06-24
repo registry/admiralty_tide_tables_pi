@@ -253,8 +253,7 @@ wxString& ATTCalculation::error()
 std::ostream& operator<<(std::ostream& out, const ATTCalculation& obj)
 {
     out <<  "error_message " << obj.error_message  << std::endl;
-    
-    out <<  "m_TideType " << obj.m_TideType << std::endl;
+
     
     out <<  "m_StPName " << obj.m_StPName << std::endl;
     out <<  "m_StPLW1T " << obj.m_StPLW1T << std::endl;

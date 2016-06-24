@@ -38,7 +38,7 @@
 #define     MY_API_VERSION_MAJOR    1
 #define     MY_API_VERSION_MINOR    9
 
-#include "../../../include/ocpn_plugin.h"
+#include "ocpn_plugin.h"
 #include "ATTDialog.h"
 
 #define ATT_TOOL_POSITION    -1          // Request default positioning of toolbar tool
@@ -75,9 +75,6 @@ public:
       int GetToolbarToolCount(void);
       void ShowPreferencesDialog( wxWindow* parent );
       void OnToolbarToolCallback(int id);
-      void SetPluginMessage(wxString &message_id, wxString &message_body);
-      void SetPositionFixEx(PlugIn_Position_Fix_Ex &pfix);
-
 
 private:
       wxWindow         *m_parent_window;
