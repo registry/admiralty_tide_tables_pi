@@ -43,26 +43,26 @@ ATTCalculation::~ATTCalculation()
 void 
 ATTCalculation::calculate()
 {
-    double HUG =  (double)(wxRound((calculate_hw (  m_StPHW1H ))*10))/10.;  
-    m_ScPHW1H = m_StPHW1H -m_StPSC + HUG + m_ScPSC;
-    HUG = (double)(wxRound((calculate_lw (  m_StPLW1H ))*10))/10.;  
-    m_ScPLW1H = m_StPLW1H -m_StPSC + HUG + m_ScPSC;
-    HUG = (double)(wxRound((calculate_hw (  m_StPHW2H ))*10))/10.;
-    m_ScPHW2H =   m_StPHW2H -m_StPSC + HUG + m_ScPSC; 
-    HUG = (double)(wxRound((calculate_lw (  m_StPLW2H ))*10))/10.;  
-    m_ScPLW2H = m_StPLW2H -m_StPSC + HUG + m_ScPSC;  
+    double HUG =  (double)(wxRound((calculate_hw (  m_StP.m_StPHW1H ))*10))/10.;  
+    m_ScPHW1H = m_StP.m_StPHW1H -m_ScP.m_StPSC + HUG + m_ScP.m_ScPSC;
+    HUG = (double)(wxRound((calculate_lw (  m_StP.m_StPLW1H ))*10))/10.;  
+    m_ScPLW1H = m_StP.m_StPLW1H -m_ScP.m_StPSC + HUG + m_ScP.m_ScPSC;
+    HUG = (double)(wxRound((calculate_hw ( m_StP.m_StPHW2H ))*10))/10.;
+    m_ScPHW2H =  m_StP.m_StPHW2H -m_ScP.m_StPSC + HUG + m_ScP.m_ScPSC; 
+    HUG = (double)(wxRound((calculate_lw (  m_StP.m_StPLW2H ))*10))/10.;  
+    m_ScPLW2H = m_StP.m_StPLW2H -m_ScP.m_StPSC + HUG + m_ScP.m_ScPSC;  
 
-    double ZUG = calculate_hwdt( m_StPHW1T);
-    m_ScPHW1T = m_StPHW1T + ZUG;
+    double ZUG = calculate_hwdt( m_StP.m_StPHW1T);
+    m_ScPHW1T = m_StP.m_StPHW1T + ZUG;
 
-    ZUG = calculate_hwdt( m_StPHW2T);
-    m_ScPHW2T = m_StPHW2T + ZUG;
+    ZUG = calculate_hwdt( m_StP.m_StPHW2T);
+    m_ScPHW2T = m_StP.m_StPHW2T + ZUG;
 
-    ZUG = calculate_lwdt( m_StPLW1T);
-    m_ScPLW1T = m_StPLW1T + ZUG;
+    ZUG = calculate_lwdt(m_StP.m_StPLW1T);
+    m_ScPLW1T = m_StP.m_StPLW1T + ZUG;
 
-    ZUG = calculate_lwdt( m_StPLW2T);
-    m_ScPLW2T = m_StPLW2T + ZUG;
+    ZUG = calculate_lwdt(m_StP.m_StPLW2T);
+    m_ScPLW2T = m_StP.m_StPLW2T + ZUG;
 
 }
 
@@ -73,13 +73,13 @@ double
 ATTCalculation::calculate_hw( double hwh )
 {
 
-    if ( m_StPMHWN != m_StPMHWS)
+    if ( m_ScP.m_StPMHWN != m_ScP.m_StPMHWS)
     {
-        return m_ScPMHWN + (m_ScPMHWS - m_ScPMHWN) * ( hwh - m_StPMHWN )/(m_StPMHWS - m_StPMHWN );
+        return m_ScP.m_ScPMHWN + (m_ScP.m_ScPMHWS - m_ScP.m_ScPMHWN) * ( hwh - m_ScP.m_StPMHWN )/(m_ScP.m_StPMHWS - m_ScP.m_StPMHWN );
     }
     else
     {
-        return m_ScPMHWN +( hwh - m_StPMHWN );
+        return m_ScP.m_ScPMHWN +( hwh - m_ScP.m_StPMHWN );
     }
 }
 
@@ -88,13 +88,13 @@ double
 ATTCalculation::calculate_lw( double lwh )
 {
 
-    if ( m_StPMLWN != m_StPMLWS)
+    if ( m_ScP.m_StPMLWN != m_ScP.m_StPMLWS)
     {
-        return m_ScPMLWN + (m_ScPMLWS - m_ScPMLWN) * ( lwh - m_StPMLWN )/(m_StPMLWS - m_StPMLWN );
+        return m_ScP.m_ScPMLWN + (m_ScP.m_ScPMLWS - m_ScP.m_ScPMLWN) * ( lwh - m_ScP.m_StPMLWN )/(m_ScP.m_StPMLWS - m_ScP.m_StPMLWN );
     }
     else
     {
-        return m_ScPMLWN +( lwh - m_StPMLWN );
+        return m_ScP.m_ScPMLWN +( lwh - m_ScP.m_StPMLWN );
     }
 }
 
@@ -139,37 +139,37 @@ ATTCalculation::calculate_lwdt( double lwt )
 void  
 ATTCalculation::get_pair_lw(const double t,  double& t1, double&dt1, double &t2, double&dt2 )
 {
-    switch (get_pair(t, m_ScPLWT1,  m_ScPLWT2, m_ScPLWT3,  m_ScPLWT4 ))
+    switch (get_pair(t, m_ScP.m_ScPLWT1,  m_ScP.m_ScPLWT2, m_ScP.m_ScPLWT3,  m_ScP.m_ScPLWT4 ))
         {
             case 0:
-                t1 = m_ScPLWT4-24;
-                dt1 = m_ScPDLWT2;
-                t2 = m_ScPLWT1;
-                dt2 = m_ScPDLWT1;
+                t1 = m_ScP.m_ScPLWT4-24;
+                dt1 = m_ScP.m_ScPDLWT2;
+                t2 = m_ScP.m_ScPLWT1;
+                dt2 = m_ScP.m_ScPDLWT1;
                 break;
             case 1:
-                t1 = m_ScPLWT1;
-                dt1 = m_ScPDLWT1;
-                t2 = m_ScPLWT2;
-                dt2 = m_ScPDLWT2;
+                t1 = m_ScP.m_ScPLWT1;
+                dt1 = m_ScP.m_ScPDLWT1;
+                t2 = m_ScP.m_ScPLWT2;
+                dt2 = m_ScP.m_ScPDLWT2;
                 break;    
             case 2:
-                t1 = m_ScPLWT2;
-                dt1 = m_ScPDLWT2;
-                t2 = m_ScPLWT3;
-                dt2 = m_ScPDLWT1;
+                t1 = m_ScP.m_ScPLWT2;
+                dt1 = m_ScP.m_ScPDLWT2;
+                t2 = m_ScP.m_ScPLWT3;
+                dt2 = m_ScP.m_ScPDLWT1;
                 break;     
             case 3:
-                t1 = m_ScPLWT3;
-                dt1 = m_ScPDLWT1;
-                t2 = m_ScPLWT4;
-                dt2 = m_ScPDLWT2;
+                t1 = m_ScP.m_ScPLWT3;
+                dt1 = m_ScP.m_ScPDLWT1;
+                t2 = m_ScP.m_ScPLWT4;
+                dt2 = m_ScP.m_ScPDLWT2;
                 break;      
             case 4:
-                t1 = m_ScPLWT4;
-                dt1 = m_ScPDLWT2;
-                t2 = m_ScPLWT1+24;
-                dt2 = m_ScPDLWT1;
+                t1 = m_ScP.m_ScPLWT4;
+                dt1 = m_ScP.m_ScPDLWT2;
+                t2 = m_ScP.m_ScPLWT1+24;
+                dt2 = m_ScP.m_ScPDLWT1;
                 break;   
             default:
                 error_message = " something is really wrong in LW dt calculation ";
@@ -181,37 +181,37 @@ ATTCalculation::get_pair_lw(const double t,  double& t1, double&dt1, double &t2,
 void  
 ATTCalculation::get_pair_hw(const double t,  double& t1, double&dt1, double &t2, double&dt2 )
 {
-    switch (get_pair(t, m_ScPHWT1,  m_ScPHWT2, m_ScPHWT3,  m_ScPHWT4 ))
+    switch (get_pair(t, m_ScP.m_ScPHWT1,  m_ScP.m_ScPHWT2, m_ScP.m_ScPHWT3,  m_ScP.m_ScPHWT4 ))
     {
         case 0:
-            t1 = m_ScPHWT4-24;
-            dt1 = m_ScPDHWT2;
-            t2 = m_ScPHWT1;
-            dt2 = m_ScPDHWT1;
+            t1 = m_ScP.m_ScPHWT4-24;
+            dt1 = m_ScP.m_ScPDHWT2;
+            t2 = m_ScP.m_ScPHWT1;
+            dt2 = m_ScP.m_ScPDHWT1;
             break;
         case 1:
-            t1 = m_ScPHWT1;
-            dt1 = m_ScPDHWT1;
-            t2 = m_ScPHWT2;
-            dt2 = m_ScPDHWT2;
+            t1 = m_ScP.m_ScPHWT1;
+            dt1 = m_ScP.m_ScPDHWT1;
+            t2 = m_ScP.m_ScPHWT2;
+            dt2 = m_ScP.m_ScPDHWT2;
             break;    
         case 2:
-            t1 = m_ScPHWT2;
-            dt1 = m_ScPDHWT2;
-            t2 = m_ScPHWT3;
-            dt2 = m_ScPDHWT1;
+            t1 = m_ScP.m_ScPHWT2;
+            dt1 = m_ScP.m_ScPDHWT2;
+            t2 = m_ScP.m_ScPHWT3;
+            dt2 = m_ScP.m_ScPDHWT1;
             break;     
         case 3:
-            t1 = m_ScPHWT3;
-            dt1 = m_ScPDHWT1;
-            t2 = m_ScPHWT4;
-            dt2 = m_ScPDHWT2;
+            t1 = m_ScP.m_ScPHWT3;
+            dt1 = m_ScP.m_ScPDHWT1;
+            t2 = m_ScP.m_ScPHWT4;
+            dt2 = m_ScP.m_ScPDHWT2;
             break;      
         case 4:
-            t1 = m_ScPHWT4;
-            dt1 = m_ScPDHWT2;
-            t2 = m_ScPHWT1+24;
-            dt2 = m_ScPDHWT1;
+            t1 = m_ScP.m_ScPHWT4;
+            dt1 = m_ScP.m_ScPDHWT2;
+            t2 = m_ScP.m_ScPHWT1+24;
+            dt2 = m_ScP.m_ScPDHWT1;
             break;   
         default:
             error_message = " something is really wrong in HW dt calculation. ";
@@ -255,17 +255,17 @@ std::ostream& operator<<(std::ostream& out, const ATTCalculation& obj)
     out <<  "error_message " << obj.error_message  << std::endl;
 
     
-    out <<  "m_StPName " << obj.m_StPName << std::endl;
-    out <<  "m_StPLW1T " << obj.m_StPLW1T << std::endl;
-    out <<  "m_StPLW1H " << obj.m_StPLW1H << std::endl;
-    out <<  "m_StPHW1T " << obj.m_StPHW1T << std::endl;
-    out <<  "m_StPHW1H " << obj.m_StPHW1H << std::endl;
-    out <<  "m_StPLW2T " << obj.m_StPLW2T << std::endl;
-    out <<  "m_StPLW2H " << obj.m_StPLW2H << std::endl;
-    out <<  "m_StPHW2T " << obj.m_StPHW2T << std::endl;
-    out <<  "m_StPHW2H " << obj.m_StPHW2H << std::endl;
+    out <<  "m_StPName " << obj.m_StP.m_StPName << std::endl;
+    out <<  "m_StPLW1T " << obj.m_StP.m_StPLW1T << std::endl;
+    out <<  "m_StPLW1H " << obj.m_StP.m_StPLW1H << std::endl;
+    out <<  "m_StPHW1T " << obj.m_StP.m_StPHW1T << std::endl;
+    out <<  "m_StPHW1H " << obj.m_StP.m_StPHW1H << std::endl;
+    out <<  "m_StPLW2T " << obj.m_StP.m_StPLW2T << std::endl;
+    out <<  "m_StPLW2H " << obj.m_StP.m_StPLW2H << std::endl;
+    out <<  "m_StPHW2T " << obj.m_StP.m_StPHW2T << std::endl;
+    out <<  "m_StPHW2H " << obj.m_StP.m_StPHW2H << std::endl;
     
-    out <<  "m_ScPName " << obj.m_ScPName << std::endl;
+    out <<  "m_ScPName " << obj.m_ScP.m_ScPName << std::endl;
     out <<  "m_ScPLW1T " << obj.m_ScPLW1T << std::endl;
     out <<  "m_ScPLW1H " << obj.m_ScPLW1H << std::endl;
     out <<  "m_ScPHW1T " << obj.m_ScPHW1T << std::endl;
@@ -275,32 +275,32 @@ std::ostream& operator<<(std::ostream& out, const ATTCalculation& obj)
     out <<  "m_ScPHW2T " << obj.m_ScPHW2T << std::endl;
     out <<  "m_ScPHW2H " << obj.m_ScPHW2H << std::endl;
 
-    out <<  "m_ScPHWT1 " << obj.m_ScPHWT1 << std::endl;
-    out <<  "m_ScPHWT2 " << obj.m_ScPHWT2 << std::endl;
-    out <<  "m_ScPHWT3 " << obj.m_ScPHWT3 << std::endl;
-    out <<  "m_ScPHWT4 " << obj.m_ScPHWT4 << std::endl;
+    out <<  "m_ScPHWT1 " << obj.m_ScP.m_ScPHWT1 << std::endl;
+    out <<  "m_ScPHWT2 " << obj.m_ScP.m_ScPHWT2 << std::endl;
+    out <<  "m_ScPHWT3 " << obj.m_ScP.m_ScPHWT3 << std::endl;
+    out <<  "m_ScPHWT4 " << obj.m_ScP.m_ScPHWT4 << std::endl;
     
-    out <<  "m_ScPLWT1 " << obj.m_ScPLWT1 << std::endl;
-    out <<  "m_ScPLWT2 " << obj.m_ScPLWT2 << std::endl;
-    out <<  "m_ScPLWT3 " << obj.m_ScPLWT3 << std::endl;
-    out <<  "m_ScPLWT4 " << obj.m_ScPLWT4 << std::endl;
+    out <<  "m_ScPLWT1 " << obj.m_ScP.m_ScPLWT1 << std::endl;
+    out <<  "m_ScPLWT2 " << obj.m_ScP.m_ScPLWT2 << std::endl;
+    out <<  "m_ScPLWT3 " << obj.m_ScP.m_ScPLWT3 << std::endl;
+    out <<  "m_ScPLWT4 " << obj.m_ScP.m_ScPLWT4 << std::endl;
     
-    out <<  "m_StPMHWS " << obj.m_StPMHWS << std::endl;
-    out <<  "m_StPMHWN " << obj.m_StPMHWN << std::endl;
-    out <<  "m_StPMLWS " << obj.m_StPMLWS << std::endl;
-    out <<  "m_StPMLWN " << obj.m_StPMLWN << std::endl;
-    out <<  "m_StPSC " << obj.m_StPSC << std::endl;
+    out <<  "m_StPMHWS " << obj.m_ScP.m_StPMHWS << std::endl;
+    out <<  "m_StPMHWN " << obj.m_ScP.m_StPMHWN << std::endl;
+    out <<  "m_StPMLWS " << obj.m_ScP.m_StPMLWS << std::endl;
+    out <<  "m_StPMLWN " << obj.m_ScP.m_StPMLWN << std::endl;
+    out <<  "m_StPSC " << obj.m_ScP.m_StPSC << std::endl;
 
-    out <<  "m_ScPDHWT1 " << obj.m_ScPDHWT1 << std::endl;
-    out <<  "m_ScPDHWT2 " << obj.m_ScPDHWT2 << std::endl;
-    out <<  "m_ScPDLWT1 " << obj.m_ScPDLWT1 << std::endl;
-    out <<  "m_ScPDLWT2 " << obj.m_ScPDLWT2 << std::endl;
+    out <<  "m_ScPDHWT1 " << obj.m_ScP.m_ScPDHWT1 << std::endl;
+    out <<  "m_ScPDHWT2 " << obj.m_ScP.m_ScPDHWT2 << std::endl;
+    out <<  "m_ScPDLWT1 " << obj.m_ScP.m_ScPDLWT1 << std::endl;
+    out <<  "m_ScPDLWT2 " << obj.m_ScP.m_ScPDLWT2 << std::endl;
     
-    out <<  "m_ScPMHWS " << obj.m_ScPMHWS << std::endl;
-    out <<  "m_ScPMHWN " << obj.m_ScPMHWN << std::endl;
-    out <<  "m_ScPMLWS " << obj.m_ScPMLWS << std::endl;
-    out <<  "m_ScPMLWN " << obj.m_ScPMLWN << std::endl;
-    out <<  "m_ScPSC " << obj.m_ScPSC << std::endl;
+    out <<  "m_ScPMHWS " << obj.m_ScP.m_ScPMHWS << std::endl;
+    out <<  "m_ScPMHWN " << obj.m_ScP.m_ScPMHWN << std::endl;
+    out <<  "m_ScPMLWS " << obj.m_ScP.m_ScPMLWS << std::endl;
+    out <<  "m_ScPMLWN " << obj.m_ScP.m_ScPMLWN << std::endl;
+    out <<  "m_ScPSC " << obj.m_ScP.m_ScPSC << std::endl;
     
     return out; 
 }

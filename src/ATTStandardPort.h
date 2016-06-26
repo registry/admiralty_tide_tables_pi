@@ -38,20 +38,18 @@
 
 class ATTStandardPort // in form of hhmm ; 0123 -> 1.3834
 {
-    wxString name;
-    double att_time_hw1;
-    double att_time_lw1;
-    double att_time_hw2;
-    double att_time_lw2;
+    public:
 
-    double hw1;
-    double lw1;
-    double hw2;
-    double lw2;
-
-
-public:
-
+    wxString  m_StPName;
+    double  m_StPLW1T;
+    double  m_StPLW1H;
+    double  m_StPHW1T;
+    double  m_StPHW1H;
+    double  m_StPLW2T;
+    double  m_StPLW2H;
+    double  m_StPHW2T;
+    double  m_StPHW2H;
+    
     
     
     ATTStandardPort( );

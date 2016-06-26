@@ -33,7 +33,8 @@
 #include <wx/datetime.h>
 #include <iostream>
 #include <ostream>
-
+#include "ATTStandardPort.h"
+#include "ATTSecondaryPort.h"
 ///////////////////////////////////////////////////////////////////////////////
 /// Class ATTCalculation
 ///////////////////////////////////////////////////////////////////////////////
@@ -91,17 +92,11 @@ protected:
     // all input elements:
     wxDateTime m_Date;
     
-    wxString  m_StPName;
-    double  m_StPLW1T;
-    double  m_StPLW1H;
-    double  m_StPHW1T;
-    double  m_StPHW1H;
-    double  m_StPLW2T;
-    double  m_StPLW2H;
-    double  m_StPHW2T;
-    double  m_StPHW2H;
+    ATTStandardPort m_StP;
+    ATTSecondaryPort m_ScP;
     
-    wxString  m_ScPName;
+
+ 
     double  m_ScPLW1T;
     double  m_ScPLW1H;
     double  m_ScPHW1T;
@@ -111,33 +106,6 @@ protected:
     double  m_ScPHW2T;
     double  m_ScPHW2H;
 
-    double  m_ScPHWT1;
-    double  m_ScPHWT2;
-    double  m_ScPHWT3;
-    double  m_ScPHWT4;
-    
-    double  m_ScPLWT1;
-    double  m_ScPLWT2;
-    double  m_ScPLWT3;
-    double  m_ScPLWT4;
-    
-    double  m_StPMHWS;
-    double  m_StPMHWN;
-    double  m_StPMLWS;
-    double  m_StPMLWN;
-    double  m_StPSC;
-
-    double  m_ScPDHWT1;
-    double  m_ScPDHWT2;
-    double  m_ScPDLWT1;
-    double  m_ScPDLWT2;
-    
-    double  m_ScPMHWS;
-    double  m_ScPMHWN;
-    double  m_ScPMLWS;
-    double  m_ScPMLWN;
-    double  m_ScPSC;
-    
 
 
 
@@ -152,44 +120,44 @@ public:
 
     inline
     void
-    setStPName( const wxString& d) {  m_StPName = d; };   
+    setStPName( const wxString& d) {  m_StP.m_StPName = d; };   
     
     inline
     void
-    setScPName( const wxString& d) {  m_ScPName = d; };   
+    setScPName( const wxString& d) {  m_ScP.m_ScPName = d; };   
         
     
     inline
     void
-    setStPLW1T( const double d) {  m_StPLW1T = d; };
+    setStPLW1T( const double d) {  m_StP.m_StPLW1T = d; };
     
     inline
     void
-    setStPLW2T( const double d) {  m_StPLW2T = d; };
+    setStPLW2T( const double d) {  m_StP.m_StPLW2T = d; };
     
     inline
     void
-    setStPHW1T( const double d) {  m_StPHW1T = d; };
+    setStPHW1T( const double d) {  m_StP.m_StPHW1T = d; };
     
     inline
     void
-    setStPHW2T( const double d) {  m_StPHW2T = d; };
+    setStPHW2T( const double d) { m_StP.m_StPHW2T = d; };
     
     inline
     void
-    setStPLW1H( const double d) {  m_StPLW1H = d; };
+    setStPLW1H( const double d) {  m_StP.m_StPLW1H = d; };
     
     inline
     void
-    setStPLW2H( const double d) {  m_StPLW2H = d; };
+    setStPLW2H( const double d) {  m_StP.m_StPLW2H = d; };
     
     inline
     void
-    setStPHW1H( const double d) {  m_StPHW1H = d; };
+    setStPHW1H( const double d) {  m_StP.m_StPHW1H = d; };
     
     inline
     void
-    setStPHW2H( const double d) {  m_StPHW2H = d; };
+    setStPHW2H( const double d) {  m_StP.m_StPHW2H = d; };
     
         
         
@@ -233,98 +201,98 @@ public:
     
     inline
     void
-    setScPHWT1( const double d) {  m_ScPHWT1 = d; };
+    setScPHWT1( const double d) {  m_ScP.m_ScPHWT1 = d; };
     
     inline
     void
-    setScPHWT2( const double d) {  m_ScPHWT2= d; };
+    setScPHWT2( const double d) {   m_ScP.m_ScPHWT2= d; };
     
     inline
     void
-    setScPHWT3( const double d) {  m_ScPHWT3 = d; };
+    setScPHWT3( const double d) {   m_ScP.m_ScPHWT3 = d; };
     
     inline
     void
-    setScPHWT4( const double d) {  m_ScPHWT4 = d; };
+    setScPHWT4( const double d) {  m_ScP. m_ScPHWT4 = d; };
     
      
     inline
     void
-    setScPLWT1( const double d) {  m_ScPLWT1 = d; };
+    setScPLWT1( const double d) {   m_ScP.m_ScPLWT1 = d; };
     
     inline
     void
-    setScPLWT2( const double d) {  m_ScPLWT2= d; };
+    setScPLWT2( const double d) {   m_ScP.m_ScPLWT2= d; };
     
     inline
     void
-    setScPLWT3( const double d) {  m_ScPLWT3 = d; };
+    setScPLWT3( const double d) {   m_ScP.m_ScPLWT3 = d; };
     
     inline
     void
-    setScPLWT4( const double d) {  m_ScPLWT4 = d; };
+    setScPLWT4( const double d) {   m_ScP.m_ScPLWT4 = d; };
     
     
     
     inline
     void
-    setStPMHWS( const double d) {  m_StPMHWS = d; };
+    setStPMHWS( const double d) {   m_ScP.m_StPMHWS = d; };
     
     inline
     void
-    setStPMHWN( const double d) {  m_StPMHWN= d; };
+    setStPMHWN( const double d) {   m_ScP.m_StPMHWN= d; };
     
     inline
     void
-    setStPMLWS( const double d) {  m_StPMLWS = d; };
+    setStPMLWS( const double d) {  m_ScP.m_StPMLWS = d; };
     
     inline
     void
-    setStPMLWN( const double d) {  m_StPMLWN = d; };
+    setStPMLWN( const double d) {  m_ScP.m_StPMLWN = d; };
      
     inline
     void
-    setStPSC( const double d) {  m_StPSC = d; };
+    setStPSC( const double d) {   m_ScP.m_StPSC = d; };
 
     
     
     
     inline
     void
-    setScPDHWT1( const double d) {  m_ScPDHWT1 = d; };
+    setScPDHWT1( const double d) {   m_ScP.m_ScPDHWT1 = d; };
     
     inline
     void
-    setScPDHWT2( const double d) {  m_ScPDHWT2= d; };
+    setScPDHWT2( const double d) {   m_ScP.m_ScPDHWT2= d; };
     
     inline
     void
-    setScPDLWT1( const double d) {  m_ScPDLWT1 = d; };
+    setScPDLWT1( const double d) {   m_ScP.m_ScPDLWT1 = d; };
     
     inline
     void
-    setScPDLWT2( const double d) {  m_ScPDLWT2 = d; };
+    setScPDLWT2( const double d) {   m_ScP.m_ScPDLWT2 = d; };
 
     
     inline
     void
-    setScPMHWS( const double d) {  m_ScPMHWS = d; };
+    setScPMHWS( const double d) {  m_ScP.m_ScPMHWS = d; };
     
     inline
     void
-    setScPMHWN( const double d) {  m_ScPMHWN= d; };
+    setScPMHWN( const double d) {  m_ScP.m_ScPMHWN= d; };
     
     inline
     void
-    setScPMLWS( const double d) {  m_ScPMLWS = d; };
+    setScPMLWS( const double d) {   m_ScP.m_ScPMLWS = d; };
     
     inline
     void
-    setScPMLWN( const double d) {  m_ScPMLWN = d; };
+    setScPMLWN( const double d) {   m_ScP.m_ScPMLWN = d; };
      
     inline
     void
-    setScPSC( const double d) {  m_ScPSC = d; };
+    setScPSC( const double d) {   m_ScP.m_ScPSC = d; };
     
     friend
     std::ostream& operator<<(std::ostream&, const ATTCalculation&);

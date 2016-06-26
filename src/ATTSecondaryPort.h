@@ -38,19 +38,40 @@
 
 class ATTSecondaryPort // in form of hhmm ; 0123 -> 1.3834
 {
-    wxString name;
-    double att_time_hw1;
-    double att_time_lw1;
-    double att_time_hw2;
-    double att_time_lw2;
-
-    double hw1;
-    double lw1;
-    double hw2;
-    double lw2;
-
-
 public:
+    
+    
+    wxString  m_ScPName;
+    double  m_ScPHWT1;
+    double  m_ScPHWT2;
+    double  m_ScPHWT3;
+    double  m_ScPHWT4;
+    
+    double  m_ScPLWT1;
+    double  m_ScPLWT2;
+    double  m_ScPLWT3;
+    double  m_ScPLWT4;
+    
+    double  m_StPMHWS;
+    double  m_StPMHWN;
+    double  m_StPMLWS;
+    double  m_StPMLWN;
+    double  m_StPSC;
+
+    double  m_ScPDHWT1;
+    double  m_ScPDHWT2;
+    double  m_ScPDLWT1;
+    double  m_ScPDLWT2;
+    
+    double  m_ScPMHWS;
+    double  m_ScPMHWN;
+    double  m_ScPMLWS;
+    double  m_ScPMLWN;
+    double  m_ScPSC;
+    
+
+
+
 
     
     
