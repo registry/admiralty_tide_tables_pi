@@ -30,6 +30,7 @@
 #include "ATTTime.h"
 ///////////////////////////////////////////////////////////////////////////
 #include <iostream>
+#include <wx/dateevt.h>
 
 #include "ocpn_plugin.h"
 
@@ -62,7 +63,8 @@ void ATTDialog::CreateLayout( )
         wxEXPAND |    // make horizontally stretchable
         wxALL,        //   and make border all around
         3 ); 
-    
+    m_Date->Connect(  wxEVT_DATE_CHANGED , wxCommandEventHandler( ATTDialog::OnSetDate ), NULL, this);
+     
 
   
     
@@ -90,7 +92,7 @@ void ATTDialog::CreateLayout( )
         wxALL,        //   and make border all around
         3 );
     
-    m_StPName= new wxTextCtrl (this, wxID_ANY );
+    m_StPName= new wxComboBox (this, wxID_ANY );
     _stp_name_sizer->Add(m_StPName,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -231,7 +233,7 @@ void ATTDialog::CreateLayout( )
         wxALL,        //   and make border all around
         3 );
     
-    m_ScPName= new wxTextCtrl (this, wxID_ANY );
+    m_ScPName= new wxComboBox (this, wxID_ANY );
     _scp_name_sizer->Add(m_ScPName,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -730,6 +732,21 @@ ATTDialog::~ATTDialog()
     delete att_calculation;
 }
 
+
+void ATTDialog::OnSetDate( wxCommandEvent& event )
+{
+
+    std::cout << m_Date->GetValue().FormatISODate() << " --- " <<  m_Date->GetValue().GetTicks() << std::endl;
+    
+    
+    event.Skip();
+}
+
+
+
+
+
+
 void ATTDialog::OnCalculate( wxCommandEvent& event )
 {
     att_calculation->calculate();
@@ -774,8 +791,8 @@ void ATTDialog::OnClose( wxCommandEvent& event )
 
 void ATTDialog::OnStPEnter( wxCommandEvent& event )
 {
-    m_StPName2Label->SetLabel( m_StPName->GetLineText(0));
-    att_calculation->setStPName( m_StPName->GetLineText(0) );
+    m_StPName2Label->SetLabel( m_StPName->GetValue());
+    att_calculation->setStPName( m_StPName->GetValue() );
     SetMinClientSize( main_sizer->GetMinSize()); 
     event.Skip();
    
@@ -783,8 +800,8 @@ void ATTDialog::OnStPEnter( wxCommandEvent& event )
 
 void ATTDialog::OnScPEnter( wxCommandEvent& event )
 {
-    m_ScPName2Label->SetLabel( m_ScPName->GetLineText(0));
-    att_calculation->setScPName( m_ScPName->GetLineText(0) );
+     m_ScPName2Label->SetLabel( m_ScPName->GetValue());
+     att_calculation->setScPName( m_ScPName->GetValue() );
     SetMinClientSize( main_sizer->GetMinSize()); 
     event.Skip();
 }

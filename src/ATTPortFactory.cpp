@@ -38,17 +38,17 @@ ATTPortFactory::~ATTPortFactory()
 }
 
 ATTSecondaryPort & 
-ATTPortFactory::getSecondaryPort( wxDateTime & date)
+ATTPortFactory::getSecondaryPort(wxString& portname, wxDateTime & date)
 {
-    ATTSecondaryPort _port;
-    return _port;
+    ScPsList& _list = ScPorts[ portname];
+    return _list[ date.GetTicks()  ];
 }
 
 ATTStandardPort & 
-ATTPortFactory::getStandardPort(wxDateTime & date)
+ATTPortFactory::getStandardPort(wxString& portname, wxDateTime & date)
 {
-    ATTStandardPort _port;
-    return _port;
+    StPsList& _list = StPorts[ portname ];
+    return _list[ date.GetTicks()   ];
 }
 
 

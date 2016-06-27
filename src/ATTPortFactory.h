@@ -30,6 +30,9 @@
 
 ///////////////////////////////////////////////////////////////////////////
 #include <wx/datetime.h>
+#include <wx/hashmap.h>
+
+
 #include "ATTStandardPort.h"
 #include "ATTSecondaryPort.h"
 ///////////////////////////////////////////////////////////////////////////////
@@ -41,17 +44,36 @@ class ATTSecondaryPort;
 
 class ATTPortFactory // provides and stores standart/secondary port to given date/year if presend... 
 {
-
-
+    
+     
+WX_DECLARE_HASH_MAP( int,
+                     ATTSecondaryPort,
+                     wxIntegerHash,
+                     wxIntegerEqual,
+                     ScPsList );
+WX_DECLARE_HASH_MAP( int, 
+                     ATTStandardPort,
+                     wxIntegerHash,
+                     wxIntegerEqual,
+                     StPsList );   
+    
+    
+WX_DECLARE_STRING_HASH_MAP( 
+                     ScPsList,
+                     ScPs );
+WX_DECLARE_STRING_HASH_MAP( 
+                     StPsList,
+                     StPs );
 public:
 
-    
+    ScPs ScPorts;
+    StPs StPorts;
     
     ATTPortFactory( );
     ~ATTPortFactory();
     
-    ATTSecondaryPort & getSecondaryPort( wxDateTime & );
-    ATTStandardPort & getStandardPort( wxDateTime & );
+    ATTSecondaryPort & getSecondaryPort( wxString&, wxDateTime & );
+    ATTStandardPort & getStandardPort( wxString&, wxDateTime & );
     
     
 };

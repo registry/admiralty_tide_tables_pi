@@ -36,6 +36,7 @@
 #include <wx/artprov.h>
 #include <wx/button.h>
 #include <wx/colour.h>
+#include <wx/combobox.h>
 #include <wx/datectrl.h>
 #include <wx/dialog.h>
 #include <wx/font.h>
@@ -74,7 +75,7 @@ protected:
     // all input elements:
     wxDatePickerCtrl * m_Date;
     
-    wxTextCtrl * m_StPName;
+    wxComboBox * m_StPName;
     wxTextCtrl * m_StPLW1T;
     wxTextCtrl * m_StPLW1H;
     wxTextCtrl * m_StPHW1T;
@@ -84,7 +85,7 @@ protected:
     wxTextCtrl * m_StPHW2T;
     wxTextCtrl * m_StPHW2H;
     
-    wxTextCtrl * m_ScPName;
+    wxComboBox * m_ScPName;
     wxTextCtrl * m_ScPLW1T;
     wxTextCtrl * m_ScPLW1H;
     wxTextCtrl * m_ScPHW1T;
@@ -131,6 +132,9 @@ protected:
     
     
     // Virtual event handlers, overide them in your derived class
+    
+    void OnSetDate( wxCommandEvent& event );
+    
     void OnCalculate( wxCommandEvent& event );
     void OnClose( wxCommandEvent& event );
     void OnStPEnter( wxCommandEvent& event );
