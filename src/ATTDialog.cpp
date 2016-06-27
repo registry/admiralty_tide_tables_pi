@@ -28,6 +28,7 @@
 #include "ATTCalculation.h"
 #include "ATTServices.h"
 #include "ATTTime.h"
+#include "ATTPortFactory.h"
 ///////////////////////////////////////////////////////////////////////////
 #include <iostream>
 #include <wx/dateevt.h>
@@ -38,6 +39,7 @@
 ATTDialog::ATTDialog( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
     att_calculation = new ATTCalculation();
+    att_factory = new ATTPortFactory();
     CreateLayout();     
 
 }
@@ -709,6 +711,7 @@ void ATTDialog::CreateLayout( )
             // make horizontally stretchable
         wxALL,        //   and make border all around
         3);
+    m_bSave->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( ATTDialog::OnSave ) , NULL, this);
     m_bClose->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( ATTDialog::OnClose ) , NULL, this);
     m_bCalculate->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( ATTDialog::OnCalculate ), NULL, this );
         
@@ -730,6 +733,7 @@ void ATTDialog::CreateLayout( )
 ATTDialog::~ATTDialog()
 {
     delete att_calculation;
+    delete att_factory;
 }
 
 
@@ -778,12 +782,23 @@ void ATTDialog::OnCalculate( wxCommandEvent& event )
 }
 
 
+void ATTDialog::OnSave( wxCommandEvent& event )
+{
+    ATTStandardPort stp;
+    ATTSecondaryPort scp;
+    
+//     att_factory.saveStandardport( stp);
+//     att_factory.saveStandardport( stp);
+    
+    event.Skip();
+}
+
+
 void ATTDialog::OnClose( wxCommandEvent& event )
 {
     Close();
     event.Skip();
 }
-
 
 
 

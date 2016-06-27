@@ -53,8 +53,10 @@
 #include <wx/xrc/xmlres.h>
 
 ///////////////////////////////////////////////////////////////////////////
-class ATTCalculation;
 
+
+class ATTCalculation;
+class ATTPortFactory;
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -68,8 +70,8 @@ private:
 protected:
     ATTCalculation * att_calculation;
     
-    
-     wxBoxSizer* main_sizer;
+    ATTPortFactory * att_factory;
+    wxBoxSizer* main_sizer;
     
 
     // all input elements:
@@ -136,6 +138,7 @@ protected:
     void OnSetDate( wxCommandEvent& event );
     
     void OnCalculate( wxCommandEvent& event );
+    void OnSave( wxCommandEvent& event );
     void OnClose( wxCommandEvent& event );
     void OnStPEnter( wxCommandEvent& event );
     void OnScPEnter( wxCommandEvent& event );
