@@ -62,6 +62,9 @@ WX_DECLARE_STRING_HASH_MAP(
 WX_DECLARE_STRING_HASH_MAP( 
                      StPsList,
                      StPs );
+
+    void Save();
+
 public:
 
     ScPs ScPorts;

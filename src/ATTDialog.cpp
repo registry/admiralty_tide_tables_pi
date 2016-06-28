@@ -33,7 +33,6 @@
 #include <iostream>
 #include <wx/dateevt.h>
 
-#include "ocpn_plugin.h"
 
 
 ATTDialog::ATTDialog( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
@@ -775,9 +774,7 @@ void ATTDialog::OnCalculate( wxCommandEvent& event )
      _s <<  att_calculation->getScPHW2H() ;
     m_ScPHW2H->SetValue( _s );
         
-//     wxString s =wxFileName::GetPathSeparator();
-//     std::cout <<  (*GetpSharedDataLocation() + _T("plugins")
-//         + s + _T("att_pi") + s + _T("data") + s) << std::endl;
+
     
     event.Skip();
 }

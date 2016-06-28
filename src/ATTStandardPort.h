@@ -36,10 +36,12 @@
 
 
 
-class ATTStandardPort // in form of hhmm ; 0123 -> 1.3834
+class ATTStandardPort 
 {
     public:
 
+    bool  to_save; // signalizes, that one has to store it    
+        
     wxString  m_StPName;
     double  m_StPLW1T;
     double  m_StPLW1H;

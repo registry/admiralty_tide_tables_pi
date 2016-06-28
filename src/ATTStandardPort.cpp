@@ -34,7 +34,7 @@
 
 ATTStandardPort::ATTStandardPort()
 {
-
+    to_save = true;
 }
 
 

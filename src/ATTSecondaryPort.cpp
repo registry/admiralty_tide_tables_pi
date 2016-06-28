@@ -34,7 +34,7 @@
 
 ATTSecondaryPort::ATTSecondaryPort()
 {
-
+    to_save = true;
 }
 
 

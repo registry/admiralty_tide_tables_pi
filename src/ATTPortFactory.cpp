@@ -26,7 +26,12 @@
 
 #include "ATTPortFactory.h"
 #include "iostream"
-
+#include <wx/filename.h>
+#include <wx/dcmemory.h>
+#include <wx/event.h>
+#include <wx/menuitem.h>
+#include <wx/dialog.h>
+#include "ocpn_plugin.h"
 
 ATTPortFactory::ATTPortFactory()
 {
@@ -36,7 +41,7 @@ ATTPortFactory::ATTPortFactory()
 
 ATTPortFactory::~ATTPortFactory()
 {
-   
+   Save();
 }
 
 
@@ -168,6 +173,53 @@ ATTPortFactory::getSecondaryPorts(const  wxDateTime & date) const
 }
 
     
-  
+void
+ATTPortFactory::Save()
+{
+    wxString s =wxFileName::GetPathSeparator();
+    
+    wxString path_to = (*GetpSharedDataLocation() + _T("plugins")
+        + s + _T("att_pi") + s + _T("data") + s);
+    
+    // Standar ports 
+    for ( StPs::const_iterator n_iter = StPorts.begin(); n_iter != StPorts.end(); ++n_iter)
+    {
+        const wxString & port_name = n_iter->first;
+        const StPsList & st_list = n_iter->second;
+        for ( StPsList::const_iterator p_iter = st_list.begin(); p_iter != st_list.end(); ++p_iter)
+        {
+            wxDateTime _date (  p_iter->first );
+            int year = _date.GetYear();
+            wxDateTime::Month month = _date.GetMonth();
+            const ATTStandardPort & stp = p_iter->second;
+            
+            wxString path;
+            path << year << s << month << s;
+            wxFileName::Mkdir( path_to + path, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL );
+        }
+    }
+    
+    for ( ScPs::const_iterator n_iter = ScPorts.begin(); n_iter != ScPorts.end(); ++n_iter)
+    {
+        const wxString & port_name = n_iter->first;
+        const ScPsList & sc_list = n_iter->second;
+        for ( ScPsList::const_iterator p_iter = sc_list.begin(); p_iter != sc_list.end(); ++p_iter)
+        {
+            wxDateTime _date (  p_iter->first );
+            int year = _date.GetYear();
+            const ATTSecondaryPort & scp = p_iter->second;
+            
+            wxString path;
+            path << year << s ;
+            wxFileName::Mkdir( path_to + path, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL  );
+        }
+    } 
+    
+    
+    
+    
+    std::cout << "Saving ports" << std::endl;
+}
+
   
   

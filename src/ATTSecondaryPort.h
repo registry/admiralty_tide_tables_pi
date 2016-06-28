@@ -40,6 +40,7 @@ class ATTSecondaryPort // in form of hhmm ; 0123 -> 1.3834
 {
 public:
     
+    bool  to_save; // signalizes, that one has to store it    
     
     wxString  m_ScPName;
     double  m_ScPHWT1;
