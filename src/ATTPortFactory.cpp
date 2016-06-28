@@ -25,6 +25,7 @@
  */
 
 #include "ATTPortFactory.h"
+#include "iostream"
 
 
 ATTPortFactory::ATTPortFactory()
@@ -35,21 +36,96 @@ ATTPortFactory::ATTPortFactory()
 
 ATTPortFactory::~ATTPortFactory()
 {
+   
 }
 
 ATTSecondaryPort & 
-ATTPortFactory::getSecondaryPort(wxString& portname, wxDateTime & date)
+ATTPortFactory::getSecondaryPort(const wxString& portname, const wxDateTime & date)
 {
     ScPsList& _list = ScPorts[ portname];
     return _list[ date.GetTicks()  ];
 }
 
 ATTStandardPort & 
-ATTPortFactory::getStandardPort(wxString& portname, wxDateTime & date)
+ATTPortFactory::getStandardPort(const wxString& portname, const wxDateTime & date)
 {
     StPsList& _list = StPorts[ portname ];
     return _list[ date.GetTicks()   ];
 }
 
+void 
+ATTPortFactory::saveStandardPort(const wxDateTime & date, const ATTStandardPort& port)
+{
+    if ( port.m_StPName.size() == 0)
+        return;
+    long ticks = date.GetTicks();
+    StPorts[ port.m_StPName][ ticks ] = port;
+}
 
+void 
+ATTPortFactory::saveSecondaryPort(const wxDateTime & date, const ATTSecondaryPort& port)
+{
+    wxDateTime y_date = date;
+    y_date.ResetTime();
+    y_date.SetDay(1);
+    y_date.SetMonth(wxDateTime::Jan);
+    
+    if ( port.m_ScPName.size() == 0)
+        return;
+    long ticks = y_date.GetTicks();
+    ScPorts[ port.m_ScPName][ ticks ] = port;
+    
+}
+
+    
+wxArrayString
+ATTPortFactory::getStandardPorts(const  wxDateTime & date) const
+{
+    
+    wxArrayString stp;
+    for ( StPs::const_iterator n_iter = StPorts.begin(); n_iter != StPorts.end(); ++n_iter)
+    {
+        const wxString & port_name = n_iter->first;
+        const StPsList & st_list = n_iter->second;
+        for ( StPsList::const_iterator p_iter = st_list.begin(); p_iter != st_list.end(); ++p_iter)
+        {
+            if ( p_iter->first == date.GetTicks())
+            {
+                const ATTStandardPort & _p = p_iter->second;
+                stp.Add( _p.m_StPName );
+            }
+        }
+    
+    }
+    return stp;
+}
+
+wxArrayString
+ATTPortFactory::getSecondaryPorts(const  wxDateTime & date) const
+{
+    wxDateTime y_date = date;
+    y_date.ResetTime();
+    y_date.SetDay(1);
+    y_date.SetMonth(wxDateTime::Jan);
+    
+    wxArrayString scp;
+    for ( ScPs::const_iterator n_iter = ScPorts.begin(); n_iter != ScPorts.end(); ++n_iter)
+    {
+        const wxString & port_name = n_iter->first;
+        const ScPsList & sc_list = n_iter->second;
+        for ( ScPsList::const_iterator p_iter = sc_list.begin(); p_iter != sc_list.end(); ++p_iter)
+        {
+            if ( p_iter->first == y_date.GetTicks())
+            {
+                 const ATTSecondaryPort & _p = p_iter->second;
+                scp.Add( _p.m_ScPName );
+            }
+        }
+    }   
+    return scp;
+}
+
+    
+  
+  
   

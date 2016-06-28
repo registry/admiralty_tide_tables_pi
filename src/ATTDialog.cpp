@@ -739,9 +739,10 @@ ATTDialog::~ATTDialog()
 
 void ATTDialog::OnSetDate( wxCommandEvent& event )
 {
-
-    std::cout << m_Date->GetValue().FormatISODate() << " --- " <<  m_Date->GetValue().GetTicks() << std::endl;
-    
+    m_StPName->Clear();
+    m_StPName->Append(att_factory->getStandardPorts ( m_Date->GetValue()) );
+    m_ScPName->Clear();
+    m_ScPName->Append(att_factory->getSecondaryPorts ( m_Date->GetValue()) );
     
     event.Skip();
 }
@@ -784,11 +785,75 @@ void ATTDialog::OnCalculate( wxCommandEvent& event )
 
 void ATTDialog::OnSave( wxCommandEvent& event )
 {
-    ATTStandardPort stp;
-    ATTSecondaryPort scp;
+    ATTStandardPort stp;    
+    stp.m_StPName = m_StPName->GetValue();
     
-//     att_factory.saveStandardport( stp);
-//     att_factory.saveStandardport( stp);
+    double _h; // error should be issued
+    
+    stp.m_StPLW1T = ATTServices::convertATTTimeAsString2Double( m_StPLW1T->GetLineText(0)) ;
+    m_StPLW1H->GetLineText(0).ToDouble( & _h);
+    stp.m_StPLW1H = _h;
+    stp.m_StPHW1T = ATTServices::convertATTTimeAsString2Double( m_StPHW1T->GetLineText(0)) ;
+    m_StPHW1H->GetLineText(0).ToDouble( & _h);
+    stp.m_StPHW1H = _h;
+    stp.m_StPLW2T = ATTServices::convertATTTimeAsString2Double( m_StPLW2T->GetLineText(0)) ;
+    m_StPLW2H->GetLineText(0).ToDouble( & _h);
+    stp.m_StPLW2H = _h;
+    stp.m_StPHW2T = ATTServices::convertATTTimeAsString2Double( m_StPHW2T->GetLineText(0)) ;
+    m_StPHW2H->GetLineText(0).ToDouble( & _h);
+    stp.m_StPHW2H = _h;
+    
+    
+    ATTSecondaryPort scp;
+    scp.m_ScPName = m_ScPName->GetValue();
+
+    scp.m_ScPHWT1 = ATTServices::convertATTTimeAsString2Double( m_ScPHWT1->GetLineText(0)) ;
+    scp.m_ScPHWT2 = ATTServices::convertATTTimeAsString2Double( m_ScPHWT2->GetLineText(0)) ;
+    scp.m_ScPHWT3 = ATTServices::convertATTTimeAsString2Double( m_ScPHWT3->GetLineText(0)) ;
+    scp.m_ScPHWT4 = ATTServices::convertATTTimeAsString2Double( m_ScPHWT4->GetLineText(0)) ;
+    
+    scp.m_ScPLWT1 = ATTServices::convertATTTimeAsString2Double( m_ScPLWT1->GetLineText(0)) ;
+    scp.m_ScPLWT2 = ATTServices::convertATTTimeAsString2Double( m_ScPLWT2->GetLineText(0)) ;
+    scp.m_ScPLWT3 = ATTServices::convertATTTimeAsString2Double( m_ScPLWT3->GetLineText(0)) ;
+    scp.m_ScPLWT4 = ATTServices::convertATTTimeAsString2Double( m_ScPLWT4->GetLineText(0)) ;
+    
+    m_StPMHWS->GetLineText(0).ToDouble( & _h);
+    scp.m_StPMHWS = _h;
+    m_StPMHWN->GetLineText(0).ToDouble( & _h);
+    scp.m_StPMHWN = _h;
+    m_StPMLWS->GetLineText(0).ToDouble( & _h);
+    scp.m_StPMLWS = _h;
+    m_StPMLWN->GetLineText(0).ToDouble( & _h);
+    scp.m_StPMLWN = _h;
+    m_StPSC->GetLineText(0).ToDouble( & _h);
+    scp.m_StPSC = _h;
+
+    scp.m_ScPDHWT1 = ATTServices::convertATTTimeAsString2Double( m_ScPDHWT1->GetLineText(0)) ;
+    scp.m_ScPDHWT2 = ATTServices::convertATTTimeAsString2Double( m_ScPDHWT2->GetLineText(0)) ;
+    scp.m_ScPDLWT1 = ATTServices::convertATTTimeAsString2Double( m_ScPDLWT1->GetLineText(0)) ;
+    scp.m_ScPDLWT2 = ATTServices::convertATTTimeAsString2Double( m_ScPDLWT2->GetLineText(0)) ;
+    
+    m_ScPMHWS->GetLineText(0).ToDouble( & _h);
+    scp.m_ScPMHWS = _h;
+    m_ScPMHWN->GetLineText(0).ToDouble( & _h);
+    scp.m_ScPMHWN = _h;
+    m_ScPMLWS->GetLineText(0).ToDouble( & _h);
+    scp.m_ScPMLWS = _h;
+    m_ScPMLWN->GetLineText(0).ToDouble( & _h);
+    scp.m_ScPMLWN = _h;
+    m_ScPSC->GetLineText(0).ToDouble( & _h);
+    scp.m_ScPSC = _h;
+    
+    
+    
+    
+    att_factory->saveStandardPort(m_Date->GetValue(),  stp);
+    att_factory->saveSecondaryPort(m_Date->GetValue(),  scp);
+    
+    m_StPName->Clear();
+    m_StPName->Append(att_factory->getStandardPorts ( m_Date->GetValue()) );
+    m_ScPName->Clear();
+    m_ScPName->Append(att_factory->getSecondaryPorts ( m_Date->GetValue()) );
     
     event.Skip();
 }
