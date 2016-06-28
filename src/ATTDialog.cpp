@@ -871,17 +871,101 @@ void ATTDialog::OnClose( wxCommandEvent& event )
 
 void ATTDialog::OnStPEnter( wxCommandEvent& event )
 {
-    m_StPName2Label->SetLabel( m_StPName->GetValue());
-    att_calculation->setStPName( m_StPName->GetValue() );
+    wxString portname =  m_StPName->GetValue();
+    
+    if ( att_factory->hasStandardPort(portname, m_Date->GetValue() ) )
+    {
+        ATTStandardPort & port = att_factory->getStandardPort( portname, m_Date->GetValue());
+        att_calculation->setStPName( m_StPName->GetValue() );
+        m_StPLW1T->Clear();
+        *m_StPLW1T <<  ATTServices::convertATTTimeAsDouble2String( port.m_StPLW1T);
+        m_StPLW1H->Clear();
+        *m_StPLW1H << port.m_StPLW1H;
+
+        m_StPHW1T->Clear();
+        *m_StPHW1T <<  ATTServices::convertATTTimeAsDouble2String( port.m_StPHW1T);
+        m_StPHW1H->Clear();
+        *m_StPHW1H << port.m_StPHW1H;
+        
+        m_StPLW2T->Clear();
+        *m_StPLW2T <<  ATTServices::convertATTTimeAsDouble2String( port.m_StPLW2T);
+        m_StPLW2H->Clear();
+        *m_StPLW2H << port.m_StPLW2H;
+
+        m_StPHW2T->Clear();
+        *m_StPHW2T <<  ATTServices::convertATTTimeAsDouble2String( port.m_StPHW2T);
+        m_StPHW2H->Clear();
+        *m_StPHW2H << port.m_StPHW2H;            
+    }
+    m_StPName2Label->SetLabel( portname ) ;
     SetMinClientSize( main_sizer->GetMinSize()); 
+
     event.Skip();
    
 }
 
 void ATTDialog::OnScPEnter( wxCommandEvent& event )
 {
-     m_ScPName2Label->SetLabel( m_ScPName->GetValue());
-     att_calculation->setScPName( m_ScPName->GetValue() );
+    wxString portname=  m_ScPName->GetValue();
+    if ( att_factory->hasSecondaryPort(portname, m_Date->GetValue() ) )
+    {
+        ATTSecondaryPort & port = att_factory->getSecondaryPort( portname, m_Date->GetValue());
+        att_calculation->setScPName( m_ScPName->GetValue() );
+        
+        
+        m_ScPHWT1->Clear();
+        *m_ScPHWT1 <<  ATTServices::convertATTTimeAsDouble2String( port.m_ScPHWT1);
+        m_ScPHWT2->Clear();
+        *m_ScPHWT2 <<  ATTServices::convertATTTimeAsDouble2String( port.m_ScPHWT2);
+        m_ScPHWT3->Clear();
+        *m_ScPHWT3 <<  ATTServices::convertATTTimeAsDouble2String( port.m_ScPHWT3);
+        m_ScPHWT4->Clear();
+        *m_ScPHWT4 <<  ATTServices::convertATTTimeAsDouble2String( port.m_ScPHWT4);
+        
+        m_ScPLWT1->Clear();
+        *m_ScPLWT1 <<  ATTServices::convertATTTimeAsDouble2String( port.m_ScPLWT1);
+        m_ScPLWT2->Clear();
+        *m_ScPLWT2 <<  ATTServices::convertATTTimeAsDouble2String( port.m_ScPLWT2);
+        m_ScPLWT3->Clear();
+        *m_ScPLWT3 <<  ATTServices::convertATTTimeAsDouble2String( port.m_ScPLWT3);
+        m_ScPLWT4->Clear();
+        *m_ScPLWT4 <<  ATTServices::convertATTTimeAsDouble2String( port.m_ScPLWT4);
+        
+        m_StPMHWS->Clear();
+        *m_StPMHWS << port.m_StPMHWS;
+        m_StPMHWN->Clear();
+        *m_StPMHWN << port.m_StPMHWN;
+        m_StPMLWS->Clear();
+        *m_StPMLWS << port.m_StPMLWS;
+        m_StPMLWN->Clear();
+        *m_StPMLWN << port.m_StPMLWN;
+        m_StPSC->Clear();
+        *m_StPSC << port.m_StPSC;
+        
+
+        m_ScPDHWT1->Clear();
+        *m_ScPDHWT1 <<  ATTServices::convertATTTimeAsDouble2String( port.m_ScPDHWT1);
+        m_ScPDHWT2->Clear();
+        *m_ScPDHWT2 <<  ATTServices::convertATTTimeAsDouble2String( port.m_ScPDHWT2);
+        m_ScPDLWT1->Clear();
+        *m_ScPDLWT1 <<  ATTServices::convertATTTimeAsDouble2String( port.m_ScPDLWT1);
+        m_ScPDLWT2->Clear();
+        *m_ScPDLWT2 <<  ATTServices::convertATTTimeAsDouble2String( port.m_ScPDLWT2);
+            
+        
+        m_ScPMHWS->Clear();
+        *m_ScPMHWS << port.m_ScPMHWS;
+        m_ScPMHWN->Clear();
+        *m_ScPMHWN << port.m_ScPMHWN;        
+        m_ScPMLWS->Clear();
+        *m_ScPMLWS << port.m_ScPMLWS;
+        m_ScPMLWN->Clear();
+        *m_ScPMLWN << port.m_ScPMLWN;
+        m_ScPSC->Clear();
+        *m_ScPSC << port.m_ScPSC;
+     
+    }
+    m_ScPName2Label->SetLabel( portname );
     SetMinClientSize( main_sizer->GetMinSize()); 
     event.Skip();
 }

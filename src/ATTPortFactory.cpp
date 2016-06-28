@@ -39,11 +39,53 @@ ATTPortFactory::~ATTPortFactory()
    
 }
 
+
+bool 
+ATTPortFactory::hasSecondaryPort(const wxString& portname, const wxDateTime & date) 
+{
+    wxDateTime y_date = date;
+    y_date.ResetTime();
+    y_date.SetDay(1);
+    y_date.SetMonth(wxDateTime::Jan);
+    
+    
+   if ( ScPorts.find( portname ) == ScPorts.end())
+       return false;
+   else
+   {
+        ScPsList& _list = ScPorts[ portname];
+        if ( _list.find(  y_date.GetTicks()  ) == _list.end())
+        return false;
+   }
+    return true;
+}
+
+bool 
+ATTPortFactory::hasStandardPort(const wxString& portname, const wxDateTime & date) 
+{
+   if ( StPorts.find( portname ) == StPorts.end())
+       return false;
+   else
+   {
+        StPsList& _list = StPorts[ portname];
+        if ( _list.find(  date.GetTicks()  ) == _list.end())
+        return false;
+   }
+    return true;
+}
+
+
+
 ATTSecondaryPort & 
 ATTPortFactory::getSecondaryPort(const wxString& portname, const wxDateTime & date)
 {
+    wxDateTime y_date = date;
+    y_date.ResetTime();
+    y_date.SetDay(1);
+    y_date.SetMonth(wxDateTime::Jan);
+    
     ScPsList& _list = ScPorts[ portname];
-    return _list[ date.GetTicks()  ];
+    return _list[ y_date.GetTicks()  ];
 }
 
 ATTStandardPort & 

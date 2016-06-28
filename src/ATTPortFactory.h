@@ -70,6 +70,9 @@ public:
     ATTPortFactory( );
     ~ATTPortFactory();
     
+    bool hasStandardPort( const wxString&, const  wxDateTime & ) ;
+    bool hasSecondaryPort(const  wxString&, const  wxDateTime & ) ;
+     
     ATTStandardPort & getStandardPort( const wxString&, const  wxDateTime & );
     ATTSecondaryPort & getSecondaryPort(const  wxString&, const  wxDateTime & );
     
@@ -80,6 +83,9 @@ public:
     getStandardPorts(const  wxDateTime &) const;
     wxArrayString
     getSecondaryPorts(const  wxDateTime &) const;
+    
+    
+    
     
     
     
