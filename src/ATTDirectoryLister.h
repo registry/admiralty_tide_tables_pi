@@ -29,6 +29,7 @@
 
 
 ///////////////////////////////////////////////////////////////////////////
+#include <iostream>
 #include <wx/arrstr.h>
 #include <wx/dir.h>
 
@@ -39,13 +40,13 @@ public:
     ATTDirectoryLister(wxArrayString& files) : m_files(files) { }
     virtual wxDirTraverseResult OnFile(const wxString& filename)
     {
-        std::cout << "list " << filename << std::endl;
+        std::cout << "flist " << filename << std::endl;
         m_files.Add(filename);
         return wxDIR_CONTINUE;
     }
     virtual wxDirTraverseResult OnDir(const wxString& dirname)
     {
-        std::cout << "list " << dirname << std::endl;
+        std::cout << "dlist " << dirname << std::endl;
         return wxDIR_CONTINUE;
     }
 private:

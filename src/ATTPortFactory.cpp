@@ -36,7 +36,7 @@
 
 ATTPortFactory::ATTPortFactory()
 {
-    wxString s =wxFileName::GetPathSeparator();
+    s =wxFileName::GetPathSeparator();
     
     path_to = (*GetpSharedDataLocation() + _T("plugins")
         + s + _T("att_pi") + s + _T("data") + s);
@@ -266,8 +266,6 @@ ATTPortFactory::writeSecondaryPort(  const wxString& path, const wxDateTime & da
     {
         written += _file.Write( buffer + written, port.getSize() - written );
     }
-    
-
     _file.Close();  
 }
     
@@ -275,14 +273,12 @@ ATTPortFactory::writeSecondaryPort(  const wxString& path, const wxDateTime & da
 void
 ATTPortFactory::Load()
 {
-
-  
     std::cout << "Load ports" << std::endl;
-    
     wxDir dir ( path_to);
-    
-    
-    
+    // get the names of all files in the array
+    wxArrayString files;
+    ATTDirectoryLister traverser(files);
+    dir.Traverse(traverser);
 }
 
 void 
