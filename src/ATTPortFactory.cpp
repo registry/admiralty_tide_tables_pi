@@ -193,9 +193,13 @@ ATTPortFactory::Save()
             wxDateTime::Month month = _date.GetMonth();
             const ATTStandardPort & stp = p_iter->second;
             
-            wxString path;
-            path << year << s << month << s;
-            wxFileName::Mkdir( path_to + path, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL );
+            if ( stp.to_save)
+            {            
+                wxString path;
+                path << year << s << month << s;
+                wxFileName::Mkdir( path_to + path, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL );
+            }
+            
         }
     }
     
@@ -208,10 +212,12 @@ ATTPortFactory::Save()
             wxDateTime _date (  p_iter->first );
             int year = _date.GetYear();
             const ATTSecondaryPort & scp = p_iter->second;
-            
-            wxString path;
-            path << year << s ;
-            wxFileName::Mkdir( path_to + path, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL  );
+            if ( scp.to_save)
+            {   
+                wxString path;
+                path << year << s ;
+                wxFileName::Mkdir( path_to + path, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL  );
+            }
         }
     } 
     
