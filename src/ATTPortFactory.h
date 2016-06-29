@@ -64,7 +64,18 @@ WX_DECLARE_STRING_HASH_MAP(
                      StPs );
 
     void Save();
-
+    void writeStandardPort( const wxString&, const  wxDateTime &,const  ATTStandardPort& ) const;   
+    void writeSecondaryPort( const wxString&, const wxDateTime &,const  ATTSecondaryPort& ) const;
+ 
+    void Load();
+    void readStandardPort( const wxString&, const  wxDateTime &, ATTStandardPort& ) ;   
+    void readSecondaryPort( const wxString&, const wxDateTime &, ATTSecondaryPort& ) ;
+      
+    
+    
+    
+    
+    
 public:
 
     ScPs ScPorts;
@@ -87,7 +98,7 @@ public:
     wxArrayString
     getSecondaryPorts(const  wxDateTime &) const;
     
-    
+
     
     
     

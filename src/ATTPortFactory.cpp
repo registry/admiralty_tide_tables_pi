@@ -35,7 +35,7 @@
 
 ATTPortFactory::ATTPortFactory()
 {
-
+    Load();
 }
 
 
@@ -198,6 +198,7 @@ ATTPortFactory::Save()
                 wxString path;
                 path << year << s << month << s;
                 wxFileName::Mkdir( path_to + path, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL );
+                writeStandardPort(path_to + path, _date, stp );
             }
             
         }
@@ -217,6 +218,7 @@ ATTPortFactory::Save()
                 wxString path;
                 path << year << s ;
                 wxFileName::Mkdir( path_to + path, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL  );
+                writeSecondaryPort(path_to + path, _date, scp );
             }
         }
     } 
@@ -227,5 +229,72 @@ ATTPortFactory::Save()
     std::cout << "Saving ports" << std::endl;
 }
 
+void 
+ATTPortFactory::writeStandardPort( const wxString& path, const  wxDateTime & date,const  ATTStandardPort& port) const
+{
+
+    wxFile _file;
+    _file.Create( path + port.m_StPName, true);
+    
+    char buffer[ port.getSize()];
+    
+    port.toStream( buffer );
+    
+    size_t written = 0;
+    while ( written != port.getSize())
+    {
+        written += _file.Write( buffer + written, port.getSize() - written );
+    }
+    
+    _file.Close();  
+}
+
+void 
+ATTPortFactory::writeSecondaryPort(  const wxString& path, const wxDateTime & date,const  ATTSecondaryPort& port) const
+{
+    
+    wxFile _file;
+    _file.Create( path + port.m_ScPName, true);
+    
+    char buffer[ port.getSize()];
+    
+    port.toStream( buffer );
+    
+    size_t written = 0;
+    while ( written != port.getSize())
+    {
+        written += _file.Write( buffer + written, port.getSize() - written );
+    }
+    
+
+    _file.Close();  
+}
+    
+   
+void
+ATTPortFactory::Load()
+{
+    wxString s =wxFileName::GetPathSeparator();
+    
+    wxString path_to = (*GetpSharedDataLocation() + _T("plugins")
+        + s + _T("att_pi") + s + _T("data") + s);
   
+    std::cout << "Load ports" << std::endl;
+}
+
+void 
+ATTPortFactory::readStandardPort( const wxString& path, const  wxDateTime & date,  ATTStandardPort& port) 
+{
+
+}
+
+void 
+ATTPortFactory::readSecondaryPort(  const wxString& path, const wxDateTime & date,  ATTSecondaryPort& port) 
+{
+    
+
+}
+    
+    
+   
   

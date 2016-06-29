@@ -40,6 +40,8 @@ class ATTSecondaryPort // in form of hhmm ; 0123 -> 1.3834
 {
 public:
     
+    static const int ScPNentries = 22;
+    
     bool  to_save; // signalizes, that one has to store it    
     
     wxString  m_ScPName;
@@ -70,15 +72,16 @@ public:
     double  m_ScPMLWN;
     double  m_ScPSC;
     
-
-
-
-
-    
     
     ATTSecondaryPort( );
     ~ATTSecondaryPort();
+
+
+    char * toStream( char * pos ) const; // writes internal values into stream starting from  pos, returns last position
+    char * fromStream( char * pos); // initialized self from stream position pos and returns new position
     
+    inline
+    size_t getSize() const { return sizeof(double)*ATTSecondaryPort::ScPNentries;  };
     
 };
 

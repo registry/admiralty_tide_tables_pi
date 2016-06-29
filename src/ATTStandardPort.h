@@ -39,7 +39,7 @@
 class ATTStandardPort 
 {
     public:
-
+    static const int StPNentries = 8;
     bool  to_save; // signalizes, that one has to store it    
         
     wxString  m_StPName;
@@ -57,6 +57,12 @@ class ATTStandardPort
     ATTStandardPort( );
     ~ATTStandardPort();
     
+    
+    char * toStream( char * pos ) const; // writes internal values into stream starting from  pos, returns last position
+    char * fromStream( char * pos); // initialized self from stream position pos and returns new position
+
+    inline
+    size_t getSize() const { return sizeof(double)*ATTStandardPort::StPNentries;  };
     
 };
 

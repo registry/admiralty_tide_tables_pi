@@ -43,3 +43,41 @@ ATTStandardPort::~ATTStandardPort()
 }
 
   
+char * 
+ATTStandardPort::toStream( char * pos ) const // writes internal values into stream starting from  pos, returns last position
+{
+   
+    double * tmp = (double*)pos;
+    
+    tmp[ 0 ] = m_StPLW1T;
+    tmp[ 1 ] = m_StPLW1H;
+    tmp[ 2 ] = m_StPHW1T;
+    tmp[ 3 ] = m_StPHW1H;
+        
+    tmp[ 4 ] = m_StPLW2T;
+    tmp[ 5 ] = m_StPLW2H;
+    tmp[ 6 ] = m_StPHW2T;
+    tmp[ 7 ] = m_StPHW2H;
+  
+    return pos + getSize();
+}
+
+char * 
+ATTStandardPort::fromStream( char * pos) // initialized self from stream position pos and returns new position
+{
+    double * tmp = (double*)pos;
+    
+    m_StPLW1T = tmp[ 0 ];
+    m_StPLW1H = tmp[ 1 ];
+    m_StPHW1T = tmp[ 2 ];
+    m_StPHW1H = tmp[ 3 ];
+    
+    m_StPLW2T = tmp[ 4 ];
+    m_StPLW2H = tmp[ 5 ];
+    m_StPHW2T = tmp[ 6 ];
+    m_StPHW2H = tmp[ 7 ];
+    
+    return pos + getSize();
+}
+    
+  
