@@ -117,6 +117,7 @@ SET(ATT_SRC
  		src/ATTSecondaryPort.cpp
  		src/ATTPortFactory.h
  		src/ATTPortFactory.cpp
+ 		src/ATTDirectoryLister.h
  	)
 
 

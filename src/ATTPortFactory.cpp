@@ -25,6 +25,7 @@
  */
 
 #include "ATTPortFactory.h"
+#include "ATTDirectoryLister.h"
 #include "iostream"
 #include <wx/filename.h>
 #include <wx/dcmemory.h>
@@ -35,6 +36,10 @@
 
 ATTPortFactory::ATTPortFactory()
 {
+    wxString s =wxFileName::GetPathSeparator();
+    
+    path_to = (*GetpSharedDataLocation() + _T("plugins")
+        + s + _T("att_pi") + s + _T("data") + s);
     Load();
 }
 
@@ -176,11 +181,7 @@ ATTPortFactory::getSecondaryPorts(const  wxDateTime & date) const
 void
 ATTPortFactory::Save()
 {
-    wxString s =wxFileName::GetPathSeparator();
-    
-    wxString path_to = (*GetpSharedDataLocation() + _T("plugins")
-        + s + _T("att_pi") + s + _T("data") + s);
-    
+   
     // Standar ports 
     for ( StPs::const_iterator n_iter = StPorts.begin(); n_iter != StPorts.end(); ++n_iter)
     {
@@ -274,12 +275,14 @@ ATTPortFactory::writeSecondaryPort(  const wxString& path, const wxDateTime & da
 void
 ATTPortFactory::Load()
 {
-    wxString s =wxFileName::GetPathSeparator();
-    
-    wxString path_to = (*GetpSharedDataLocation() + _T("plugins")
-        + s + _T("att_pi") + s + _T("data") + s);
+
   
     std::cout << "Load ports" << std::endl;
+    
+    wxDir dir ( path_to);
+    
+    
+    
 }
 
 void 

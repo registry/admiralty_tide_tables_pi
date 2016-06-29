@@ -78,6 +78,8 @@ WX_DECLARE_STRING_HASH_MAP(
     
 public:
 
+    wxString path_to;
+    
     ScPs ScPorts;
     StPs StPorts;
     
