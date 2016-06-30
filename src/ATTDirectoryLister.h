@@ -40,7 +40,6 @@ public:
     ATTDirectoryLister(wxArrayString& files) : m_files(files) { }
     virtual wxDirTraverseResult OnFile(const wxString& filename)
     {
-        std::cout << "flist " << filename << std::endl;
         m_files.Add(filename);
         return wxDIR_CONTINUE;
     }

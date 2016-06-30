@@ -201,6 +201,7 @@ ATTPortFactory::Save()
             
             if ( stp.to_save)
             {            
+                std::cout << " Write " << stp.m_StPName << " for " << _date.FormatDate() << std::endl;
                 wxString path;
                 path << pathStandardPort << s << year << s << month << s;
                 wxFileName::Mkdir( path_to + path, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL );
@@ -222,6 +223,7 @@ ATTPortFactory::Save()
             const ATTSecondaryPort & scp = p_iter->second;
             if ( scp.to_save)
             {   
+                std::cout << " Write " << scp.m_ScPName << " for " << _date.FormatDate() << std::endl;
                 wxString path;
                 path  << pathSecondaryPort << s  << year << s ;
                 wxFileName::Mkdir( path_to + path, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL  );
@@ -314,6 +316,22 @@ ATTPortFactory::Load()
     wxArrayString stp_files;
     ATTDirectoryLister stp_traverser(stp_files);
     stp_dir.Traverse(stp_traverser);
+    for (wxArrayString::iterator stp_iter = stp_files.begin();  stp_iter != stp_files.end(); ++stp_iter)
+    {
+        std::cout << "standard port " << *stp_iter << std::endl;
+        wxDateTime port_date = readPortDate(*stp_iter);
+        wxDateTime las_day_port_date = port_date.GetLastMonthDay();
+        for ( ; port_date.GetDay() < las_day_port_date.GetDay();)
+        {
+            std::cout << "load day " << port_date.FormatDate() << std::endl;
+            ATTStandardPort port;
+            readStandardPort( *stp_iter, port_date, port);  
+            saveStandardPort(  port_date, port );
+            port_date.SetDay( port_date.GetDay() + 1 ); 
+        }
+    }
+    
+    
     
     std::cout << "Load secondary ports" << std::endl;
     wxDir scp_dir ( path_to + pathSecondaryPort + s);
@@ -321,22 +339,94 @@ ATTPortFactory::Load()
     wxArrayString scp_files;
     ATTDirectoryLister scp_traverser(scp_files);
     scp_dir.Traverse(scp_traverser); 
+    for (wxArrayString::iterator scp_iter = scp_files.begin();  scp_iter != scp_files.end(); ++scp_iter)
+    {
+        std::cout << "secondary port " << *scp_iter << std::endl;
+        wxDateTime port_date = readPortDate(*scp_iter);
+         ATTSecondaryPort port;
+        readSecondaryPort( *scp_iter, port);  
+        saveSecondaryPort(  port_date, port );
+    }
     
 }
 
 void 
 ATTPortFactory::readStandardPort( const wxString& path, const  wxDateTime & date,  ATTStandardPort& port) 
 {
-
+    wxFile file;
+    file.Open( path, wxFile::read);
+    
+    
+    unsigned int day = date.GetDay();
+    if (wxInvalidOffset == file.Seek ((day-1)*port.getSize() + timeStampOffset ))
+    {
+        std::cerr << "Cannot seek while reading " << path << std::endl;
+        return ;
+    }
+    char buffer[ port.getSize()];
+    
+    
+    
+    
+    size_t read = 0;
+    while ( read != port.getSize())
+    {
+        read += file.Read( buffer + read, port.getSize() - read );
+    }
+    port.fromStream( buffer );
+    port.to_save = false;
+    wxFileName fname ( path );
+    port.m_StPName = fname.GetFullName();
+    
+    file.Close();    
 }
 
 void 
-ATTPortFactory::readSecondaryPort(  const wxString& path, const wxDateTime & date,  ATTSecondaryPort& port) 
+ATTPortFactory::readSecondaryPort(  const wxString& path,  ATTSecondaryPort& port) 
 {
+    wxFile file;
+    file.Open( path, wxFile::read);
     
+
+    if (wxInvalidOffset == file.Seek (timeStampOffset ))
+    {
+        std::cerr << "Cannot seek while reading " << path << std::endl;
+        return ;
+    }
+    char buffer[ port.getSize()];
+    
+    size_t read = 0;
+    while ( read != port.getSize())
+    {
+        read += file.Read( buffer + read, port.getSize() - read );
+    }
+    port.fromStream( buffer );
+    port.to_save = false;
+    wxFileName fname ( path );
+    port.m_ScPName = fname.GetFullName();
+    
+    file.Close();  
 
 }
     
     
-   
-  
+ 
+wxDateTime
+ATTPortFactory::readPortDate( const wxString& path) const
+{
+    wxFile file;
+    file.Open( path, wxFile::read);
+    
+    time_t _ticks;
+    size_t read = 0;
+    while ( read !=timeStampOffset)
+    {
+        read += file.Read( (char*)&_ticks + read, timeStampOffset - read );
+    }
+    
+    wxDateTime to_return ( _ticks );
+    
+    file.Close();    
+    
+    return to_return;
+}

@@ -69,11 +69,12 @@ WX_DECLARE_STRING_HASH_MAP(
  
     void Load();
     void readStandardPort( const wxString&, const  wxDateTime &, ATTStandardPort& ) ;   
-    void readSecondaryPort( const wxString&, const wxDateTime &, ATTSecondaryPort& ) ;
+    void readSecondaryPort( const wxString&,  ATTSecondaryPort& ) ;
       
     
     
-    
+    wxDateTime 
+    readPortDate( const wxString &) const;
     
     
 public:
