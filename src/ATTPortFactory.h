@@ -80,6 +80,11 @@ public:
 
     wxString path_to;
     wxString s;
+    
+    static const wxString pathStandardPort;
+    static const wxString pathSecondaryPort;
+    static const time_t timeStampOffset = sizeof(time_t);
+    
     ScPs ScPorts;
     StPs StPorts;
     

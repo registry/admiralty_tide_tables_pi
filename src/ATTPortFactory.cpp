@@ -34,6 +34,10 @@
 #include <wx/dialog.h>
 #include "ocpn_plugin.h"
 
+const wxString ATTPortFactory::pathStandardPort = _T("StP");
+const wxString ATTPortFactory::pathSecondaryPort = _T("ScP");
+
+
 ATTPortFactory::ATTPortFactory()
 {
     s =wxFileName::GetPathSeparator();
@@ -190,6 +194,7 @@ ATTPortFactory::Save()
         for ( StPsList::const_iterator p_iter = st_list.begin(); p_iter != st_list.end(); ++p_iter)
         {
             wxDateTime _date (  p_iter->first );
+            _date.ResetTime();
             int year = _date.GetYear();
             wxDateTime::Month month = _date.GetMonth();
             const ATTStandardPort & stp = p_iter->second;
@@ -197,7 +202,7 @@ ATTPortFactory::Save()
             if ( stp.to_save)
             {            
                 wxString path;
-                path << year << s << month << s;
+                path << pathStandardPort << s << year << s << month << s;
                 wxFileName::Mkdir( path_to + path, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL );
                 writeStandardPort(path_to + path, _date, stp );
             }
@@ -212,12 +217,13 @@ ATTPortFactory::Save()
         for ( ScPsList::const_iterator p_iter = sc_list.begin(); p_iter != sc_list.end(); ++p_iter)
         {
             wxDateTime _date (  p_iter->first );
+            _date.ResetTime();
             int year = _date.GetYear();
             const ATTSecondaryPort & scp = p_iter->second;
             if ( scp.to_save)
             {   
                 wxString path;
-                path << year << s ;
+                path  << pathSecondaryPort << s  << year << s ;
                 wxFileName::Mkdir( path_to + path, wxS_DIR_DEFAULT, wxPATH_MKDIR_FULL  );
                 writeSecondaryPort(path_to + path, _date, scp );
             }
@@ -233,29 +239,58 @@ ATTPortFactory::Save()
 void 
 ATTPortFactory::writeStandardPort( const wxString& path, const  wxDateTime & date,const  ATTStandardPort& port) const
 {
-
-    wxFile _file;
-    _file.Create( path + port.m_StPName, true);
+    wxFile file;
+    if ( wxFile::Exists( path + port.m_StPName))
+    {
+        file.Open( path + port.m_StPName, wxFile::read_write);
+        if (wxInvalidOffset == file.Seek(0) )
+        {
+            std::cerr << "Cannot open file to modify " << port.m_StPName << std::endl;
+            return ;
+        }
+    }
+    else
+        file.Create( path + port.m_StPName, false);
     
+    
+    wxDateTime _date = date;
+    _date = _date.SetDay(1);
+    time_t timestamp = _date.GetTicks();
+    file.Write((char*) &timestamp, timeStampOffset );
+    
+    unsigned int day = date.GetDay();
+    if (wxInvalidOffset == file.Seek ((day-1)*port.getSize() + timeStampOffset ))
+    {
+        std::cerr << "Cannot seek while writing " << port.m_StPName << std::endl;
+        return ;
+    }
     char buffer[ port.getSize()];
+    
+    
     
     port.toStream( buffer );
     
     size_t written = 0;
     while ( written != port.getSize())
     {
-        written += _file.Write( buffer + written, port.getSize() - written );
+        written += file.Write( buffer + written, port.getSize() - written );
     }
     
-    _file.Close();  
+    file.Close();  
 }
 
 void 
 ATTPortFactory::writeSecondaryPort(  const wxString& path, const wxDateTime & date,const  ATTSecondaryPort& port) const
 {
     
-    wxFile _file;
-    _file.Create( path + port.m_ScPName, true);
+    wxFile file;
+    file.Create( path + port.m_ScPName, true);
+    
+    wxDateTime _date = date;
+    _date = _date.SetDay(1);
+    time_t timestamp = _date.GetTicks();
+    file.Write( (char*)&timestamp, timeStampOffset );
+    
     
     char buffer[ port.getSize()];
     
@@ -264,21 +299,29 @@ ATTPortFactory::writeSecondaryPort(  const wxString& path, const wxDateTime & da
     size_t written = 0;
     while ( written != port.getSize())
     {
-        written += _file.Write( buffer + written, port.getSize() - written );
+        written += file.Write( buffer + written, port.getSize() - written );
     }
-    _file.Close();  
+    file.Close();  
 }
     
    
 void
 ATTPortFactory::Load()
 {
-    std::cout << "Load ports" << std::endl;
-    wxDir dir ( path_to);
+    std::cout << "Load standard ports" << std::endl;
+    wxDir stp_dir ( path_to + pathStandardPort + s);
     // get the names of all files in the array
-    wxArrayString files;
-    ATTDirectoryLister traverser(files);
-    dir.Traverse(traverser);
+    wxArrayString stp_files;
+    ATTDirectoryLister stp_traverser(stp_files);
+    stp_dir.Traverse(stp_traverser);
+    
+    std::cout << "Load secondary ports" << std::endl;
+    wxDir scp_dir ( path_to + pathSecondaryPort + s);
+    // get the names of all files in the array
+    wxArrayString scp_files;
+    ATTDirectoryLister scp_traverser(scp_files);
+    scp_dir.Traverse(scp_traverser); 
+    
 }
 
 void 

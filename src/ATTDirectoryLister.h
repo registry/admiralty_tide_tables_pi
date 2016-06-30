@@ -46,7 +46,6 @@ public:
     }
     virtual wxDirTraverseResult OnDir(const wxString& dirname)
     {
-        std::cout << "dlist " << dirname << std::endl;
         return wxDIR_CONTINUE;
     }
 private:
