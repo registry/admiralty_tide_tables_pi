@@ -369,15 +369,24 @@ ATTPortFactory::readStandardPort( const wxString& path, const  wxDateTime & date
     
     
     size_t read = 0;
-    while ( read != port.getSize())
+    bool success = !file.Eof();
+    while (success && read != port.getSize())
     {
-        read += file.Read( buffer + read, port.getSize() - read );
+        size_t _read = file.Read( buffer + read, port.getSize() - read );
+        if ( (size_t)-1 == _read || 0 == _read )
+        {
+            success = false;
+            break;
+        }
+        read += _read;
     }
-    port.fromStream( buffer );
-    port.to_save = false;
-    wxFileName fname ( path );
-    port.m_StPName = fname.GetFullName();
-    
+    if ( success )
+    {
+        port.fromStream( buffer );
+        port.to_save = false;
+        wxFileName fname ( path );
+        port.m_StPName = fname.GetFullName();
+    }
     file.Close();    
 }
 
