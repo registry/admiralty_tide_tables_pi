@@ -51,13 +51,13 @@
 #include <wx/string.h>
 #include <wx/textctrl.h>
 #include <wx/xrc/xmlres.h>
-
+#include <wx/valnum.h>
 ///////////////////////////////////////////////////////////////////////////
 
 
 class ATTCalculation;
 class ATTPortFactory;
-
+class ATTTimeValidator;
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class ATTDialog
@@ -72,7 +72,8 @@ protected:
     
     ATTPortFactory * att_factory;
     wxBoxSizer* main_sizer;
-    
+    ATTTimeValidator * my_validator;
+    wxFloatingPointValidator< double > * my_dvalidator;
 
     // all input elements:
     wxDatePickerCtrl * m_Date;

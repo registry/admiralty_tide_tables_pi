@@ -99,25 +99,27 @@ FIND_PACKAGE(Gettext REQUIRED)
 
 
 SET(ATT_SRC
-                src/att_pi.h
- 		src/att_pi.cpp
- 		src/tool_icon.h
- 		src/tool_icon.cpp
- 		src/ATTDialog.h
- 		src/ATTDialog.cpp
- 		src/ATTCalculation.h
  		src/ATTCalculation.cpp
- 		src/ATTServices.h
- 		src/ATTServices.cpp
- 		src/ATTTime.h
- 		src/ATTTime.cpp
- 		src/ATTStandardPort.h
- 		src/ATTStandardPort.cpp
- 		src/ATTSecondaryPort.h
- 		src/ATTSecondaryPort.cpp
- 		src/ATTPortFactory.h
- 		src/ATTPortFactory.cpp
+ 		src/ATTCalculation.h
+ 		src/ATTDialog.cpp
+ 		src/ATTDialog.h
  		src/ATTDirectoryLister.h
+ 		src/ATTPortFactory.cpp
+ 		src/ATTPortFactory.h
+ 		src/ATTSecondaryPort.cpp
+ 		src/ATTSecondaryPort.h
+ 		src/ATTServices.cpp
+ 		src/ATTServices.h
+ 		src/ATTStandardPort.cpp
+ 		src/ATTStandardPort.h
+ 		src/ATTTime.cpp
+ 		src/ATTTime.h
+ 		src/ATTTimeValidator.cpp
+ 		src/ATTTimeValidator.h
+ 		src/att_pi.cpp
+ 		src/tool_icon.cpp
+ 		src/tool_icon.h
+                src/att_pi.h
  	)
 
 

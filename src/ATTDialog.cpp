@@ -29,16 +29,19 @@
 #include "ATTServices.h"
 #include "ATTTime.h"
 #include "ATTPortFactory.h"
+#include "ATTTimeValidator.h"
 ///////////////////////////////////////////////////////////////////////////
 #include <iostream>
 #include <wx/dateevt.h>
-
+#include <wx/valnum.h>
 
 
 ATTDialog::ATTDialog( wxWindow* parent, wxWindowID id, const wxString& title, const wxPoint& pos, const wxSize& size, long style ) : wxDialog( parent, id, title, pos, size, style )
 {
     att_calculation = new ATTCalculation();
     att_factory = new ATTPortFactory();
+    my_validator = new ATTTimeValidator();;
+    my_dvalidator = new wxFloatingPointValidator< double >() ;
     CreateLayout();     
 
 }
@@ -115,7 +118,7 @@ void ATTDialog::CreateLayout( )
         wxALL,        //   and make border all around
         3 );
     
-    m_StPLW1T= new wxTextCtrl (this, wxID_ANY );
+    m_StPLW1T= new wxTextCtrl (this, wxID_ANY,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator );
     _stp_tide_sizer->Add(m_StPLW1T,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -124,7 +127,7 @@ void ATTDialog::CreateLayout( )
     m_StPLW1T->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPLW1T ), NULL, this); 
     *m_StPLW1T << "0000";   
    
-    m_StPLW1H= new wxTextCtrl (this, wxID_ANY );
+    m_StPLW1H= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_dvalidator );
     _stp_tide_sizer->Add(m_StPLW1H,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -140,7 +143,7 @@ void ATTDialog::CreateLayout( )
         wxALL,        //   and make border all around
         3 );
     
-    m_StPHW1T= new wxTextCtrl (this, wxID_ANY );
+    m_StPHW1T= new wxTextCtrl (this, wxID_ANY,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator  );
     _stp_tide_sizer->Add(m_StPHW1T,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -149,7 +152,7 @@ void ATTDialog::CreateLayout( )
     m_StPHW1T->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPHW1T ), NULL, this); 
     *m_StPHW1T << "0000";
     
-    m_StPHW1H= new wxTextCtrl (this, wxID_ANY );
+    m_StPHW1H= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_dvalidator );
     _stp_tide_sizer->Add(m_StPHW1H,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -165,7 +168,7 @@ void ATTDialog::CreateLayout( )
         wxALL,        //   and make border all around
         3 );
     
-    m_StPLW2T= new wxTextCtrl (this, wxID_ANY );
+    m_StPLW2T= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator );
     _stp_tide_sizer->Add(m_StPLW2T,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -174,7 +177,7 @@ void ATTDialog::CreateLayout( )
     m_StPLW2T->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPLW2T ), NULL, this); 
     *m_StPLW2T << "0000";
     
-    m_StPLW2H= new wxTextCtrl (this, wxID_ANY );
+    m_StPLW2H= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_dvalidator );
     _stp_tide_sizer->Add(m_StPLW2H,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -191,7 +194,7 @@ void ATTDialog::CreateLayout( )
         wxALL,        //   and make border all around
         3 );
     
-    m_StPHW2T= new wxTextCtrl (this, wxID_ANY );
+    m_StPHW2T= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator );
     _stp_tide_sizer->Add(m_StPHW2T,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -200,7 +203,7 @@ void ATTDialog::CreateLayout( )
     m_StPHW2T->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPHW2T ), NULL, this); 
     *m_StPHW2T << "0000";
     
-    m_StPHW2H= new wxTextCtrl (this, wxID_ANY );
+    m_StPHW2H= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_dvalidator );
     _stp_tide_sizer->Add(m_StPHW2H,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -427,7 +430,7 @@ void ATTDialog::CreateLayout( )
     wxFlexGridSizer * _scp_hw_calc_sizer = new  wxFlexGridSizer 	( 	2   );
     _scp_tide_calc_sizer->Add( _scp_hw_calc_sizer);
     
-    m_ScPHWT1= new wxTextCtrl (this, wxID_ANY );
+    m_ScPHWT1= new wxTextCtrl (this, wxID_ANY,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator );
     _scp_hw_calc_sizer->Add(m_ScPHWT1,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -436,7 +439,7 @@ void ATTDialog::CreateLayout( )
     m_ScPHWT1->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnScPHWT1 ), NULL, this); 
     *m_ScPHWT1 << "0000";
     
-    m_ScPHWT2= new wxTextCtrl (this, wxID_ANY );
+    m_ScPHWT2= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator);
     _scp_hw_calc_sizer->Add(m_ScPHWT2,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -459,7 +462,7 @@ void ATTDialog::CreateLayout( )
         3 );
     
       
-    m_ScPHWT3= new wxTextCtrl (this, wxID_ANY );
+    m_ScPHWT3= new wxTextCtrl (this, wxID_ANY,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator );
     _scp_hw_calc_sizer->Add(m_ScPHWT3,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -468,7 +471,7 @@ void ATTDialog::CreateLayout( )
     m_ScPHWT3->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnScPHWT3 ), NULL, this); 
      *m_ScPHWT3 << "1200";
     
-    m_ScPHWT4= new wxTextCtrl (this, wxID_ANY );
+    m_ScPHWT4= new wxTextCtrl (this, wxID_ANY,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator );
     _scp_hw_calc_sizer->Add(m_ScPHWT4,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -481,7 +484,7 @@ void ATTDialog::CreateLayout( )
     wxFlexGridSizer * _scp_lw_calc_sizer = new  wxFlexGridSizer 	( 	2   );
     _scp_tide_calc_sizer->Add( _scp_lw_calc_sizer);
     
-    m_ScPLWT1= new wxTextCtrl (this, wxID_ANY );
+    m_ScPLWT1= new wxTextCtrl (this, wxID_ANY,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator );
     _scp_lw_calc_sizer->Add(m_ScPLWT1,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -490,7 +493,7 @@ void ATTDialog::CreateLayout( )
     m_ScPLWT1->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnScPLWT1 ), NULL, this); 
     *m_ScPLWT1 << "0100";
     
-    m_ScPLWT2= new wxTextCtrl (this, wxID_ANY );
+    m_ScPLWT2= new wxTextCtrl (this, wxID_ANY,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator );
     _scp_lw_calc_sizer->Add(m_ScPLWT2,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -513,7 +516,7 @@ void ATTDialog::CreateLayout( )
         3 );
     
       
-    m_ScPLWT3= new wxTextCtrl (this, wxID_ANY );
+    m_ScPLWT3= new wxTextCtrl (this, wxID_ANY,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator );
     _scp_lw_calc_sizer->Add(m_ScPLWT3,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -522,7 +525,7 @@ void ATTDialog::CreateLayout( )
     m_ScPLWT3->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnScPLWT3 ), NULL, this); 
     *m_ScPLWT3 << "1400";
     
-    m_ScPLWT4= new wxTextCtrl (this, wxID_ANY );
+    m_ScPLWT4= new wxTextCtrl (this, wxID_ANY,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator );
     _scp_lw_calc_sizer->Add(m_ScPLWT4,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -533,7 +536,7 @@ void ATTDialog::CreateLayout( )
     
     // mean leavel on st p
     
-    m_StPMHWS= new wxTextCtrl (this, wxID_ANY );
+    m_StPMHWS= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_dvalidator );
     _scp_tide_calc_sizer->Add(m_StPMHWS,
         0,            // make vertically stretchable
             // make horizontally stretchable
@@ -542,7 +545,7 @@ void ATTDialog::CreateLayout( )
     m_StPMHWS->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPMHWS ), NULL, this); 
     *m_StPMHWS << 0;   
     
-    m_StPMHWN= new wxTextCtrl (this, wxID_ANY );
+    m_StPMHWN= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_dvalidator );
     _scp_tide_calc_sizer->Add(m_StPMHWN,
         0,            // make vertically stretchable
             // make horizontally stretchable
@@ -551,7 +554,7 @@ void ATTDialog::CreateLayout( )
      m_StPMHWN->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPMHWN ), NULL, this); 
     *m_StPMHWN << 0;   
       
-    m_StPMLWS= new wxTextCtrl (this, wxID_ANY );
+    m_StPMLWS= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_dvalidator );
     _scp_tide_calc_sizer->Add(m_StPMLWS,
         0,            // make vertically stretchable
             // make horizontally stretchable
@@ -560,7 +563,7 @@ void ATTDialog::CreateLayout( )
      m_StPMLWS->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPMLWS ), NULL, this); 
     *m_StPMLWS << 0;   
     
-    m_StPMLWN= new wxTextCtrl (this, wxID_ANY );
+    m_StPMLWN= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_dvalidator );
     _scp_tide_calc_sizer->Add(m_StPMLWN,
         0,            // make vertically stretchable
             // make horizontally stretchable
@@ -569,7 +572,7 @@ void ATTDialog::CreateLayout( )
      m_StPMLWN->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnStPMLWN ), NULL, this); 
      *m_StPMLWN << 0;   
         
-    m_StPSC= new wxTextCtrl (this, wxID_ANY );
+    m_StPSC= new wxTextCtrl (this, wxID_ANY  ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_dvalidator);
     _scp_tide_calc_sizer->Add(m_StPSC,
         0,            // make vertically stretchable
             // make horizontally stretchable
@@ -591,7 +594,7 @@ void ATTDialog::CreateLayout( )
     wxFlexGridSizer * _scp_diff_hw_calc_sizer = new  wxFlexGridSizer 	( 	2   );
     _scp_tide_calc_sizer->Add( _scp_diff_hw_calc_sizer);
     
-    m_ScPDHWT1= new wxTextCtrl (this, wxID_ANY );
+    m_ScPDHWT1= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator);
     _scp_diff_hw_calc_sizer->Add(m_ScPDHWT1,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -600,7 +603,7 @@ void ATTDialog::CreateLayout( )
      m_ScPDHWT1->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnScPDHWT1 ), NULL, this); 
      *m_ScPDHWT1 << 0;
     
-    m_ScPDHWT2= new wxTextCtrl (this, wxID_ANY );
+    m_ScPDHWT2= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator);
     _scp_diff_hw_calc_sizer->Add(m_ScPDHWT2,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -613,7 +616,7 @@ void ATTDialog::CreateLayout( )
     wxFlexGridSizer * _scp_diff_lw_calc_sizer = new  wxFlexGridSizer 	( 	2   );
     _scp_tide_calc_sizer->Add( _scp_diff_lw_calc_sizer);
     
-    m_ScPDLWT1= new wxTextCtrl (this, wxID_ANY );
+    m_ScPDLWT1= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator);
     _scp_diff_lw_calc_sizer->Add(m_ScPDLWT1,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -622,7 +625,7 @@ void ATTDialog::CreateLayout( )
      m_ScPDLWT1->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnScPDLWT1 ), NULL, this); 
     *m_ScPDLWT1 << 0;
     
-    m_ScPDLWT2= new wxTextCtrl (this, wxID_ANY );
+    m_ScPDLWT2= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_validator);
     _scp_diff_lw_calc_sizer->Add(m_ScPDLWT2,
         1,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -635,7 +638,7 @@ void ATTDialog::CreateLayout( )
     
     
         
-    m_ScPMHWS= new wxTextCtrl (this, wxID_ANY );
+    m_ScPMHWS= new wxTextCtrl (this, wxID_ANY  ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_dvalidator);
     _scp_tide_calc_sizer->Add(m_ScPMHWS,
         0,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -644,7 +647,7 @@ void ATTDialog::CreateLayout( )
      m_ScPMHWS->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnScPMHWS ), NULL, this); 
     *m_ScPMHWS << 0; 
     
-    m_ScPMHWN= new wxTextCtrl (this, wxID_ANY );
+    m_ScPMHWN= new wxTextCtrl (this, wxID_ANY  ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_dvalidator);
     _scp_tide_calc_sizer->Add(m_ScPMHWN,
         0,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -653,7 +656,7 @@ void ATTDialog::CreateLayout( )
      m_ScPMHWN->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnScPMHWN ), NULL, this); 
     *m_ScPMHWN << 0; 
       
-    m_ScPMLWS= new wxTextCtrl (this, wxID_ANY );
+    m_ScPMLWS= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_dvalidator );
     _scp_tide_calc_sizer->Add(m_ScPMLWS,
         0,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -662,7 +665,7 @@ void ATTDialog::CreateLayout( )
      m_ScPMLWS->Connect(  wxEVT_TEXT , wxCommandEventHandler( ATTDialog::OnScPMLWS ), NULL, this); 
     *m_ScPMLWS << 0; 
     
-    m_ScPMLWN= new wxTextCtrl (this, wxID_ANY );
+    m_ScPMLWN= new wxTextCtrl (this, wxID_ANY ,wxEmptyString,wxDefaultPosition,wxDefaultSize,0, *my_dvalidator );
     _scp_tide_calc_sizer->Add(m_ScPMLWN,
         0,            // make vertically stretchable
         wxEXPAND |    // make horizontally stretchable
@@ -733,6 +736,8 @@ ATTDialog::~ATTDialog()
 {
     delete att_calculation;
     delete att_factory;
+    delete my_validator;
+    delete my_dvalidator;
 }
 
 
