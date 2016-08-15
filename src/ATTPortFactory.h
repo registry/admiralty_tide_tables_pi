@@ -44,12 +44,12 @@ class ATTPortFactory // provides and stores standart/secondary port to given dat
 {
     
      
-WX_DECLARE_HASH_MAP( long,
+WX_DECLARE_HASH_MAP( time_t,
                      ATTSecondaryPort,
                      wxIntegerHash,
                      wxIntegerEqual,
                      ScPsList );
-WX_DECLARE_HASH_MAP( long, 
+WX_DECLARE_HASH_MAP( time_t, 
                      ATTStandardPort,
                      wxIntegerHash,
                      wxIntegerEqual,

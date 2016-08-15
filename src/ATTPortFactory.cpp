@@ -114,7 +114,7 @@ ATTPortFactory::saveStandardPort(const wxDateTime & date, const ATTStandardPort&
 {
     if ( port.m_StPName.size() == 0)
         return;
-    long ticks = date.GetTicks();
+    time_t ticks = date.GetTicks();
     StPorts[ port.m_StPName][ ticks ] = port;
 }
 
@@ -128,7 +128,7 @@ ATTPortFactory::saveSecondaryPort(const wxDateTime & date, const ATTSecondaryPor
     
     if ( port.m_ScPName.size() == 0)
         return;
-    long ticks = y_date.GetTicks();
+    time_t ticks = y_date.GetTicks();
     ScPorts[ port.m_ScPName][ ticks ] = port;
     
 }
@@ -266,7 +266,7 @@ ATTPortFactory::writeStandardPort( const wxString& path, const  wxDateTime & dat
         std::cerr << "Cannot seek while writing " << port.m_StPName << std::endl;
         return ;
     }
-    char buffer[ port.getSize()];
+    char * buffer = new char[ port.getSize()];
     
     
     
@@ -279,6 +279,7 @@ ATTPortFactory::writeStandardPort( const wxString& path, const  wxDateTime & dat
     }
     
     file.Close();  
+    delete[] buffer;
 }
 
 void 
@@ -363,7 +364,7 @@ ATTPortFactory::readStandardPort( const wxString& path, const  wxDateTime & date
         std::cerr << "Cannot seek while reading " << path << std::endl;
         return ;
     }
-    char buffer[ port.getSize()];
+    char * buffer = new char[ port.getSize()];
     
     
     
@@ -387,7 +388,8 @@ ATTPortFactory::readStandardPort( const wxString& path, const  wxDateTime & date
         wxFileName fname ( path );
         port.m_StPName = fname.GetFullName();
     }
-    file.Close();    
+    file.Close();   
+    delete[] buffer;
 }
 
 void 
@@ -402,7 +404,7 @@ ATTPortFactory::readSecondaryPort(  const wxString& path,  ATTSecondaryPort& por
         std::cerr << "Cannot seek while reading " << path << std::endl;
         return ;
     }
-    char buffer[ port.getSize()];
+    char * buffer = new char[ port.getSize()];
     
     size_t read = 0;
     while ( read != port.getSize())
@@ -414,7 +416,8 @@ ATTPortFactory::readSecondaryPort(  const wxString& path,  ATTSecondaryPort& por
     wxFileName fname ( path );
     port.m_ScPName = fname.GetFullName();
     
-    file.Close();  
+    file.Close(); 
+    delete[] buffer;
 
 }
     
