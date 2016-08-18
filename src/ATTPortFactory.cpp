@@ -295,7 +295,7 @@ ATTPortFactory::writeSecondaryPort(  const wxString& path, const wxDateTime & da
     file.Write( (char*)&timestamp, timeStampOffset );
     
     
-    char buffer[ port.getSize()];
+    char * buffer = new char[ port.getSize()];
     
     port.toStream( buffer );
     
@@ -304,7 +304,8 @@ ATTPortFactory::writeSecondaryPort(  const wxString& path, const wxDateTime & da
     {
         written += file.Write( buffer + written, port.getSize() - written );
     }
-    file.Close();  
+    file.Close();
+    delete[] buffer;
 }
     
    
