@@ -9,6 +9,9 @@ content:
       start_path: manual
       branches: HEAD
       edit_url: https://github.com/opencpn-manuals/admiralty_tide_tables_pi/edit/master/{path}
+    - url: https://github.com/opencpn-manuals/plugins
+      start_path:  manual/master-plugins
+      branches: HEAD
 
 ui:   
   bundle:

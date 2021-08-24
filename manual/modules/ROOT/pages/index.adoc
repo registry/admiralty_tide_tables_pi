@@ -27,8 +27,8 @@ Tables Explanation]
 
 === Documentation
 
-*Please make a User Guide. More information is given
-link:../plugin_documentation.html[here.]*
+NOTE: Please make a User Guide. More information is given
+in  xref:opencpn-plugins:authoring:pm-plugin-documentation.adoc
 
 == User Guide
 
