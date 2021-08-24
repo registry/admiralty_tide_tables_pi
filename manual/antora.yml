@@ -1,4 +1,3 @@
 name: admiralty
-title: Admiralty Tide Data
+title: Admiralty Tide Tables Manual
 version: '0.1'
-start_page: ROOT:admiralty.adoc 

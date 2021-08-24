@@ -1,7 +1,7 @@
 site:
   title: Admiralty Tida Tables Manual
   url:  https://nowhere.net
-  start_page: admiralty:ROOT:admiralty.adoc
+  start_page: admiralty::index.adoc
 
 content:
   sources:
