@@ -1,17 +1,17 @@
 :imagesdir: ../images/
 
-== Admiralty Tides
+= Admiralty Tides
 
 Admiralty Tide Tables
 
-== Plugin Datasheet Template
+= Plugin Datasheet Template
 
-=== Aim
+== Aim
 
 Form or repository for Admiralty Tide information. Intent is simply to
 store it in an useful form in OpenCPN.
 
-=== Links
+== Links
 
 * Source: https://github.com/registry/admiralty_tide_tables_pi[Github
 Repository]
@@ -21,18 +21,18 @@ calculation plugin for REEDS almanac and Admiralty Tide Tables]
 * Explanation: http://www.siranah.de/html/sail030d.htm[Admiralty Tide
 Tables Explanation]
 
-=== Requirements
+== Requirements
 
 ??
 
-=== Documentation
+== Documentation
 
 NOTE: Please make a User Guide. More information is given
 in  xref:opencpn-plugins:authoring:pm-plugin-documentation.adoc
 
-== User Guide
+= User Guide
 
-=== 1. What and Why
+== 1. What and Why
 
 Easy work with A.T.Tables, published in REEDS or in Tide Tables, i've
 created small OpenCPN plugin. It allows to calculate tides on secondary
@@ -92,7 +92,7 @@ faster and gets available for more people. 2. Add support for tide curve
 for standard port, so one can do such thing like “at which time one has
 enough water depth to pass a barrier” or similar. 3. …
 
-=== 2. Install
+== 2. Install
 
 
 image:admiralty-table.jpeg[]
@@ -101,8 +101,8 @@ image:admiralty-table.jpeg[]
 image:admiraltytidestable.jpeg[]
 
 
-=== 3. Standard actions
+== 3. Standard actions
 
-=== 4. Options
+== 4. Options
 
-=== 5. FAQ
+== 5. FAQ
