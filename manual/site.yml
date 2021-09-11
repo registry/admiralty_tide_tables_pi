@@ -1,5 +1,5 @@
 site:
-  title: Admiralty Tida Tables Manual
+  title: Admiralty Tide Tables
   url:  https://nowhere.net
   start_page: admiralty::index.adoc
 
@@ -9,10 +9,7 @@ content:
       start_path: manual
       branches: HEAD
       edit_url: https://github.com/opencpn-manuals/admiralty_tide_tables_pi/edit/master/{path}
-    - url: https://github.com/opencpn-manuals/plugins
-      start_path:  manual/master-plugins
-      branches: HEAD
-
+ 
 ui:   
   bundle:
     url: https://gitlab.com/leamas/antora-ui-default/-/raw/master/latest/ui-bundle.zip
