@@ -34,7 +34,8 @@
 #include <wx/aui/aui.h>
 
 #include "att_pi.h"
-#include "version.h"
+
+//#include "version.h"
 
 #include "tool_icon.h"
 
