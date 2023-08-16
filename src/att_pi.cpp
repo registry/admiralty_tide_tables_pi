@@ -34,6 +34,7 @@
 #include <wx/aui/aui.h>
 
 #include "att_pi.h"
+#include "version.h"
 
 #include "tool_icon.h"
 
@@ -62,7 +63,7 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p)
 
 
 att_pi::att_pi(void *ppimgr)
-      :opencpn_plugin_19(ppimgr)
+      :opencpn_plugin_116(ppimgr)
 {
       // Create the PlugIn icons
       initialize_images();
@@ -113,47 +114,22 @@ bool att_pi::DeInit(void)
       return true;
 }
 
-int att_pi::GetAPIVersionMajor()
-{
-      return MY_API_VERSION_MAJOR;
-}
+int att_pi::GetAPIVersionMajor() { return OCPN_API_VERSION_MAJOR; }
 
-int att_pi::GetAPIVersionMinor()
-{
-      return MY_API_VERSION_MINOR;
-}
+int att_pi::GetAPIVersionMinor() { return OCPN_API_VERSION_MINOR; }
 
-int att_pi::GetPlugInVersionMajor()
-{
-      return PLUGIN_VERSION_MAJOR;
-}
+int att_pi::GetPlugInVersionMajor() { return PLUGIN_VERSION_MAJOR; }
 
-int att_pi::GetPlugInVersionMinor()
-{
-      return PLUGIN_VERSION_MINOR;
-}
+int att_pi::GetPlugInVersionMinor() { return PLUGIN_VERSION_MINOR; }
 
-wxString att_pi::GetCommonName()
-{
-      return _("Admiralty Tide Tables Calculation");
-}
+wxString att_pi::GetCommonName() { return _T(PLUGIN_COMMON_NAME); }
 
-wxString att_pi::GetShortDescription()
-{
-      return _("A.T.T. Calculation PlugIn for OpenCPN");
-}
+wxString att_pi::GetShortDescription() { return _(PLUGIN_SHORT_DESCRIPTION); }
 
-wxString att_pi::GetLongDescription()
-{
-      return _("A.T.T. Calculation  PlugIn for OpenCPN");
+wxString att_pi::GetLongDescription() { return _(PLUGIN_LONG_DESCRIPTION); }
 
-}
+int att_pi::GetToolbarToolCount(void) { return 1; }
 
-
-int att_pi::GetToolbarToolCount(void)
-{
-      return 1;
-}
 void att_pi::ShowPreferencesDialog( wxWindow* parent )
 {
 
