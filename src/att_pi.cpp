@@ -35,8 +35,6 @@
 
 #include "att_pi.h"
 
-//#include "version.h"
-
 #include "tool_icon.h"
 
 // the class factories, used to create and destroy instances of the PlugIn

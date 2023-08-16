@@ -47,7 +47,7 @@ set(LONG_DESCRIPTION "Admiralty tide calculations")
  
 set(VERSION_MAJOR "0")
 set(VERSION_MINOR "1")
-set(VERSION_PATCH "2")
+set(VERSION_PATCH "3")
 set(VERSION_TWEAK "0")
 set(VERSION_DATE "16/08/2023") # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov58")
@@ -58,17 +58,17 @@ set(TP_COMMENT "  * Release for O58 using CI")
 
 set(PARENT "opencpn")
 
-# The next line allows for setting up your own local webserver with git on it for testing purposes, the default is github.com
+# The next line allows setup of a local webserver with git for testing purposes.
 #set(GIT_REPOSITORY_SERVER "github.com")
 
-# Specifies cloudsmith repository sufficies
+# Specifies cloudsmith repository  suffixes
 set(PROD "prod")    # Standard Repos
 set(BETA "beta")    # Standard Repos
 set(ALPHA "alpha")  # Standard Repos
 
 # set this if your cloudsmith repository name does not match your git repository name
 set(CLOUDSMITH_BASE_REPOSITORY "admiralty_tide")
-# Set the following to use OpenCPN cloudsmith repositories instead of own repositories
+# Set to use OpenCPN cloudsmith repositories
 set(CLOUDSMITH_USER "opencpn")
 #set(CLOUDSMITH_USER "rgleason")
 
@@ -186,24 +186,24 @@ set(OCPNHDRS
     libs/ocpn-api/ocpn_plugin.h
 )
 
-set(EXTSRC
-)
-set(EXTINCLUDE
-    extinclude/ODAPI.h
-    extinclude/ODJSONSchemas.h
-)
+#set(EXTSRC
+#)
+#set(EXTINCLUDE
+#    extinclude/ODAPI.h
+#    extinclude/ODJSONSchemas.h
+#)
 
-set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
+#set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
 
-set(LIBHDRS
-    libs/GL/gl.h
-    libs/GL/gl_private.h
-    libs/GL/glext.h
-    libs/GL/glu.h
-    libs/wxJSON/include/json_defs.h
-    libs/wxJSON/include/jsonreader.h
-    libs/wxJSON/include/jsonval.h
-    libs/wxJSON/include/jsonwriter.h)
+#set(LIBHDRS
+#    libs/GL/gl.h
+#    libs/GL/gl_private.h
+#    libs/GL/glext.h
+#    libs/GL/glu.h
+#    libs/wxJSON/include/json_defs.h
+#    libs/wxJSON/include/jsonreader.h
+#    libs/wxJSON/include/jsonval.h
+#    libs/wxJSON/include/jsonwriter.h)
 
 add_definitions(-DPLUGIN_USE_SVG)
 
@@ -219,13 +219,13 @@ set(EXTINCLUDE_DIR ${EXTINCLUDE_DIR} extinclude libs/ocpn-api/)
 # ----- If using JSON validation in plugin section above is needed ----- ##
 #
 
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/${EXTINCLUDE_DIR})
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/GL)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
+#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
 
 #
 # ----- Change below to match project requirements for android build ----- ##
@@ -239,9 +239,10 @@ endif(QT_ANDROID)
 ## ----- Change above to match project requirements for android build ----- ##
 ##
 
-
-target_sources(${PACKAGE_NAME} PUBLIC ${SRCS} ${OCPNSRC} ${EXTSRC} ${LIBSSRC} ${LIBHDRS} )
-
+#===================================
+target_sources(${PACKAGE_NAME} PUBLIC ${SRCS} )
+#===================================
+###   ${OCPNSRC} ${EXTSRC}  ${LIBSSRC}  ${LIBHDRS} 
 if(NOT OCPN_FLATPAK_CONFIG)
     # Build environment not available when flatpak is being configured so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
