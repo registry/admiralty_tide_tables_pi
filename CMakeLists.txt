@@ -47,7 +47,7 @@ set(LONG_DESCRIPTION "Admiralty tide calculations")
  
 set(VERSION_MAJOR "0")
 set(VERSION_MINOR "1")
-set(VERSION_PATCH "5")
+set(VERSION_PATCH "6")
 set(VERSION_TWEAK "0")
 set(VERSION_DATE "17/08/2023") # DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov58")
