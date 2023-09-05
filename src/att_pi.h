@@ -32,11 +32,13 @@
   #include "wx/wx.h"
 #endif //precompiled headers
 
-#define     PLUGIN_VERSION_MAJOR    0
-#define     PLUGIN_VERSION_MINOR    0
+//#define     PLUGIN_VERSION_MAJOR    0
+//#define     PLUGIN_VERSION_MINOR    0
 
-#define     MY_API_VERSION_MAJOR    1
-#define     MY_API_VERSION_MINOR    9
+//#define     MY_API_VERSION_MAJOR    1
+//#define     MY_API_VERSION_MINOR    9
+
+#include "version.h"
 
 #include "ocpn_plugin.h"
 #include "ATTDialog.h"
@@ -48,8 +50,8 @@
 //    The PlugIn Class Definition
 //----------------------------------------------------------------------------------------------------------
 
-
-class att_pi : public opencpn_plugin_19
+//class weather_routing_pi : public wxEvtHandler, public opencpn_plugin_116
+class att_pi : public opencpn_plugin_116
 {
 public:
       att_pi(void *ppimgr);
@@ -67,6 +69,7 @@ public:
       wxString GetCommonName();
       wxString GetShortDescription();
       wxString GetLongDescription();
+	  //from Shipdriver for definition of panel icon												 
 
 //    The optional method overrides
 
