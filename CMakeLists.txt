@@ -1,7 +1,8 @@
 ##---------------------------------------------------------------------------
 ## Author:      Pavel Saviankou
 ##***************************************************************************
-## *   Copyright (C) 2016 by Pavel Saviankou                                 *
+## *   Copyright (C) 2016 by Pavel Saviankou                         *
+## *   License:     GPLv3+
 ## *   This program is free software; you can redistribute it and/or modify  *
 ## *   it under the terms of the GNU General Public License as published by  *
 ## *   the Free Software Foundation; either version 2 of the License, or     *
@@ -14,11 +15,18 @@
 ## *                                                                         *
 ## *   You should have received a copy of the GNU General Public License     *
 ## *   along with this program; if not, write to the                         *
-## *   Free Software Foundation, Inc.,                                       *
-## *   51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,  USA.             *
-## ***************************************************************************
-##  TP1.0.253   07/08/2023 by Jon Gough
-## ***************************************************************************
+## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx,                                       *
+## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
+#-----------------------------------------------------------------------------
+# Frontend2 Author: Jon Gough 
+# Testplugn(TP) v1.0.254.0 09/09/2023 DD/MM/YYYY format
+# buildCI:yes useODAPI:no validateJSON:no
+# ---------------------------------------------------------------------------
+## -- When changing this file do NOT change the order of the sections.    -- ##
+## -- Make changes only between the section blocks identified             -- ##
+## -- The whole configuration process relies on this sequence for success.-- ##
+##
+## -- Modify section below to include all the details for your plugin.    -- ##
 
 set(CMLOC "CMakeLists: ")
 
@@ -47,44 +55,40 @@ set(LONG_DESCRIPTION "Admiralty tide calculations")
  
 set(VERSION_MAJOR "0")
 set(VERSION_MINOR "1")
-set(VERSION_PATCH "6")
+set(VERSION_PATCH "7")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE "17/08/2023") # DD/MM/YYYY format
+set(VERSION_DATE  "07/09/2023")#DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov58")
-
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
-set(TP_COMMENT "  * Release for O58 using CI")
+set(TP_COMMENT "  * Release for O571 or o58 using CI")
 
 set(PARENT "opencpn")
 
-# The next line allows setup of a local webserver with git for testing purposes.
+#Use to set up a local webserver with git installed.
+#Default is github.com. Now set in pluginconfigure.cmake
 #set(GIT_REPOSITORY_SERVER "github.com")
 
-# Specifies cloudsmith repository  suffixes
-set(PROD "prod")    # Standard Repos
-set(BETA "beta")    # Standard Repos
-set(ALPHA "alpha")  # Standard Repos
+## Specifies Cloudsmith upload repository suffix for each catalog
+set(PROD "prod")   #Standard Repos
+set(BETA "beta")   #Standard Repos
+set(ALPHA "alpha") #Standard Repos
 
-# set this if your cloudsmith repository name does not match your git repository name
-set(CLOUDSMITH_BASE_REPOSITORY "admiralty-tide")
-# Set to use OpenCPN cloudsmith repositories
+# Set if  Cloudsmith Base Repository name does not match your Git Repository name.set(CLOUDSMITH_BASE_REPOSITORY "admiralty-tide")
+#set(CLOUDSMITH_BASE_REPOSITORY "${GIT_REPOSITORY_NAME}")
+#set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Ricks's customization
+set(CLOUDSMITH_BASE_REPOSITORY "admiralty_tide_tables")  #without the pi
+
+# Set the following to use OpenCPN cloudsmith repositories instead of own repositories
 set(CLOUDSMITH_USER "opencpn")
-#set(CLOUDSMITH_USER "rgleason")
+#set(CLOUDSMITH_USER "rick-gleason")
 
 set(XML_INFO_URL "https://opencpn-manuals.github.io/main/admiralty/index.html")
 set(XML_SUMMARY ${SHORT_DESCRIPTION})
 set(XML_DESCRIPTION ${LONG_DESCRIPTION})
 
-
-
-##
 ## ----- Modify section above to include all the details for your plugin ----- ##
-##
-
-##
 ## ----- Modify section below if there are special requirements for the plugin ----- ##
-##
 
 option(PLUGIN_USE_SVG "Use SVG graphics" ON)
 
@@ -105,47 +109,33 @@ endif("${CMAKE_BUILD_TYPE}" STREQUAL "")
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "" "Debug" "Release" "RelWithDebInfo" "MinSizeRel")
 message(STATUS "${CMLOC}Build type: ${CMAKE_BUILD_TYPE}")
 
-##
-## ----- The statements below are used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
-##
+## ----- Statements below used to setup standard variables required by the CMAKE process -- Do not remove - ##
 
 project(${PACKAGE})
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+#========================================================
 include("PluginSetup")
-
-##
-## ----- The above is used to setup standard variables that are required by the CMAKE process - do not remove ----- ##
-##
-
-##
+#========================================================
+## ----- Above used to setup standard variables required by CMAKE process - Do not remove ----- ##
 ## ----- Modify section below if there are special requirements for the plugin ----- ##
-##
 
 set(CMAKE_VERBOSE_MAKEFILE "Activate verbose mode for make files" ON)
 
 option(Plugin_CXX11 "Use c++11" OFF)
 
-##
 ## ----- Modify section above if there are special requirements for the plugin ----- ##
-##
-
-##
 ## ----- do not change next section - needed to configure build process ----- ##
-##
-
+#===========================================================
 include("PluginConfigure")
-
-##
+#===========================================================
 ## ----- do not change section above - needed to configure build process ----- ##
-##
-
-#
-# ----- Change below to match project requirements for source, headers, etc. ----- ##
-#
+## ----- Change below to match project requirements for source, headers, etc. ----- ##
 
 add_definitions(-DUSE_S57)
+
+## ---- Section Below - Add your project SET(SRCS and SET(HDRS  etc..
 
 SET(SRCS
  		src/ATTCalculation.cpp
@@ -171,78 +161,38 @@ SET(SRCS
                 src/att_pi.h
  	)
 
-set(OCPNSRC
-    ocpnsrc/cutil.cpp
-    ocpnsrc/TexFont.cpp
-)
-
-set(OCPNHDRS
-    ocpninclude/cutil.h
-#    ocpninclude/ocpn_plugin.h
-    ocpninclude/pluginmanager.h
-    ocpninclude/shaders.h
-    ocpninclude/TexFont.h
-    ocpninclude/vector2D.h
-    libs/ocpn-api/ocpn_plugin.h
-)
-
-#set(EXTSRC
-#)
-#set(EXTINCLUDE
-#    extinclude/ODAPI.h
-#    extinclude/ODJSONSchemas.h
-#)
-
-#set(LIBSSRC libs/wxJSON/src/jsonreader.cpp libs/wxJSON/src/jsonval.cpp libs/wxJSON/src/jsonwriter.cpp)
-
-#set(LIBHDRS
-#    libs/GL/gl.h
-#    libs/GL/gl_private.h
-#    libs/GL/glext.h
-#    libs/GL/glu.h
-#    libs/wxJSON/include/json_defs.h
-#    libs/wxJSON/include/jsonreader.h
-#    libs/wxJSON/include/jsonval.h
-#    libs/wxJSON/include/jsonwriter.h)
-
 add_definitions(-DPLUGIN_USE_SVG)
 
-set(EXTINCLUDE_DIR ${EXTINCLUDE_DIR} extinclude libs/ocpn-api/)
+## ----- Section above - Add your project SET(SRCS and SET(HDRS  etc..
+## ----- If using JSON validation in plugin section below is needed ----- ##
 
-#
-# ----- If using JSON validation in plugin section below is needed ----- ##
-#
+# Do not need Json Schema Validation
 
-# Not using JSON in this Plugin
+## ----- If using JSON validation in plugin section above is needed ----- ##
 
-#
-# ----- If using JSON validation in plugin section above is needed ----- ##
-#
 
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/ocpninclude)
-include_directories(BEFORE ${PROJECT_SOURCE_DIR}/${EXTINCLUDE_DIR})
+##================================================================================
+## Change as required to collect all the set( headers and SRCS
+## This add_library  can be used in conditionals below.
+##================================================================================
+
+SET(SRC ${SRCS} ${HDRS} )
+
+##=============================================================
+## Modify/configure 'Include' Directories below for the Plugin
+##=============================================================
+
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/GL)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
 
-#
-# ----- Change below to match project requirements for android build ----- ##
-#
 
-if(QT_ANDROID)
-    include_directories( ${PROJECT_SOURCE_DIR}/extinclude/GLES2)
-endif(QT_ANDROID)
+## Change target_sources to match your project needs.
+##=================================================
+target_sources(${PACKAGE_NAME} PUBLIC ${SRC} )
+##=================================================
 
-##
-## ----- Change above to match project requirements for android build ----- ##
-##
-
-#===================================
-target_sources(${PACKAGE_NAME} PUBLIC ${SRCS} )
-#===================================
-###   ${OCPNSRC} ${EXTSRC}  ${LIBSSRC}  ${LIBHDRS} 
 if(NOT OCPN_FLATPAK_CONFIG)
     # Build environment not available when flatpak is being configured so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
@@ -253,35 +203,30 @@ endif(NOT OCPN_FLATPAK_CONFIG)
 
 add_definitions(-DTIXML_USE_STL)
 
-#
-# ----- If using JSON validation in plugin section b
-
-# Not using JSON
-
-#
-# ----- If using JSON validation in plugin section above is needed ----- ##
-#
 ##
-## ----- Change above to match project requirements ----- ##
+## ----- If using JSON validation section below is needed ----- ##
 ##
 
+# Do not need Json Schema Validation
+
 ##
-## ----- do not change next section - needed to configure build process ----- ##
+## ----- Do not change next section - needed to configure build process ----- ##
 ##
+##------- Change below to match project requirements --------------
 
 # Needed for android builds
 if(QT_ANDROID)
     include_directories(BEFORE ${qt_android_include})
 endif(QT_ANDROID)
 
-# Needed for all builds
+## Needed for all builds Do not change - needed to build app --- ##
+#========================================================
 include("PluginInstall")
 include("PluginLocalization")
 include("PluginPackage")
+#========================================================
+## ----- Do not change section above - needed to configure build process ----- ##
 
-##
-## ----- do not change section above - needed to configure build process ----- ##
-##
 message(STATUS "${CMLOC}include directories: ")
 get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
 foreach(dir ${dirs})
