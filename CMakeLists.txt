@@ -115,23 +115,27 @@ project(${PACKAGE})
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-#========================================================
+##========================================================
+
 include("PluginSetup")
-#========================================================
-## ----- Above used to setup standard variables required by CMAKE process - Do not remove ----- ##
-## ----- Modify section below if there are special requirements for the plugin ----- ##
+
+##========================================================
+## ----- Above sets up standard variables required by CMAKE - Do not remove -----##
+## ----- Modify section below if there are special requirements for the plugin --##
 
 set(CMAKE_VERBOSE_MAKEFILE "Activate verbose mode for make files" ON)
 
 option(Plugin_CXX11 "Use c++11" OFF)
 
-## ----- Modify section above if there are special requirements for the plugin ----- ##
-## ----- do not change next section - needed to configure build process ----- ##
-#===========================================================
+## ----- Modify section above if there are special requirements for the plugin --##
+## ----- Do not change next section - needed to configure build process ---------##
+##===========================================================
+
 include("PluginConfigure")
-#===========================================================
-## ----- do not change section above - needed to configure build process ----- ##
-## ----- Change below to match project requirements for source, headers, etc. ----- ##
+
+##===========================================================
+## ----- Do not change section above - needed to configure build process --------##
+## ----- Change below to match project requirements for source, headers, etc. ---##
 
 add_definitions(-DUSE_S57)
 
@@ -163,18 +167,18 @@ SET(SRCS
 
 add_definitions(-DPLUGIN_USE_SVG)
 
-## ----- Section above - Add your project SET(SRCS and SET(HDRS  etc..
-## ----- If using JSON validation in plugin section below is needed ----- ##
+## ----- Section above - Add your project SET(SRCS and SET(HDRS  etc.-------##
+## ----- If using JSON validation in plugin section below is needed --------##
 
 # Do not need Json Schema Validation
 
-## ----- If using JSON validation in plugin section above is needed ----- ##
+## ----- If using JSON validation in plugin section above is needed --------##
 
 
-##================================================================================
+##=============================================================
 ## Change as required to collect all the set( headers and SRCS
 ## This add_library  can be used in conditionals below.
-##================================================================================
+##=============================================================
 
 SET(SRC ${SRCS} ${HDRS} )
 
@@ -187,14 +191,16 @@ include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/GL)
 include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/wxJSON/include)
 
-
 ## Change target_sources to match your project needs.
-##=================================================
+##==============================================================
+
 target_sources(${PACKAGE_NAME} PUBLIC ${SRC} )
-##=================================================
+
+##==============================================================
 
 if(NOT OCPN_FLATPAK_CONFIG)
-    # Build environment not available when flatpak is being configured so following statements will not work
+    # Build environment not available when flatpak is being configured 
+	# so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
 
     add_subdirectory(libs/tinyxml)
@@ -204,28 +210,28 @@ endif(NOT OCPN_FLATPAK_CONFIG)
 add_definitions(-DTIXML_USE_STL)
 
 ##
-## ----- If using JSON validation section below is needed ----- ##
+## ----- If using JSON validation section below is needed ---------------##
 ##
 
 # Do not need Json Schema Validation
 
-##
-## ----- Do not change next section - needed to configure build process ----- ##
-##
-##------- Change below to match project requirements --------------
+
+##------- Change below to match project requirements --------------------##
 
 # Needed for android builds
 if(QT_ANDROID)
     include_directories(BEFORE ${qt_android_include})
 endif(QT_ANDROID)
 
-## Needed for all builds Do not change - needed to build app --- ##
-#========================================================
+## Needed for all builds Do not change - needed to build app -------------##
+##===============================================================
+
 include("PluginInstall")
 include("PluginLocalization")
 include("PluginPackage")
-#========================================================
-## ----- Do not change section above - needed to configure build process ----- ##
+
+##================================================================
+## ----- Do not change section above - needed to configure build process --##
 
 message(STATUS "${CMLOC}include directories: ")
 get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
