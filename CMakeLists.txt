@@ -59,6 +59,7 @@ set(VERSION_PATCH "8")
 set(VERSION_TWEAK "0")
 set(VERSION_DATE  "25/09/2023")#DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov58")
+
 set(OCPN_API_VERSION_MAJOR "1")
 set(OCPN_API_VERSION_MINOR "16")
 set(TP_COMMENT "  * Release using CI")
@@ -188,10 +189,6 @@ SET(SRC ${SRCS} ${HDRS} )
 
 #include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
 
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/GL)
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/libs/ocpn-api)
-
 ## Change target_sources to match your project needs.
 ##==============================================================
 
@@ -204,9 +201,6 @@ if(NOT OCPN_FLATPAK_CONFIG)
 	# so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
 
-#    add_subdirectory(libs/tinyxml)
-#    target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
-
     add_subdirectory(opencpn-libs/WindowsHeaders)
     target_link_libraries(${PACKAGE_NAME} windows::headers)
 
@@ -216,8 +210,8 @@ if(NOT OCPN_FLATPAK_CONFIG)
     add_subdirectory(opencpn-libs/tinyxml)
     target_link_libraries(${PACKAGE_NAME} ocpn::tinyxml)
 
-#    add_subdirectory(opencpn-libs/wxJSON)
-#    target_link_libraries(${PACKAGE_NAME} ocpn::wxjson)
+    add_subdirectory(opencpn-libs/wxJSON)
+    target_link_libraries(${PACKAGE_NAME} ocpn::wxjson)
 
     add_subdirectory(opencpn-libs/plugingl)
     target_link_libraries(${PACKAGE_NAME} ocpn::plugingl)
