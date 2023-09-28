@@ -78,7 +78,7 @@ set(ALPHA "alpha") #Standard Repos
 # Set if  Cloudsmith Base Repository name does not match your Git Repository name.
 #set(CLOUDSMITH_BASE_REPOSITORY "${GIT_REPOSITORY_NAME}")
 #set(CLOUDSMITH_BASE_REPOSITORY "opencpn-plugins")  #Ricks's customization
-set(CLOUDSMITH_BASE_REPOSITORY "admiralty_tide_tables")  #without the pi
+set(CLOUDSMITH_BASE_REPOSITORY "admiralty-tide")  #without the pi
 
 # Set the following to use OpenCPN cloudsmith repositories instead of own repositories
 set(CLOUDSMITH_USER "opencpn")
@@ -186,8 +186,6 @@ SET(SRC ${SRCS} ${HDRS} )
 ##=============================================================
 ## Modify/configure 'Include' Directories below for the Plugin
 ##=============================================================
-
-#include_directories(BEFORE ${PROJECT_SOURCE_DIR}/include)
 
 ## Change target_sources to match your project needs.
 ##==============================================================
