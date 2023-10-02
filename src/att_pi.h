@@ -45,8 +45,7 @@
 //    The PlugIn Class Definition
 //----------------------------------------------------------------------------------------------------------
 
-//class weather_routing_pi : public wxEvtHandler, public opencpn_plugin_116
-class att_pi : public opencpn_plugin_116
+class att_pi : public opencpn_plugin_117
 {
 public:
       att_pi(void *ppimgr);
@@ -60,7 +59,9 @@ public:
       int GetAPIVersionMinor();
       int GetPlugInVersionMajor();
       int GetPlugInVersionMinor();
-
+      int GetPlugInVersionPatch();
+      int GetPlugInVersionPost();
+	  
       wxString GetCommonName();
       wxString GetShortDescription();
       wxString GetLongDescription();
