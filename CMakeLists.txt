@@ -19,7 +19,7 @@
 ## *   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx                                       *
 #-----------------------------------------------------------------------------
 # Frontend2 Author: Jon Gough 
-# Testplugin(TP) v1.0.259.0 01/10/2023 DD/MM/YYYY format
+# Testplugin(TP) v1.0.260 07/10/2023 DD/MM/YYYY format
 # buildCI:yes useODAPI:no validateJSON:no
 # ---------------------------------------------------------------------------
 ## -- When changing this file do NOT change the order of the sections.    -- ##
@@ -55,9 +55,9 @@ set(LONG_DESCRIPTION "Admiralty tide calculations")
  
 set(VERSION_MAJOR "0")
 set(VERSION_MINOR "1")
-set(VERSION_PATCH "10")
+set(VERSION_PATCH "11")
 set(VERSION_TWEAK "0")
-set(VERSION_DATE  "02/10/2023")#DD/MM/YYYY format
+set(VERSION_DATE  "06/10/2023")#DD/MM/YYYY format
 set(OCPN_MIN_VERSION "ov58")
 
 set(OCPN_API_VERSION_MAJOR "1")
@@ -199,8 +199,8 @@ if(NOT OCPN_FLATPAK_CONFIG)
 	# so following statements will not work
     message(STATUS "${CMLOC}Adding target link libraries to ${PACKAGE_NAME}")
 
-    add_subdirectory(opencpn-libs/WindowsHeaders)
-    target_link_libraries(${PACKAGE_NAME} windows::headers)
+#    add_subdirectory(opencpn-libs/WindowsHeaders)
+#    target_link_libraries(${PACKAGE_NAME} windows::headers)
 
     add_subdirectory(opencpn-libs/api-17)
     target_link_libraries(${PACKAGE_NAME} ocpn::api)
