@@ -62,7 +62,7 @@ extern "C" DECL_EXP void destroy_pi(opencpn_plugin* p)
 
 
 att_pi::att_pi(void *ppimgr)
-      :opencpn_plugin_116(ppimgr)
+      :opencpn_plugin_117(ppimgr)
 {
       // Create the PlugIn icons
       initialize_images();
@@ -120,6 +120,11 @@ int att_pi::GetAPIVersionMinor() { return OCPN_API_VERSION_MINOR; }
 int att_pi::GetPlugInVersionMajor() { return PLUGIN_VERSION_MAJOR; }
 
 int att_pi::GetPlugInVersionMinor() { return PLUGIN_VERSION_MINOR; }
+
+int att_pi::GetPlugInVersionPatch() { return PLUGIN_VERSION_PATCH; }
+
+int att_pi::GetPlugInVersionPost() { return PLUGIN_VERSION_TWEAK; }
+
 
 wxString att_pi::GetCommonName() { return _T(PLUGIN_COMMON_NAME); }
 
