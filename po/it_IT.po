@@ -1,123 +1,115 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: opencpn\n"
+"X-Crowdin-Project-ID: 49843\n"
+"X-Crowdin-Language: it\n"
+"X-Crowdin-File: /plugins/admiralty_tide_tables_pi/po/admiralty_tide_tables_pi.pot\n"
+"X-Crowdin-File-ID: 434\n"
+"Project-Id-Version: opencpn\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Italian\n"
+"Language: it_IT\n"
+"PO-Revision-Date: 2023-11-09 21:22\n"
+
 #: src/ATTDialog.cpp:54
 msgid "General info"
-msgstr ""
+msgstr "Informazioni generali"
 
 #: src/ATTDialog.cpp:57
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #: src/ATTDialog.cpp:76
 msgid "Tide"
-msgstr ""
+msgstr "Marea"
 
 #: src/ATTDialog.cpp:80
 msgid "Standard Port"
-msgstr ""
+msgstr "Porto di riferimento"
 
 #: src/ATTDialog.cpp:92 src/ATTDialog.cpp:233
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: src/ATTDialog.cpp:114 src/ATTDialog.cpp:255
 msgid "LW1"
-msgstr ""
+msgstr "LW1"
 
 #: src/ATTDialog.cpp:139 src/ATTDialog.cpp:280
 msgid "HW1"
-msgstr ""
+msgstr "HW1"
 
 #: src/ATTDialog.cpp:164 src/ATTDialog.cpp:304
 msgid "LW2"
-msgstr ""
+msgstr "LW2"
 
 #: src/ATTDialog.cpp:190 src/ATTDialog.cpp:329
 msgid "HW2"
-msgstr ""
+msgstr "HW2"
 
 #: src/ATTDialog.cpp:222
 msgid "Secondary Port"
-msgstr ""
-
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the admiralty_tide_tables_pi package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#: src/ATTDialog.cpp:263 src/ATTDialog.cpp:271 src/ATTDialog.cpp:288
-#: src/ATTDialog.cpp:296 src/ATTDialog.cpp:312 src/ATTDialog.cpp:320
-#: src/ATTDialog.cpp:337 src/ATTDialog.cpp:345 src/ATTDialog.cpp:422
-#: src/ATTDialog.cpp:586
-#, fuzzy
-msgid ""
-msgstr ""
-"Project-Id-Version: admiralty_tide_tables_pi 0.1.13.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-19 19:05+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
-"Content-Transfer-Encoding: 8bit\n"
+msgstr "Porto secondario"
 
 #: src/ATTDialog.cpp:359
 msgid "Calculation"
-msgstr ""
+msgstr "Calcolo"
 
 #: src/ATTDialog.cpp:365
 msgid "Port"
-msgstr ""
+msgstr "Porto"
 
 #: src/ATTDialog.cpp:372
 msgid "HW"
-msgstr ""
+msgstr "HW"
 
 #: src/ATTDialog.cpp:379
 msgid "LW"
-msgstr ""
+msgstr "LW"
 
 #: src/ATTDialog.cpp:386
 msgid "MHWS"
-msgstr ""
+msgstr "MHWS"
 
 #: src/ATTDialog.cpp:393
 msgid "MHWN"
-msgstr ""
+msgstr "MHWN"
 
 #: src/ATTDialog.cpp:400
 msgid "MLWS"
-msgstr ""
+msgstr "MLWS"
 
 #: src/ATTDialog.cpp:407
 msgid "MLWN"
-msgstr ""
+msgstr "MLWN"
 
 #: src/ATTDialog.cpp:414
 msgid "SC"
-msgstr ""
+msgstr "SC"
 
 #: src/ATTDialog.cpp:451 src/ATTDialog.cpp:457 src/ATTDialog.cpp:505
 #: src/ATTDialog.cpp:511
 msgid "and"
-msgstr ""
+msgstr "e"
 
 #: src/ATTDialog.cpp:692
 msgid "Print"
-msgstr ""
+msgstr "Stampa"
 
 #: src/ATTDialog.cpp:698
 msgid "Save"
-msgstr ""
+msgstr "Salva"
 
 #: src/ATTDialog.cpp:704
 msgid "CALCULATE!"
-msgstr ""
+msgstr "CALCOLATO!"
 
 #: src/ATTDialog.cpp:710
 msgid "Close"
-msgstr ""
+msgstr "Chiudere"
 
 #: src/ATTDialog.h:188 src/att_pi.cpp:93
 msgid "A.T.T. Calculation"
-msgstr ""
+msgstr "Calcolo A.T.T."
+
