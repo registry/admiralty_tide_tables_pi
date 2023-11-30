@@ -1,0 +1,115 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Crowdin-Project: opencpn\n"
+"X-Crowdin-Project-ID: 49843\n"
+"X-Crowdin-Language: es-ES\n"
+"X-Crowdin-File: /plugins/admiralty_tide_tables_pi/po/admiralty_tide_tables_pi.pot\n"
+"X-Crowdin-File-ID: 434\n"
+"Project-Id-Version: opencpn\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language-Team: Spanish\n"
+"Language: es_ES\n"
+"PO-Revision-Date: 2023-11-09 21:22\n"
+
+#: src/ATTDialog.cpp:54
+msgid "General info"
+msgstr "Información general"
+
+#: src/ATTDialog.cpp:57
+msgid "Date"
+msgstr "Fecha"
+
+#: src/ATTDialog.cpp:76
+msgid "Tide"
+msgstr "Marea"
+
+#: src/ATTDialog.cpp:80
+msgid "Standard Port"
+msgstr "Puerto estándar"
+
+#: src/ATTDialog.cpp:92 src/ATTDialog.cpp:233
+msgid "Name"
+msgstr "Nombre"
+
+#: src/ATTDialog.cpp:114 src/ATTDialog.cpp:255
+msgid "LW1"
+msgstr "LW1"
+
+#: src/ATTDialog.cpp:139 src/ATTDialog.cpp:280
+msgid "HW1"
+msgstr "HW1"
+
+#: src/ATTDialog.cpp:164 src/ATTDialog.cpp:304
+msgid "LW2"
+msgstr "LW2"
+
+#: src/ATTDialog.cpp:190 src/ATTDialog.cpp:329
+msgid "HW2"
+msgstr "HW2"
+
+#: src/ATTDialog.cpp:222
+msgid "Secondary Port"
+msgstr "Puerto secundario"
+
+#: src/ATTDialog.cpp:359
+msgid "Calculation"
+msgstr "Cálculo"
+
+#: src/ATTDialog.cpp:365
+msgid "Port"
+msgstr "Puerto"
+
+#: src/ATTDialog.cpp:372
+msgid "HW"
+msgstr "HW"
+
+#: src/ATTDialog.cpp:379
+msgid "LW"
+msgstr "LW"
+
+#: src/ATTDialog.cpp:386
+msgid "MHWS"
+msgstr "MHWS"
+
+#: src/ATTDialog.cpp:393
+msgid "MHWN"
+msgstr "MHWN"
+
+#: src/ATTDialog.cpp:400
+msgid "MLWS"
+msgstr "MLWS"
+
+#: src/ATTDialog.cpp:407
+msgid "MLWN"
+msgstr "MLWN"
+
+#: src/ATTDialog.cpp:414
+msgid "SC"
+msgstr "SC"
+
+#: src/ATTDialog.cpp:451 src/ATTDialog.cpp:457 src/ATTDialog.cpp:505
+#: src/ATTDialog.cpp:511
+msgid "and"
+msgstr "y"
+
+#: src/ATTDialog.cpp:692
+msgid "Print"
+msgstr "Imprimir"
+
+#: src/ATTDialog.cpp:698
+msgid "Save"
+msgstr "Guardar"
+
+#: src/ATTDialog.cpp:704
+msgid "CALCULATE!"
+msgstr "¡CALCULA!"
+
+#: src/ATTDialog.cpp:710
+msgid "Close"
+msgstr "Cerrar"
+
+#: src/ATTDialog.h:188 src/att_pi.cpp:93
+msgid "A.T.T. Calculation"
+msgstr "Cálculo A.T.T."
+
